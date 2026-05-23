@@ -1,1 +1,307 @@
-# eldomi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>El Patio de los Domis · Comida Dominicana · Pedidos Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; color: #1a1a2e; line-height: 1.5; overflow-x: hidden; }
+        :root { --dd-red: #e63946; --dd-red-dark: #c1121f; --card-shadow: 0 8px 20px rgba(0,0,0,0.06); --border-light: #e9ecef; --text-secondary: #495057; }
+        .app { max-width: 1280px; margin: 0 auto; background: white; min-height: 100vh; display: flex; flex-direction: column; }
+        .header { background: white; border-bottom: 1px solid var(--border-light); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-img { height: 50px; width: auto; object-fit: contain; border-radius: 12px; }
+        .logo-text h1 { font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, #c72a2a 0%, #e04b4b 100%); background-clip: text; -webkit-background-clip: text; color: transparent; white-space: nowrap; }
+        .logo-text span { font-size: 0.65rem; font-weight: 500; color: var(--text-secondary); display: block; }
+        .flag-svg { width: 32px; height: 22px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .cart-bubble { position: fixed; bottom: 25px; right: 20px; width: 60px; height: 60px; background: var(--dd-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; box-shadow: 0 6px 16px rgba(230,57,70,0.3); transition: transform 0.2s; }
+        .cart-bubble:active { transform: scale(0.94); }
+        .cart-bubble .cart-icon { font-size: 28px; color: white; }
+        .cart-bubble .bubble-count { position: absolute; top: -6px; right: -6px; background: #ffd166; color: #1a1a2e; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+        .hero-banner { background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%); color: white; padding: 2rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .hero-text h2 { font-size: 1.6rem; font-weight: 800; }
+        .hero-text p { font-size: 0.85rem; opacity: 0.9; margin-top: 6px; }
+        .status-badge { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+        .open-status { background: #2b9348; color: white; padding: 6px 16px; border-radius: 40px; font-weight: 700; font-size: 0.8rem; }
+        .closed-status { background: #9e2e2e; color: white; padding: 6px 16px; border-radius: 40px; font-weight: 700; font-size: 0.8rem; }
+        .address-link { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); padding: 6px 14px; border-radius: 40px; font-size: 0.7rem; font-weight: 500; color: white; text-decoration: none; }
+        .hours-note { font-size: 0.65rem; opacity: 0.85; text-align: right; }
+        .menu-section { padding: 1.5rem; flex: 1; }
+        .menu-category { margin-bottom: 2.5rem; }
+        .category-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--dd-red); }
+        .category-icon { font-size: 1.8rem; }
+        .category-title { font-size: 1.4rem; font-weight: 700; color: #2d241c; }
+        .category-sub { font-size: 0.7rem; color: #868e96; margin-left: auto; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .food-card { background: white; border-radius: 20px; overflow: hidden; transition: all 0.25s ease; box-shadow: var(--card-shadow); border: 1px solid var(--border-light); cursor: pointer; }
+        .food-card:hover { transform: translateY(-4px); box-shadow: 0 16px 28px rgba(0,0,0,0.08); }
+        .food-card:active { transform: scale(0.98); }
+        .card-img { height: 170px; background-size: cover; background-position: center; background-color: #f8f3ed; }
+        .card-content { padding: 1rem 1rem 1.2rem; }
+        .food-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 6px; color: #1a1a2e; }
+        .price-row { margin-top: 8px; }
+        .price { font-weight: 800; font-size: 1.2rem; color: #2b9348; }
+        .options-modal { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-radius: 28px 28px 0 0; z-index: 1100; transform: translateY(100%); transition: transform 0.3s; padding: 1.5rem; max-height: 85vh; overflow-y: auto; }
+        .options-modal.open { transform: translateY(0); }
+        .options-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1099; visibility: hidden; opacity: 0; transition: 0.2s; }
+        .options-overlay.open { visibility: visible; opacity: 1; }
+        .option-group { margin-bottom: 1.5rem; }
+        .option-label { font-weight: 700; margin-bottom: 12px; font-size: 0.9rem; color: #2d241c; }
+        .option-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .option-btn { background: #f1f3f5; border: 1px solid #dee2e6; padding: 8px 18px; border-radius: 40px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; font-weight: 500; }
+        .option-btn.selected { background: var(--dd-red); border-color: var(--dd-red); color: white; }
+        .modal-actions { display: flex; gap: 12px; margin-top: 24px; }
+        .modal-add-btn { flex: 1; background: var(--dd-red); color: white; border: none; padding: 14px; border-radius: 40px; font-weight: 700; cursor: pointer; }
+        .modal-cancel-btn { flex: 1; background: #f1f3f5; border: none; padding: 14px; border-radius: 40px; font-weight: 600; cursor: pointer; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1001; visibility: hidden; opacity: 0; transition: 0.2s; display: flex; justify-content: flex-end; }
+        .cart-overlay.open { visibility: visible; opacity: 1; }
+        .cart-panel { background: white; width: 100%; max-width: 500px; height: 100%; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.3s; }
+        .cart-overlay.open .cart-panel { transform: translateX(0); }
+        .cart-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-weight: 800; font-size: 1.2rem; }
+        .close-cart { font-size: 1.8rem; cursor: pointer; background: none; border: none; color: #666; }
+        .cart-scrollable { flex: 1; overflow-y: auto; padding: 1rem 1.2rem; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+        .cart-item-actions { display: flex; gap: 12px; }
+        .qty-btn { background: #f1f3f5; border: none; width: 32px; height: 32px; border-radius: 30px; font-weight: 700; font-size: 1.2rem; cursor: pointer; }
+        .customer-info, .tip-section { background: #f8f9fa; border-radius: 20px; padding: 1rem; margin: 1rem 0; }
+        .name-row { display: flex; gap: 12px; }
+        .name-input { flex: 1; padding: 12px 14px; border: 1px solid #dee2e6; border-radius: 30px; font-size: 0.85rem; }
+        .tip-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+        .tip-option { background: white; border: 1px solid #dee2e6; border-radius: 40px; padding: 6px 16px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+        .tip-option.selected { background: var(--dd-red); color: white; }
+        .custom-tip { display: flex; gap: 8px; margin-top: 10px; }
+        .custom-tip-input { flex: 1; padding: 10px 14px; border: 1px solid #dee2e6; border-radius: 30px; }
+        .subtotal-row, .tip-row, .total-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.95rem; }
+        .total-row { font-weight: 800; font-size: 1.2rem; margin-top: 12px; padding-top: 12px; border-top: 2px dashed #e9ecef; }
+        .payment-buttons { display: flex; gap: 12px; margin: 20px 0 12px; }
+        .payment-btn { flex: 1; background: #f1f3f5; border: 1px solid #dee2e6; padding: 12px; border-radius: 40px; font-weight: 700; cursor: pointer; text-align: center; font-size: 0.9rem; }
+        .order-track { background: #f8f9fa; border-radius: 18px; padding: 12px; margin-top: 16px; text-align: center; font-size: 0.8rem; }
+        .toast-msg { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: #1a1a2e; color: white; padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; z-index: 1100; opacity: 0; transition: 0.2s; pointer-events: none; }
+        .toast-msg.show { opacity: 1; }
+        @media (max-width: 600px) {
+            .menu-section { padding: 1rem; }
+            .category-title { font-size: 1.2rem; }
+            .logo-text h1 { font-size: 1.1rem; }
+            .logo-img { height: 40px; }
+            .hero-text h2 { font-size: 1.2rem; }
+            .cart-bubble { width: 52px; height: 52px; }
+            .cart-bubble .cart-icon { font-size: 24px; }
+            .address-link { font-size: 0.65rem; padding: 4px 10px; }
+        }
+        footer { text-align: center; padding: 1.2rem; font-size: 0.7rem; color: #adb5bd; border-top: 1px solid #e9ecef; }
+        .payment-note { font-size: 0.7rem; text-align: center; margin-top: 8px; color: #6c757d; }
+        .empty-cart-msg { text-align: center; padding: 2rem; color: #adb5bd; }
+        .info-note { background: #e8f5e9; border-radius: 14px; padding: 10px; font-size: 0.7rem; margin-bottom: 16px; color: #2b9348; text-align: center; }
+    </style>
+</head>
+<body>
+<div class="app">
+    <div class="header">
+        <div class="logo-area">
+            <img class="logo-img" src="https://www.image2url.com/r2/default/images/1779484716038-a6168d99-cdda-4779-8b1d-8af05b3bc507.jpg" alt="Logo">
+            <div class="logo-text">
+                <h1>El Patio de los Domis 
+                    <svg class="flag-svg" viewBox="0 0 36 24"><rect x="0" y="0" width="18" height="12" fill="#002277"/><rect x="18" y="0" width="18" height="12" fill="#ce1126"/><rect x="0" y="12" width="18" height="12" fill="#ce1126"/><rect x="18" y="12" width="18" height="12" fill="#002277"/><rect x="16" y="0" width="4" height="24" fill="white"/><rect x="0" y="10" width="36" height="4" fill="white"/></svg>
+                </h1>
+                <span>Chimmi · Yaroa · Mofongo · Longaniza · Chicharrón</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-banner">
+        <div class="hero-text">
+            <h2>🔥 ¡Sabor Dominicano!</h2>
+            <p>Toca cualquier platillo para elegir tamaño o variante</p>
+        </div>
+        <div class="status-badge">
+            <div id="liveStatusBadge" class="open-status">🟢 Abierto ahora</div>
+            <a href="https://maps.google.com/?q=3343+S+US+Hwy+1+Fort+Pierce+FL+34982" target="_blank" class="address-link">📍 3343 S US Hwy 1, Fort Pierce, FL 34982</a>
+            <div class="hours-note" id="hoursNoteText">📅 Hoy: 11AM - 10PM</div>
+        </div>
+    </div>
+    <div class="menu-section"><div id="menuContainer"></div></div>
+    <footer>© El Patio de los Domis — Auténtica comida dominicana 🇩🇴</footer>
+</div>
+
+<div id="cartBubble" class="cart-bubble"><span class="cart-icon">🛒</span><span class="bubble-count" id="bubbleCount">0</span></div>
+<div id="cartOverlay" class="cart-overlay"><div class="cart-panel"><div class="cart-header"><span>📋 Tu pedido</span><button class="close-cart" id="closeCartBtn">&times;</button></div><div class="cart-scrollable"><div class="info-note">✅ Toca cualquier platillo para elegir tamaño / opción.</div><div class="cart-items-list" id="cartItemsList"><div class="empty-cart-msg">Carrito vacío 🍽️</div></div><div class="customer-info"><h4>👤 Tus datos</h4><div class="name-row"><input type="text" id="firstNameInput" placeholder="Nombre *"><input type="text" id="lastNameInput" placeholder="Apellido *"></div></div><div class="tip-section"><div>💜 ¿Dejar propina?</div><div class="tip-buttons"><button class="tip-option" data-tip="0">Sin propina</button><button class="tip-option" data-tip="10">10%</button><button class="tip-option" data-tip="15">15%</button><button class="tip-option" data-tip="20">20%</button></div><div class="custom-tip"><span>$</span><input type="number" id="customTipInput" placeholder="Monto personalizado" step="0.01"></div></div><div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div><div class="tip-row" id="tipRow" style="display:none;"><span>💜 Propina</span><span id="tipAmount">$0.00</span></div><div class="total-row"><span>Total a pagar</span><span id="cartTotalPrice">$0.00</span></div><div class="payment-buttons"><button id="venmoPayBtn" class="payment-btn">💚 Pagar con Venmo</button><button id="cashappPayBtn" class="payment-btn">💰 Pagar con CashApp</button></div><div class="payment-note">📱 Pagar al número <strong>772-307-7637</strong> vía Venmo o CashApp</div><div class="order-track" id="orderTrackSection" style="display:none;"><span id="lastOrderNumber"></span><br><span id="orderStatusMsg"></span></div></div></div></div>
+
+<div id="optionsOverlay" class="options-overlay"></div>
+<div id="optionsModal" class="options-modal">
+    <div id="modalItemName" style="font-weight:800; font-size:1.3rem; margin-bottom:12px;"></div>
+    <div id="modalOptions"></div>
+    <div class="modal-actions"><button class="modal-cancel-btn" id="modalCancelBtn">Cancelar</button><button class="modal-add-btn" id="modalAddBtn">Añadir al carrito</button></div>
+</div>
+<div id="toastMsg" class="toast-msg">✨ Agregado</div>
+
+<script>
+    // ============================================================
+    // 🖼️ IMAGE URLS - EDIT YOUR IMAGES HERE
+    // ============================================================
+    // All images should be 600x400px for best quality
+    // Just replace the URL between the quotes with your own image link
+    
+    const IMAGES = {
+        // === FEATURED FAVORITES & MEATS ===
+        yaroa: "https://i.imgur.com/3nPHFzO.jpeg",              // Yaroa (Loaded Fries)
+        mofongo: "https://i.imgur.com/srqhEOP.jpeg",            // Mofongo
+        chicharron: "https://i.imgur.com/BRpYZ9a.jpeg",         // Chicharrón de Cerdo
+        picapollo: "https://i.imgur.com/EhPwwDn.jpeg",          // Pica Pollo
+        pechuga: "https://i.imgur.com/XM1TLoD.jpeg",            // Pechuga a la Plancha
+        longaniza: "https://i.imgur.com/EKxarug.jpeg",          // Longaniza
+        
+        // === DOMINICAN BURGERS ===
+        chimires: "https://i.imgur.com/r40XEdz.jpeg",           // Chimi Res (Beef)
+        chimipollo: "https://i.imgur.com/Wl4op3d.jpeg",         // Chimi Pollo (Chicken)
+        
+        // === APPETIZERS & SIDES ===
+        empanadas: "https://i.imgur.com/wQbMOds.jpg",           // Empanadas
+        quesoFrito: "https://i.imgur.com/2oEU7qX.png",  // Queso Frito
+        salchipapas: "https://i.imgur.com/gHJrmdJ.png", // Salchipapas
+        alitas: "https://i.imgur.com/UYdIbiP.png",           // Alitas/Wings
+        tostones: "https://i.imgur.com/j1BlfcS.jpeg",       // Tostones
+        maduros: "https://i.imgur.com/vMsdBS8.png",            // Maduros (Sweet Plantains)
+        arrozGandules: "https://i.imgur.com/KoBiTky.jpeg", // Arroz con Gandules
+        riceBeans: "https://i.imgur.com/BjmJjg7.png",          // Rice and Beans
+        fries: "https://i.imgur.com/xQbv16p.png",      // French Fries
+        
+        // === DRINKS ===
+        chinola: "https://i.imgur.com/VwTmGAE.jpeg",            // Jugo de Chinola
+        limonada: "https://i.imgur.com/torAUAd.jpeg",           // Limonada Natural
+        morir: "https://i.imgur.com/Op6tCvN.jpeg",              // Morir Soñando
+        
+        // === SAUCES ===
+        salsaRoja: "https://i.imgur.com/jlAecYF.jpeg",          // Salsa Roja
+        salsaVerde: "https://i.imgur.com/0zYqZdY.jpeg",         // Salsa Verde
+        salsaAjo: "https://i.imgur.com/d5gdmLv.jpeg"            // Salsa de Ajo
+    };
+
+    // ============================================================
+    // 🥩 PROTEIN OPTIONS FOR MOFONGO
+    // ============================================================
+    const MOFONGO_PROTEINS = [
+        { name: "Carne de Cerdo Fritas (Pork)", price: 0, base: true },
+        { name: "Salami & Queso (Salami & Fried Cheese)", price: 16.00, base: false },
+        { name: "Longaniza (Dominican Sausages)", price: 0, base: true },
+        { name: "Chicharrón de Cerdo (Crispy Pork Rinds)", price: 3.50, base: false },
+        { name: "Camarones (Shrimp)", price: 4.00, base: false }
+    ];
+
+    // ============================================================
+    // 🍽️ SIDE OPTIONS FOR CHICHARRON AND LONGANIZA
+    // ============================================================
+    const SIDE_OPTIONS = [
+        { name: "Rice and Beans", price: 0, base: true },
+        { name: "Yellow Rice", price: 0, base: true },
+        { name: "Tostones", price: 0, base: true },
+        { name: "French Fries", price: 0, base: true },
+        { name: "Fried Yuca", price: 0, base: true },
+        { name: "Sweet Plantains", price: 0, base: true }
+    ];
+
+    // ============================================================
+    // 📋 FULL MENU STRUCTURE - DO NOT EDIT UNLESS ADDING/REMOVING ITEMS
+    // ============================================================
+    const CATEGORIES = {
+        favorites: { name: "⭐ Featured Favorites & Meats", icon: "🔥", description: "Platos principales",
+            items: [
+                { id: "yaroa", name: "Yaroa (Loaded Fries)", options: ["Small ($11.50)", "Large ($15.50)"], prices: [11.50, 15.50], image: IMAGES.yaroa },
+                { id: "mofongo", name: "Mofongo", hasProteinOptions: true, proteinOptions: MOFONGO_PROTEINS, basePrice: 18.50, image: IMAGES.mofongo },
+                { id: "chicharron", name: "Chicharrón de Cerdo", options: ["Regular ($16.50)", "Large ($20.00)"], prices: [16.50, 20.00], image: IMAGES.chicharron, hasSideOptions: true, sideOptions: SIDE_OPTIONS },
+                { id: "picapollo", name: "Pica Pollo", price: 15.50, image: IMAGES.picapollo },
+                { id: "pechuga", name: "Pechuga a la Plancha", price: 16.00, image: IMAGES.pechuga },
+                { id: "longaniza", name: "Longaniza", hasSideOptions: true, sideOptions: SIDE_OPTIONS, basePrice: 17.00, image: IMAGES.longaniza }
+            ]},
+        burgers: { name: "🍔 Dominican Burgers (Chimmi)", icon: "🍔", description: "Chimmi estilo dominicano",
+            items: [
+                { id: "chimires", name: "Chimi Res (Beef Patty)", price: 12.00, image: IMAGES.chimires },
+                { id: "chimipollo", name: "Chimi Pollo (Chicken)", price: 12.00, image: IMAGES.chimipollo }
+            ]},
+        appetizers: { name: "🥟 Appetizers & Sides", icon: "🥟", description: "Entradas y acompañantes",
+            items: [
+                { id: "empanadas", name: "Empanadas", options: ["Beef ($5.00)", "Chicken ($5.00)", "Cheese ($5.50)"], prices: [5.00, 5.00, 5.50], image: IMAGES.empanadas },
+                { id: "quesofrito", name: "Queso Frito", price: 9.00, image: IMAGES.quesoFrito },
+                { id: "salchipapas", name: "Salchipapas", price: 11.00, image: IMAGES.salchipapas },
+                { id: "alitas", name: "Alitas", price: 12.00, image: IMAGES.alitas },
+                { id: "tostones", name: "Tostones", price: 5.00, image: IMAGES.tostones },
+                { id: "maduros", name: "Maduros", price: 6.00, image: IMAGES.maduros },
+                { id: "arrozgandules", name: "Arroz con Gandules", price: 7.00, image: IMAGES.arrozGandules },
+                { id: "ricebeans", name: "Rice and Beans", price: 7.00, image: IMAGES.riceBeans },
+                { id: "fries", name: "French Fries", price: 6.00, image: IMAGES.fries }
+            ]},
+        drinks: { name: "🍹 Bebidas Naturales", icon: "🍹", description: "Jugos frescos",
+            items: [
+                { id: "chinola", name: "Jugo de Chinola", price: 5.00, image: IMAGES.chinola },
+                { id: "limonada", name: "Limonada Natural", price: 5.00, image: IMAGES.limonada },
+                { id: "morir", name: "Morir Soñando", price: 6.00, image: IMAGES.morir }
+            ]},
+        sauces: { name: "🌶️ Salsas Caseras", icon: "🌶️", description: "Para acompañar",
+            items: [
+                { id: "salsaroja", name: "Salsa Roja", price: 2.00, image: IMAGES.salsaRoja },
+                { id: "salsaverde", name: "Salsa Verde", price: 2.00, image: IMAGES.salsaVerde },
+                { id: "salsaajo", name: "Salsa de Ajo", price: 2.50, image: IMAGES.salsaAjo }
+            ]}
+    };
+
+    // ============================================================
+    // ⏰ BUSINESS HOURS
+    // ============================================================
+    const BUSINESS_HOURS = {
+        sunday: { open: null, close: null, closed: true },
+        monday: { open: 11, close: 21, closed: false },
+        tuesday: { open: 11, close: 21, closed: false },
+        wednesday: { open: 11, close: 21, closed: false },
+        thursday: { open: 11, close: 21, closed: false },
+        friday: { open: 11, close: 22, closed: false },
+        saturday: { open: 11, close: 22, closed: false }
+    };
+    function getDayKey(date) { return ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][date.getDay()]; }
+    function isOpenNow() { const now=new Date(), hours=BUSINESS_HOURS[getDayKey(now)]; if(!hours||hours.closed) return false; const t=now.getHours()+now.getMinutes()/60; return t>=hours.open && t<hours.close; }
+    function getTodayHours() { const hours=BUSINESS_HOURS[getDayKey(new Date())]; if(!hours||hours.closed) return "Cerrado"; const f=h=>h===12?"12PM":h===21?"9PM":h===22?"10PM":h>12?`${h-12}PM`:`${h}AM`; return `${f(hours.open)} - ${f(hours.close)}`; }
+    function updateLiveStatus() { const b=document.getElementById('liveStatusBadge'), n=document.getElementById('hoursNoteText'); if(isOpenNow()){ b.className='open-status'; b.innerText='🟢 Abierto ahora'; n.innerHTML=`📅 Hoy: ${getTodayHours()}`; } else { b.className='closed-status'; b.innerText='🔴 Cerrado ahora'; n.innerHTML=`📅 Hoy: ${getTodayHours()} · Vuelve pronto`; } }
+    updateLiveStatus(); setInterval(updateLiveStatus, 60000);
+
+    // ============================================================
+    // 🛒 CART FUNCTIONALITY (DO NOT EDIT UNLESS NEEDED)
+    // ============================================================
+    let cart = new Map();
+    let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
+    const PAYMENT_PHONE = "7723077637";
+    let tipAmount = 0, selectedTipPreset = '0';
+
+    function getSubtotal() { let s=0; for(let e of cart.values()) s+= e.price * e.quantity; return s; }
+    function calculateTip() { const sub=getSubtotal(), cv=parseFloat(document.getElementById('customTipInput')?.value); if(!isNaN(cv)&&cv>0){ tipAmount=cv; return tipAmount; } const p=parseFloat(selectedTipPreset); tipAmount=(p===0||isNaN(p))?0:(sub*p)/100; return tipAmount; }
+    function getTotal() { return getSubtotal()+tipAmount; }
+    function updateTotalsUI() { const s=getSubtotal(), t=tipAmount, tot=s+t; document.getElementById('cartSubtotal').innerText=`$${s.toFixed(2)}`; document.getElementById('tipAmount').innerText=`$${t.toFixed(2)}`; document.getElementById('cartTotalPrice').innerText=`$${tot.toFixed(2)}`; document.getElementById('tipRow').style.display=t>0?'flex':'none'; }
+    function getCustomerName() { return { fullName: `${document.getElementById('firstNameInput')?.value.trim()||''} ${document.getElementById('lastNameInput')?.value.trim()||''}`.trim() }; }
+    function generateOrderNumber() { return 'DOMI-'+Math.floor(Math.random()*9000+1000)+'-'+Date.now().toString().slice(-4); }
+    function buildOrderDescription() { if(cart.size===0) return null; let items=[]; for(let e of cart.values()) items.push(`${e.quantity}x ${e.displayName} ($${(e.price*e.quantity).toFixed(2)})`); const s=getSubtotal(), t=tipAmount, tot=s+t, fn=getCustomerName().fullName; return { summary: items.join(', '), total: tot, fullName: fn, fullNote: `${fn} - Pedido: ${items.join(', ')}${t>0?` + Propina $${t.toFixed(2)}`:''} | Total $${tot.toFixed(2)}` }; }
+    function recordOrder(method, total, customerName) { const oNum=generateOrderNumber(); localStorage.setItem('lastDomisOrder',JSON.stringify({orderId:oNum,customerName,total,tip:tipAmount,method})); document.getElementById('orderTrackSection').style.display='block'; document.getElementById('lastOrderNumber').innerText=oNum; document.getElementById('orderStatusMsg').innerHTML=`✅ Pedido #${oNum} para ${customerName}<br>Total: $${total.toFixed(2)}<br>📱 Redirigiendo a ${method}...`; showToast(`🛍️ Orden #${oNum} creada`,2000); }
+    function openVenmoPayment() { if(cart.size===0||!getCustomerName().fullName) return; const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; window.location.href=`venmo://pay?phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`; setTimeout(()=>window.location.href=`https://venmo.com/?txn=pay&phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`,2000); recordOrder('Venmo', t, info.fullName); }
+    function openCashAppPayment() { if(cart.size===0||!getCustomerName().fullName) return; const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; window.location.href=`cashapp://$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`; setTimeout(()=>window.location.href=`https://cash.app/$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`,2000); recordOrder('CashApp', t, info.fullName); }
+    function updateAllUI() { updateCartBadge(); renderCartPanel(); calculateTip(); updateTotalsUI(); }
+    function updateCartBadge() { let total=0; for(let e of cart.values()) total+=e.quantity; document.getElementById('bubbleCount').innerText=total; }
+    function renderCartPanel() { const cont=document.getElementById('cartItemsList'); if(!cont) return; if(cart.size===0){ cont.innerHTML='<div class="empty-cart-msg">Carrito vacío 🍽️</div>'; return; } let html=''; for(let [k,entry] of cart.entries()){ html+=`<div class="cart-item"><div><h4>${entry.displayName}</h4><div>$${entry.price.toFixed(2)} c/u</div></div><div class="cart-item-actions"><button class="qty-btn decr" data-key="${k}">−</button><span>${entry.quantity}</span><button class="qty-btn incr" data-key="${k}">+</button><button class="qty-btn remove" data-key="${k}" style="background:transparent;">🗑️</button></div></div>`; } cont.innerHTML=html; document.querySelectorAll('.decr').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,-1))); document.querySelectorAll('.incr').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,1))); document.querySelectorAll('.remove').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,-999))); }
+    function changeQuantity(key, delta) { if(!cart.has(key)) return; const e=cart.get(key); let n=e.quantity+delta; if(n<=0) cart.delete(key); else e.quantity=n; updateAllUI(); if(delta>0) showToast(`➕ ${e.displayName}`,800); }
+    function addToCartWithOptions(item, variantName, price, proteinName=null, sideName=null) { let display = item.name; if(proteinName) display+=` con ${proteinName}`; else if(sideName) display+=` con ${sideName}`; else if(variantName) display+=` (${variantName})`; const key=`${item.id}_${proteinName||sideName||variantName||'default'}`; if(cart.has(key)) cart.get(key).quantity++; else cart.set(key,{displayName:display, price, quantity:1}); updateAllUI(); showToast(`${display} · añadido`,1000); }
+    function showOptions(item) { currentItem=item; currentSelectedOption=currentSelectedProtein=currentSelectedSide=null; document.getElementById('modalItemName').innerText=item.name; const cont=document.getElementById('modalOptions'); let html=''; if(item.options){ html+=`<div class="option-group"><div class="option-label">Elige tamaño:</div><div class="option-buttons">`+item.options.map((opt,i)=>`<button class="option-btn option-size" data-price="${item.prices[i]}" data-name="${opt}">${opt}</button>`).join('')+`</div></div>`; } if(item.hasProteinOptions){ html+=`<div class="option-group"><div class="option-label">🥩 Elección de Proteína (Obligatorio):</div><div class="option-buttons">`+item.proteinOptions.map(p=>`<button class="option-btn option-protein" data-price="${p.price}" data-name="${p.name}" data-base="${p.base}">${p.name}${p.price>0?` +$${p.price.toFixed(2)}`:p.base?' (Base)':''}</button>`).join('')+`</div></div>`; } if(item.hasSideOptions){ html+=`<div class="option-group"><div class="option-label">🍽️ Acompañantes (Elige 1 Obligatorio):</div><div class="option-buttons">`+item.sideOptions.map(s=>`<button class="option-btn option-side" data-price="${s.price}" data-name="${s.name}" data-base="${s.base}">${s.name}</button>`).join('')+`</div></div>`; } cont.innerHTML=html; document.querySelectorAll('.option-size').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-size').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedOption={name:b.dataset.name, price:parseFloat(b.dataset.price)}; })); document.querySelectorAll('.option-protein').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-protein').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedProtein={name:b.dataset.name, price:parseFloat(b.dataset.price), isBase:b.dataset.base==='true'}; })); document.querySelectorAll('.option-side').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-side').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedSide={name:b.dataset.name, price:parseFloat(b.dataset.price), isBase:b.dataset.base==='true'}; })); if(item.options?.length) document.querySelector('.option-size')?.click(); if(item.hasProteinOptions){ (document.querySelector('.option-protein[data-base="true"]')||document.querySelector('.option-protein'))?.click(); } if(item.hasSideOptions){ (document.querySelector('.option-side[data-base="true"]')||document.querySelector('.option-side'))?.click(); } document.getElementById('optionsOverlay').classList.add('open'); document.getElementById('optionsModal').classList.add('open'); }
+    function getFinalPrice(item) { let price=0; if(item.options && currentSelectedOption) price=currentSelectedOption.price; else if(item.price) price=item.price; else if(item.basePrice) price=item.basePrice; if(item.hasProteinOptions && currentSelectedProtein && !currentSelectedProtein.isBase) price+=currentSelectedProtein.price; if(item.hasSideOptions && currentSelectedSide && !currentSelectedSide.isBase) price+=currentSelectedSide.price; return price; }
+    function hideOptions() { document.getElementById('optionsOverlay').classList.remove('open'); document.getElementById('optionsModal').classList.remove('open'); currentItem=null; currentSelectedOption=currentSelectedProtein=currentSelectedSide=null; }
+    document.getElementById('modalCancelBtn').addEventListener('click', hideOptions);
+    document.getElementById('modalAddBtn').addEventListener('click', ()=>{ if(currentItem){ if(currentItem.hasProteinOptions && !currentSelectedProtein){ showToast("⚠️ Selecciona una proteína",1500); return; } if(currentItem.hasSideOptions && !currentSelectedSide){ showToast("⚠️ Selecciona un acompañante",1500); return; } if(currentItem.options && !currentSelectedOption && !currentItem.hasProteinOptions && !currentItem.hasSideOptions){ showToast("⚠️ Selecciona una opción",1500); return; } const finalPrice=getFinalPrice(currentItem); addToCartWithOptions(currentItem, currentSelectedOption?.name, finalPrice, currentSelectedProtein?.name, currentSelectedSide?.name); } hideOptions(); });
+    function renderMenuByCategories() { const container=document.getElementById('menuContainer'); if(!container) return; let html=''; for(const [key,cat] of Object.entries(CATEGORIES)){ html+=`<div class="menu-category"><div class="category-header"><span class="category-icon">${cat.icon}</span><span class="category-title">${cat.name}</span><span class="category-sub">${cat.description}</span></div><div class="menu-grid" id="grid-${key}"></div></div>`; } container.innerHTML=html; for(const [key,cat] of Object.entries(CATEGORIES)){ const grid=document.getElementById(`grid-${key}`); if(grid){ let gridHtml=''; cat.items.forEach(item=>{ let priceDisplay=''; if(item.options) priceDisplay=`Desde $${Math.min(...item.prices).toFixed(2)}`; else if(item.hasProteinOptions) priceDisplay=`$${item.basePrice.toFixed(2)} + proteína`; else if(item.hasSideOptions) priceDisplay=`$${item.basePrice.toFixed(2)} + acompañante`; else priceDisplay=`$${item.price.toFixed(2)}`; gridHtml+=`<div class="food-card" data-item='${JSON.stringify(item)}'><div class="card-img" style="background-image:url('${item.image}');"></div><div class="card-content"><div class="food-title">${item.name}</div><div class="price-row"><span class="price">${priceDisplay}</span></div></div></div>`; }); grid.innerHTML=gridHtml; } } document.querySelectorAll('.food-card').forEach(card=>{ card.addEventListener('click',()=>{ const itemData=JSON.parse(card.dataset.item); showOptions(itemData); }); }); }
+    function setupTip() { const btns=document.querySelectorAll('.tip-option'), ci=document.getElementById('customTipInput'); btns.forEach(b=>b.addEventListener('click',()=>{ btns.forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); selectedTipPreset=b.dataset.tip; if(ci) ci.value=''; calculateTip(); updateTotalsUI(); })); if(ci) ci.addEventListener('input',()=>{ btns.forEach(bb=>bb.classList.remove('selected')); selectedTipPreset='custom'; calculateTip(); updateTotalsUI(); }); document.querySelector('.tip-option[data-tip="0"]')?.classList.add('selected'); calculateTip(); updateTotalsUI(); }
+    function loadLastOrder() { const saved=localStorage.getItem('lastDomisOrder'); if(saved){ try{ const ord=JSON.parse(saved); const td=document.getElementById('orderTrackSection'), ln=document.getElementById('lastOrderNumber'), st=document.getElementById('orderStatusMsg'); if(td&&ln&&st){ td.style.display='block'; ln.innerText=ord.orderId; st.innerHTML=`🎫 Pedido #${ord.orderId}<br>👤 ${ord.customerName}<br>Total: $${ord.total.toFixed(2)}`; } } catch(e){} } }
+    let toastTimeout; function showToast(msg,dur=1500){ const toast=document.getElementById('toastMsg'); toast.innerText=msg; toast.classList.add('show'); if(toastTimeout) clearTimeout(toastTimeout); toastTimeout=setTimeout(()=>toast.classList.remove('show'),dur); }
+    function openCart() { document.getElementById('cartOverlay').classList.add('open'); }
+    function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); }
+    document.getElementById('cartBubble').addEventListener('click', openCart);
+    document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+    document.getElementById('cartOverlay').addEventListener('click', (e) => { if(e.target === document.getElementById('cartOverlay')) closeCart(); });
+    document.getElementById('venmoPayBtn').addEventListener('click', openVenmoPayment);
+    document.getElementById('cashappPayBtn').addEventListener('click', openCashAppPayment);
+    renderMenuByCategories(); setupTip(); updateAllUI(); loadLastOrder();
+</script>
+</body>
+</html>

@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="description" content="El Patio de los Domis - Autentica comida dominicana. Chimmi, Yaroa, Mofongo, Longaniza y mas. Pedidos online con entrega en Fort Pierce, FL.">
-    <meta name="keywords" content="comida dominicana, chimmi, yaroa, mofongo, longaniza, fort pierce, dominican food">
-    <meta name="author" content="El Patio de los Domis">
     <title>El Patio de los Domis · Comida Dominicana · Pedidos Online</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -14,7 +12,6 @@
         :root { --dd-red: #e63946; --dd-red-dark: #c1121f; --card-shadow: 0 8px 20px rgba(0,0,0,0.06); --border-light: #e9ecef; --text-secondary: #495057; --header-height: 65px; }
         .app { max-width: 1280px; margin: 0 auto; background: white; min-height: 100vh; display: flex; flex-direction: column; }
         
-        /* Header */
         .header { 
             background: white; 
             border-bottom: 1px solid var(--border-light); 
@@ -46,29 +43,13 @@
         .logo-text span { font-size: 0.55rem; font-weight: 500; color: var(--text-secondary); display: block; }
         .flag-svg { width: 24px; height: 18px; border-radius: 3px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); vertical-align: middle; }
         
-        /* Header right section */
         .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .header-status { display: flex; flex-direction: row; align-items: center; gap: 8px; }
-        .header-open-status, .header-closed-status { 
-            padding: 4px 12px; 
-            border-radius: 30px; 
-            font-weight: 700; 
-            font-size: 0.7rem; 
-            text-align: center; 
-            white-space: nowrap; 
-        }
+        .header-open-status, .header-closed-status { padding: 4px 12px; border-radius: 30px; font-weight: 700; font-size: 0.7rem; text-align: center; white-space: nowrap; }
         .header-open-status { background: #2b9348; color: white; }
         .header-closed-status { background: #9e2e2e; color: white; }
-        .header-hours-note { 
-            font-size: 0.65rem; 
-            color: var(--text-secondary); 
-            white-space: nowrap;
-            background: #f1f3f5;
-            padding: 4px 10px;
-            border-radius: 30px;
-        }
+        .header-hours-note { font-size: 0.65rem; color: var(--text-secondary); white-space: nowrap; background: #f1f3f5; padding: 4px 10px; border-radius: 30px; }
         
-        /* Address icon */
         .header-address-icon {
             display: flex;
             align-items: center;
@@ -86,7 +67,6 @@
         .header-address-icon img { width: 18px; height: 18px; object-fit: contain; display: block; }
         .header-address-icon span { display: none; }
         
-        /* Hero banner */
         .hero-banner { 
             background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%); 
             color: white; 
@@ -97,18 +77,9 @@
             align-items: center; 
             text-align: center;
         }
-        .hero-text h2 { 
-            font-size: clamp(1.1rem, 4vw, 1.4rem); 
-            font-weight: 700; 
-            letter-spacing: -0.01em;
-        }
-        .hero-text p { 
-            font-size: 0.7rem; 
-            opacity: 0.85; 
-            margin-top: 3px; 
-        }
+        .hero-text h2 { font-size: clamp(1.1rem, 4vw, 1.4rem); font-weight: 700; }
+        .hero-text p { font-size: 0.7rem; opacity: 0.85; margin-top: 3px; }
         
-        /* Menu section */
         .menu-section { padding: 1rem; flex: 1; }
         .menu-category { margin-bottom: 1.5rem; }
         .category-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--dd-red); flex-wrap: wrap; }
@@ -123,7 +94,6 @@
         .food-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
         .price { font-weight: 800; font-size: 1rem; color: #2b9348; }
         
-        /* Modal */
         .options-modal { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-radius: 28px 28px 0 0; z-index: 1100; transform: translateY(100%); transition: transform 0.3s; padding: 1.2rem; max-height: 85vh; overflow-y: auto; box-shadow: 0 -8px 30px rgba(0,0,0,0.15); }
         .options-modal.open { transform: translateY(0); }
         .options-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1099; visibility: hidden; opacity: 0; transition: 0.2s; backdrop-filter: blur(3px); }
@@ -138,41 +108,10 @@
         .modal-add-btn { background: var(--dd-red); color: white; }
         .modal-cancel-btn { background: #f1f3f5; color: #333; }
         
-        /* Cart */
-        .cart-bubble { 
-            position: fixed; 
-            bottom: 20px; 
-            right: 16px; 
-            width: 52px; 
-            height: 52px; 
-            background: var(--dd-red); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            cursor: pointer; 
-            z-index: 1000; 
-            box-shadow: 0 6px 16px rgba(230,57,70,0.4); 
-            transition: transform 0.2s; 
-            border: none; 
-        }
+        .cart-bubble { position: fixed; bottom: 20px; right: 16px; width: 52px; height: 52px; background: var(--dd-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; box-shadow: 0 6px 16px rgba(230,57,70,0.4); transition: transform 0.2s; border: none; }
         .cart-bubble:active { transform: scale(0.92); }
         .cart-bubble .cart-icon { font-size: 24px; color: white; }
-        .bubble-count { 
-            position: absolute; 
-            top: -5px; 
-            right: -5px; 
-            background: #ffd166; 
-            color: #1a1a2e; 
-            border-radius: 50%; 
-            width: 22px; 
-            height: 22px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 11px; 
-            font-weight: 800; 
-        }
+        .bubble-count { position: absolute; top: -5px; right: -5px; background: #ffd166; color: #1a1a2e; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
         
         .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1001; visibility: hidden; opacity: 0; transition: 0.2s; display: flex; justify-content: flex-end; }
         .cart-overlay.open { visibility: visible; opacity: 1; }
@@ -195,9 +134,8 @@
         .subtotal-row, .tip-row, .total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; flex-wrap: wrap; }
         .total-row { font-weight: 800; font-size: 1.1rem; margin-top: 10px; padding-top: 10px; border-top: 2px dashed #e9ecef; }
         .payment-buttons { display: flex; gap: 10px; margin: 15px 0 10px; flex-wrap: wrap; }
-        .payment-btn { flex: 1; background: #f1f3f5; border: 1px solid #dee2e6; padding: 10px; border-radius: 40px; font-weight: 700; cursor: pointer; text-align: center; font-size: 0.85rem; min-width: 120px; }
+        .payment-btn { flex: 1; background: #f1f3f5; border: 1px solid #dee2e6; padding: 10px; border-radius: 40px; font-weight: 700; cursor: pointer; text-align: center; font-size: 0.85rem; min-width: 120px; transition: 0.1s; }
         .payment-btn:active { transform: scale(0.97); }
-        .order-track { background: #f8f9fa; border-radius: 16px; padding: 10px; margin-top: 12px; text-align: center; font-size: 0.75rem; }
         .toast-msg { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #1a1a2e; color: white; padding: 8px 16px; border-radius: 40px; font-size: 0.8rem; z-index: 1200; opacity: 0; transition: 0.2s; pointer-events: none; white-space: nowrap; max-width: 90vw; text-align: center; }
         .toast-msg.show { opacity: 1; }
         footer { text-align: center; padding: 0.8rem; font-size: 0.65rem; color: #adb5bd; border-top: 1px solid #e9ecef; }
@@ -205,7 +143,6 @@
         .empty-cart-msg { text-align: center; padding: 1.5rem; color: #adb5bd; font-size: 0.8rem; }
         .info-note { background: #e8f5e9; border-radius: 12px; padding: 8px; font-size: 0.65rem; margin-bottom: 12px; color: #2b9348; text-align: center; }
         
-        /* Responsive */
         @media (min-width: 768px) {
             .cart-bubble { width: 58px; height: 58px; bottom: 25px; right: 25px; }
             .cart-bubble .cart-icon { font-size: 28px; }
@@ -279,7 +216,7 @@
 </div>
 
 <div id="cartBubble" class="cart-bubble"><span class="cart-icon">🛒</span><span class="bubble-count" id="bubbleCount">0</span></div>
-<div id="cartOverlay" class="cart-overlay"><div class="cart-panel"><div class="cart-header"><span>Tu pedido</span><button class="close-cart" id="closeCartBtn">&times;</button></div><div class="cart-scrollable"><div class="info-note">Toca cualquier platillo para elegir tamano / opcion.</div><div class="cart-items-list" id="cartItemsList"><div class="empty-cart-msg">Carrito vacio</div></div><div class="customer-info"><h4 style="font-size:0.9rem;">Tus datos</h4><div class="name-row"><input type="text" id="firstNameInput" placeholder="Nombre *" class="name-input"><input type="text" id="lastNameInput" placeholder="Apellido *" class="name-input"></div></div><div class="tip-section"><div style="font-size:0.8rem;">Dejar propina</div><div class="tip-buttons"><button class="tip-option" data-tip="0">Sin propina</button><button class="tip-option" data-tip="10">10%</button><button class="tip-option" data-tip="15">15%</button><button class="tip-option" data-tip="20">20%</button></div><div class="custom-tip"><span>$</span><input type="number" id="customTipInput" placeholder="Monto" step="0.01" class="custom-tip-input"></div></div><div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div><div class="tip-row" id="tipRow" style="display:none;"><span>Propina</span><span id="tipAmount">$0.00</span></div><div class="total-row"><span>Total a pagar</span><span id="cartTotalPrice">$0.00</span></div><div class="payment-buttons"><button id="venmoPayBtn" class="payment-btn">Pagar con Venmo</button><button id="cashappPayBtn" class="payment-btn">Pagar con CashApp</button></div><div class="payment-note">Pagar al numero 772-307-7637 via Venmo o CashApp</div><div class="order-track" id="orderTrackSection" style="display:none;"><span id="lastOrderNumber"></span><br><span id="orderStatusMsg"></span></div></div></div></div>
+<div id="cartOverlay" class="cart-overlay"><div class="cart-panel"><div class="cart-header"><span>Tu pedido</span><button class="close-cart" id="closeCartBtn">&times;</button></div><div class="cart-scrollable"><div class="info-note">Toca cualquier platillo para elegir tamano / opcion.</div><div class="cart-items-list" id="cartItemsList"><div class="empty-cart-msg">Carrito vacio</div></div><div class="customer-info"><h4 style="font-size:0.9rem;">Tus datos</h4><div class="name-row"><input type="text" id="firstNameInput" placeholder="Nombre *" class="name-input"><input type="text" id="lastNameInput" placeholder="Apellido *" class="name-input"></div></div><div class="tip-section"><div style="font-size:0.8rem;">Dejar propina</div><div class="tip-buttons"><button class="tip-option" data-tip="0">Sin propina</button><button class="tip-option" data-tip="10">10%</button><button class="tip-option" data-tip="15">15%</button><button class="tip-option" data-tip="20">20%</button></div><div class="custom-tip"><span>$</span><input type="number" id="customTipInput" placeholder="Monto" step="0.01" class="custom-tip-input"></div></div><div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div><div class="tip-row" id="tipRow" style="display:none;"><span>Propina</span><span id="tipAmount">$0.00</span></div><div class="total-row"><span>Total a pagar</span><span id="cartTotalPrice">$0.00</span></div><div class="payment-buttons"><button id="venmoPayBtn" class="payment-btn">Pagar con Venmo</button><button id="cashappPayBtn" class="payment-btn">Pagar con CashApp</button></div><div class="payment-note">Pagar al numero 772-307-7637 via Venmo o CashApp</div></div></div></div>
 
 <div id="optionsOverlay" class="options-overlay"></div>
 <div id="optionsModal" class="options-modal">
@@ -290,7 +227,6 @@
 <div id="toastMsg" class="toast-msg">Agregado</div>
 
 <script>
-    // All food images
     const IMAGES = {
         yaroa: "https://i.imgur.com/3nPHFzO.jpeg",
         mofongo: "https://i.imgur.com/srqhEOP.jpeg",
@@ -372,7 +308,6 @@
             ]}
     };
 
-    // Business hours
     const BUSINESS_HOURS = {
         sunday: { open: 11, close: 20, closed: false },
         monday: { open: 11, close: 21, closed: false },
@@ -393,13 +328,11 @@
     }
     updateLiveStatus(); setInterval(updateLiveStatus, 60000);
 
-    // Header hide/show on scroll
     let lastScrollY = window.scrollY;
     const header = document.getElementById('mainHeader');
     function handleScroll() { const cs = window.scrollY; if (cs > lastScrollY && cs > 60) header.classList.add('hide-header'); else if (cs < lastScrollY) header.classList.remove('hide-header'); lastScrollY = cs; }
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Cart logic
     let cart = new Map();
     let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
     let tipAmount = 0, selectedTipPreset = '0';
@@ -410,27 +343,47 @@
     function getTotal() { return getSubtotal()+tipAmount; }
     function updateTotalsUI() { const s=getSubtotal(), t=tipAmount, tot=s+t; document.getElementById('cartSubtotal').innerText=`$${s.toFixed(2)}`; document.getElementById('tipAmount').innerText=`$${t.toFixed(2)}`; document.getElementById('cartTotalPrice').innerText=`$${tot.toFixed(2)}`; document.getElementById('tipRow').style.display=t>0?'flex':'none'; }
     function getCustomerName() { return { fullName: `${document.getElementById('firstNameInput')?.value.trim()||''} ${document.getElementById('lastNameInput')?.value.trim()||''}`.trim() }; }
-    function generateOrderNumber() { return 'DOMI-'+Math.floor(Math.random()*9000+1000)+'-'+Date.now().toString().slice(-4); }
     function buildOrderDescription() { if(cart.size===0) return null; let items=[]; for(let e of cart.values()) items.push(`${e.quantity}x ${e.displayName} ($${(e.price*e.quantity).toFixed(2)})`); const s=getSubtotal(), t=tipAmount, tot=s+t, fn=getCustomerName().fullName; return { summary: items.join(', '), total: tot, fullName: fn }; }
-    function recordOrder(method, total, customerName) { const oNum=generateOrderNumber(); localStorage.setItem('lastDomisOrder',JSON.stringify({orderId:oNum,customerName,total,tip:tipAmount,method})); document.getElementById('orderTrackSection').style.display='block'; document.getElementById('lastOrderNumber').innerHTML=`Orden: ${oNum}`; document.getElementById('orderStatusMsg').innerHTML=`Pedido ${oNum} para ${customerName}<br>Total: $${total.toFixed(2)}<br>Redirigiendo a ${method}...`; showToast(`Orden ${oNum}`,1500); }
-    function openVenmoPayment() { if(cart.size===0||!getCustomerName().fullName){ showToast("Agrega items y nombre",1200); return; } const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; window.location.href=`venmo://pay?phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`; setTimeout(()=>window.location.href=`https://venmo.com/?txn=pay&phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`,2000); recordOrder('Venmo', t, info.fullName); }
-    function openCashAppPayment() { if(cart.size===0||!getCustomerName().fullName){ showToast("Agrega items y nombre",1200); return; } const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; window.location.href=`cashapp://$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`; setTimeout(()=>window.location.href=`https://cash.app/$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`,2000); recordOrder('CashApp', t, info.fullName); }
+    function showToast(msg,dur=1200){ const toast=document.getElementById('toastMsg'); toast.innerText=msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),dur); }
+    
+    // VENMO - Opens Venmo app on mobile, web fallback on desktop
+    function openVenmoPayment() { 
+        if(cart.size===0){ showToast("Agrega items al carrito",1200); return; } 
+        if(!getCustomerName().fullName){ showToast("Ingresa tu nombre",1200); return; } 
+        const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; 
+        // Try to open Venmo app first (mobile)
+        window.location.href=`venmo://pay?phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`; 
+        // Fallback to web after 2 seconds if app doesn't open
+        setTimeout(()=>window.location.href=`https://venmo.com/?txn=pay&phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`,2000); 
+        showToast(`Redirigiendo a Venmo - $${t.toFixed(2)}`,1500); 
+    }
+    
+    // CASHAPP - Opens CashApp app on mobile, web fallback on desktop
+    function openCashAppPayment() { 
+        if(cart.size===0){ showToast("Agrega items al carrito",1200); return; } 
+        if(!getCustomerName().fullName){ showToast("Ingresa tu nombre",1200); return; } 
+        const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; 
+        // Try to open CashApp app first (mobile)
+        window.location.href=`cashapp://$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`; 
+        // Fallback to web after 2 seconds if app doesn't open
+        setTimeout(()=>window.location.href=`https://cash.app/$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`,2000); 
+        showToast(`Redirigiendo a CashApp - $${t.toFixed(2)}`,1500); 
+    }
+    
     function updateAllUI() { updateCartBadge(); renderCartPanel(); calculateTip(); updateTotalsUI(); }
     function updateCartBadge() { let total=0; for(let e of cart.values()) total+=e.quantity; document.getElementById('bubbleCount').innerText=total; }
     function renderCartPanel() { const cont=document.getElementById('cartItemsList'); if(!cont) return; if(cart.size===0){ cont.innerHTML='<div class="empty-cart-msg">Carrito vacio</div>'; return; } let html=''; for(let [k,entry] of cart.entries()){ html+=`<div class="cart-item"><div><h4 style="font-size:0.9rem;">${escapeHtml(entry.displayName)}</h4><div style="font-size:0.8rem;">$${entry.price.toFixed(2)} c/u</div></div><div class="cart-item-actions"><button class="qty-btn decr" data-key="${k}">-</button><span>${entry.quantity}</span><button class="qty-btn incr" data-key="${k}">+</button><button class="qty-btn remove" data-key="${k}" style="background:transparent;">X</button></div></div>`; } cont.innerHTML=html; document.querySelectorAll('.decr').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,-1))); document.querySelectorAll('.incr').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,1))); document.querySelectorAll('.remove').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,-999))); }
     function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
     function changeQuantity(key, delta) { if(!cart.has(key)) return; const e=cart.get(key); let n=e.quantity+delta; if(n<=0) cart.delete(key); else e.quantity=n; updateAllUI(); if(delta>0) showToast(`+ ${e.displayName}`,700); }
     function addToCartWithOptions(item, variantName, price, proteinName=null, sideName=null) { let display = item.name; if(proteinName) display+=` con ${proteinName}`; else if(sideName) display+=` con ${sideName}`; else if(variantName) display+=` (${variantName})`; const key=`${item.id}_${proteinName||sideName||variantName||'default'}`; if(cart.has(key)) cart.get(key).quantity++; else cart.set(key,{displayName:display, price, quantity:1}); updateAllUI(); showToast(`${display}`,800); }
-    function showOptions(item) { currentItem=item; currentSelectedOption=currentSelectedProtein=currentSelectedSide=null; document.getElementById('modalItemName').innerText=item.name; const cont=document.getElementById('modalOptions'); let html=''; if(item.options){ html+=`<div class="option-group"><div class="option-label">Elige tamano:</div><div class="option-buttons">`+item.options.map((opt,i)=>`<button class="option-btn option-size" data-price="${item.prices[i]}" data-name="${opt}">${opt}</button>`).join('')+`</div></div>`; } if(item.hasProteinOptions){ html+=`<div class="option-group"><div class="option-label">Eleccion de Proteina (Obligatorio):</div><div class="option-buttons">`+item.proteinOptions.map(p=>`<button class="option-btn option-protein" data-price="${p.price}" data-name="${p.name}" data-base="${p.base}">${p.name}${p.price>0?` +$${p.price.toFixed(2)}`:p.base?' (Base)':''}</button>`).join('')+`</div></div>`; } if(item.hasSideOptions){ html+=`<div class="option-group"><div class="option-label">Acompanantes (Elige 1 Obligatorio):</div><div class="option-buttons">`+item.sideOptions.map(s=>`<button class="option-btn option-side" data-price="${s.price}" data-name="${s.name}" data-base="${s.base}">${s.name}</button>`).join('')+`</div></div>`; } cont.innerHTML=html; attachOptionEvents(); if(item.options?.length) document.querySelector('.option-size')?.click(); if(item.hasProteinOptions) (document.querySelector('.option-protein[data-base="true"]')||document.querySelector('.option-protein'))?.click(); if(item.hasSideOptions) (document.querySelector('.option-side[data-base="true"]')||document.querySelector('.option-side'))?.click(); document.getElementById('optionsOverlay').classList.add('open'); document.getElementById('optionsModal').classList.add('open'); }
+    function showOptions(item) { currentItem=item; currentSelectedOption=currentSelectedProtein=currentSelectedSide=null; document.getElementById('modalItemName').innerText=item.name; const cont=document.getElementById('modalOptions'); let html=''; if(item.options){ html+=`<div class="option-group"><div class="option-label">Elige tamano:</div><div class="option-buttons">`+item.options.map((opt,i)=>`<button class="option-btn option-size" data-price="${item.prices[i]}" data-name="${opt}">${opt}</button>`).join('')+`</div></div>`; } if(item.hasProteinOptions){ html+=`<div class="option-group"><div class="option-label">Eleccion de Proteina:</div><div class="option-buttons">`+item.proteinOptions.map(p=>`<button class="option-btn option-protein" data-price="${p.price}" data-name="${p.name}" data-base="${p.base}">${p.name}${p.price>0?` +$${p.price.toFixed(2)}`:p.base?' (Base)':''}</button>`).join('')+`</div></div>`; } if(item.hasSideOptions){ html+=`<div class="option-group"><div class="option-label">Acompanantes:</div><div class="option-buttons">`+item.sideOptions.map(s=>`<button class="option-btn option-side" data-price="${s.price}" data-name="${s.name}" data-base="${s.base}">${s.name}</button>`).join('')+`</div></div>`; } cont.innerHTML=html; attachOptionEvents(); if(item.options?.length) document.querySelector('.option-size')?.click(); if(item.hasProteinOptions) (document.querySelector('.option-protein[data-base="true"]')||document.querySelector('.option-protein'))?.click(); if(item.hasSideOptions) (document.querySelector('.option-side[data-base="true"]')||document.querySelector('.option-side'))?.click(); document.getElementById('optionsOverlay').classList.add('open'); document.getElementById('optionsModal').classList.add('open'); }
     function attachOptionEvents() { document.querySelectorAll('.option-size').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-size').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedOption={name:b.dataset.name, price:parseFloat(b.dataset.price)}; })); document.querySelectorAll('.option-protein').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-protein').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedProtein={name:b.dataset.name, price:parseFloat(b.dataset.price), isBase:b.dataset.base==='true'}; })); document.querySelectorAll('.option-side').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-side').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedSide={name:b.dataset.name, price:parseFloat(b.dataset.price), isBase:b.dataset.base==='true'}; })); }
     function getFinalPrice(item) { let price=0; if(item.options && currentSelectedOption) price=currentSelectedOption.price; else if(item.price) price=item.price; else if(item.basePrice) price=item.basePrice; if(item.hasProteinOptions && currentSelectedProtein && !currentSelectedProtein.isBase) price+=currentSelectedProtein.price; if(item.hasSideOptions && currentSelectedSide && !currentSelectedSide.isBase) price+=currentSelectedSide.price; return price; }
-    function hideOptions() { document.getElementById('optionsOverlay').classList.remove('open'); document.getElementById('optionsModal').classList.remove('open'); currentItem=null; currentSelectedOption=currentSelectedProtein=currentSelectedSide=null; }
+    function hideOptions() { document.getElementById('optionsOverlay').classList.remove('open'); document.getElementById('optionsModal').classList.remove('open'); currentItem=null; }
     document.getElementById('modalCancelBtn').addEventListener('click', hideOptions);
     document.getElementById('modalAddBtn').addEventListener('click', ()=>{ if(currentItem){ if(currentItem.hasProteinOptions && !currentSelectedProtein){ showToast("Selecciona una proteina",1200); return; } if(currentItem.hasSideOptions && !currentSelectedSide){ showToast("Selecciona un acompanante",1200); return; } if(currentItem.options && !currentSelectedOption && !currentItem.hasProteinOptions && !currentItem.hasSideOptions){ showToast("Selecciona una opcion",1200); return; } const finalPrice=getFinalPrice(currentItem); addToCartWithOptions(currentItem, currentSelectedOption?.name, finalPrice, currentSelectedProtein?.name, currentSelectedSide?.name); } hideOptions(); });
     function renderMenuByCategories() { const container=document.getElementById('menuContainer'); if(!container) return; let html=''; for(const [key,cat] of Object.entries(CATEGORIES)){ html+=`<div class="menu-category"><div class="category-header"><span class="category-icon">${cat.icon}</span><span class="category-title">${cat.name}</span><span class="category-sub">${cat.description}</span></div><div class="menu-grid" id="grid-${key}"></div></div>`; } container.innerHTML=html; for(const [key,cat] of Object.entries(CATEGORIES)){ const grid=document.getElementById(`grid-${key}`); if(grid){ let gridHtml=''; cat.items.forEach(item=>{ let priceDisplay=''; if(item.options) priceDisplay=`Desde $${Math.min(...item.prices).toFixed(2)}`; else if(item.hasProteinOptions) priceDisplay=`$${item.basePrice.toFixed(2)} + proteina`; else if(item.hasSideOptions) priceDisplay=`$${item.basePrice.toFixed(2)} + acompanante`; else priceDisplay=`$${item.price.toFixed(2)}`; const imgUrl = item.image || ''; gridHtml+=`<div class="food-card" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'><div class="card-img" style="background-image: url('${imgUrl}'); background-size: cover; background-position: center;"></div><div class="card-content"><div class="food-title">${item.name}</div><div class="price-row"><span class="price">${priceDisplay}</span></div></div></div>`; }); grid.innerHTML=gridHtml; } } document.querySelectorAll('.food-card').forEach(card=>{ card.addEventListener('click',()=>{ const itemData=JSON.parse(card.dataset.item); showOptions(itemData); }); }); }
     function setupTip() { const btns=document.querySelectorAll('.tip-option'), ci=document.getElementById('customTipInput'); btns.forEach(b=>b.addEventListener('click',()=>{ btns.forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); selectedTipPreset=b.dataset.tip; if(ci) ci.value=''; calculateTip(); updateTotalsUI(); })); if(ci) ci.addEventListener('input',()=>{ btns.forEach(bb=>bb.classList.remove('selected')); selectedTipPreset='custom'; calculateTip(); updateTotalsUI(); }); document.querySelector('.tip-option[data-tip="0"]')?.classList.add('selected'); calculateTip(); updateTotalsUI(); }
-    function loadLastOrder() { const saved=localStorage.getItem('lastDomisOrder'); if(saved){ try{ const ord=JSON.parse(saved); const td=document.getElementById('orderTrackSection'), ln=document.getElementById('lastOrderNumber'), st=document.getElementById('orderStatusMsg'); if(td&&ln&&st){ td.style.display='block'; ln.innerHTML=`Pedido ${ord.orderId}`; st.innerHTML=`${ord.customerName}<br>Total: $${ord.total.toFixed(2)}`; } } catch(e){} } }
-    let toastTimeout; function showToast(msg,dur=1200){ const toast=document.getElementById('toastMsg'); toast.innerText=msg; toast.classList.add('show'); if(toastTimeout) clearTimeout(toastTimeout); toastTimeout=setTimeout(()=>toast.classList.remove('show'),dur); }
     function openCart() { document.getElementById('cartOverlay').classList.add('open'); }
     function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); }
     document.getElementById('cartBubble').addEventListener('click', openCart);
@@ -438,7 +391,7 @@
     document.getElementById('cartOverlay').addEventListener('click', (e) => { if(e.target === document.getElementById('cartOverlay')) closeCart(); });
     document.getElementById('venmoPayBtn').addEventListener('click', openVenmoPayment);
     document.getElementById('cashappPayBtn').addEventListener('click', openCashAppPayment);
-    renderMenuByCategories(); setupTip(); updateAllUI(); loadLastOrder();
+    renderMenuByCategories(); setupTip(); updateAllUI();
 </script>
 </body>
 </html>

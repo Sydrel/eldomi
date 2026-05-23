@@ -3,7 +3,7 @@
 🇩🇴 **Authentic Dominican Food** - Chimmi, Yaroa, Mofongo, Longaniza, Chicharrón and more!
 
 ## Live Demo
-[Visit Website](https://YOUR_USERNAME.github.io/REPO_NAME/)
+[Visit Website](https://sydrel.github.io/eldomi/)
 
 ## Features
 - 📱 Fully responsive design (works on iPhone, Android, tablets, desktop)

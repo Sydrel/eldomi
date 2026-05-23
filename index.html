@@ -9,28 +9,91 @@
     <title>El Patio de los Domis · Comida Dominicana · Pedidos Online</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ---------- RESET & BASE ---------- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; color: #1a1a2e; line-height: 1.5; overflow-x: hidden; }
-        :root { --dd-red: #e63946; --dd-red-dark: #c1121f; --card-shadow: 0 8px 20px rgba(0,0,0,0.06); --border-light: #e9ecef; --text-secondary: #495057; }
+        :root { --dd-red: #e63946; --dd-red-dark: #c1121f; --card-shadow: 0 8px 20px rgba(0,0,0,0.06); --border-light: #e9ecef; --text-secondary: #495057; --header-height: 70px; }
         .app { max-width: 1280px; margin: 0 auto; background: white; min-height: 100vh; display: flex; flex-direction: column; }
         
-        /* ---------- HEADER (STICKY + RESPONSIVE) ---------- */
-        .header { background: white; border-bottom: 1px solid var(--border-light); padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); background: rgba(255,255,255,0.96); flex-wrap: wrap; }
+        /* ---------- HEADER (HIDE ON SCROLL DOWN, SHOW ON SCROLL UP) ---------- */
+        .header { 
+            background: white; 
+            border-bottom: 1px solid var(--border-light); 
+            padding: 0.8rem 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 15px; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 100; 
+            backdrop-filter: blur(10px); 
+            background: rgba(255,255,255,0.96); 
+            flex-wrap: wrap;
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(0);
+            box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .header.hide-header { transform: translateY(-100%); }
+        /* Add padding to body to prevent content from hiding under fixed header */
+        body { padding-top: var(--header-height); }
         .logo-area { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .logo-img { height: 50px; width: auto; object-fit: contain; border-radius: 12px; background: #f8f3ed; }
-        .logo-text h1 { font-size: clamp(0.9rem, 4vw, 1.4rem); font-weight: 800; background: linear-gradient(135deg, #c72a2a 0%, #e04b4b 100%); background-clip: text; -webkit-background-clip: text; color: transparent; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+        .logo-img { height: 45px; width: auto; object-fit: contain; border-radius: 12px; background: #f8f3ed; }
+        .logo-text h1 { font-size: clamp(0.9rem, 4vw, 1.3rem); font-weight: 800; background: linear-gradient(135deg, #c72a2a 0%, #e04b4b 100%); background-clip: text; -webkit-background-clip: text; color: transparent; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
         .logo-text span { font-size: 0.6rem; font-weight: 500; color: var(--text-secondary); display: block; }
         .flag-svg { width: 28px; height: 20px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); vertical-align: middle; }
         
         /* ---------- FLOATING CART BUTTON ---------- */
-        .cart-bubble { position: fixed; bottom: 25px; right: 20px; width: 58px; height: 58px; background: var(--dd-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; box-shadow: 0 6px 16px rgba(230,57,70,0.4); transition: transform 0.2s; border: none; }
+        .cart-bubble { 
+            position: fixed; 
+            bottom: 25px; 
+            right: 20px; 
+            width: 58px; 
+            height: 58px; 
+            background: var(--dd-red); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            z-index: 1000; 
+            box-shadow: 0 6px 16px rgba(230,57,70,0.4); 
+            transition: transform 0.2s; 
+            border: none; 
+        }
         .cart-bubble:active { transform: scale(0.92); }
         .cart-bubble .cart-icon { font-size: 26px; color: white; }
-        .bubble-count { position: absolute; top: -6px; right: -6px; background: #ffd166; color: #1a1a2e; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+        .bubble-count { 
+            position: absolute; 
+            top: -6px; 
+            right: -6px; 
+            background: #ffd166; 
+            color: #1a1a2e; 
+            border-radius: 50%; 
+            width: 24px; 
+            height: 24px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 12px; 
+            font-weight: 800; 
+        }
         
-        /* ---------- HERO BANNER ---------- */
-        .hero-banner { background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%); color: white; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        /* ---------- HERO BANNER (now below fixed header) ---------- */
+        .hero-banner { 
+            background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%); 
+            color: white; 
+            padding: 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 16px; 
+            margin-top: 0;
+        }
         .hero-text h2 { font-size: clamp(1.2rem, 5vw, 1.8rem); font-weight: 800; }
         .hero-text p { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
         .status-badge { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
@@ -103,7 +166,7 @@
         .empty-cart-msg { text-align: center; padding: 2rem; color: #adb5bd; }
         .info-note { background: #e8f5e9; border-radius: 14px; padding: 10px; font-size: 0.7rem; margin-bottom: 16px; color: #2b9348; text-align: center; }
         
-        /* ---------- TABLET & DESKTOP OPTIMIZATIONS ---------- */
+        /* ---------- RESPONSIVE ADJUSTMENTS ---------- */
         @media (min-width: 768px) {
             .menu-grid { gap: 24px; }
             .food-card:hover { transform: translateY(-4px); box-shadow: 0 16px 28px rgba(0,0,0,0.1); }
@@ -112,9 +175,12 @@
             .options-modal { border-radius: 32px 32px 0 0; max-width: 560px; left: 50%; transform: translateX(-50%) translateY(100%); width: 90%; }
             .options-modal.open { transform: translateX(-50%) translateY(0); }
             .options-overlay.open { background: rgba(0,0,0,0.7); }
+            body { padding-top: 75px; }
+            .header { padding: 0.8rem 2rem; }
         }
         @media (max-width: 640px) {
-            .header { padding: 0.7rem 1rem; }
+            body { padding-top: 65px; }
+            .header { padding: 0.6rem 1rem; }
             .logo-img { height: 38px; }
             .menu-section { padding: 1rem; }
             .card-img { height: 150px; }
@@ -136,7 +202,7 @@
 </head>
 <body>
 <div class="app">
-    <div class="header">
+    <div class="header" id="mainHeader">
         <div class="logo-area">
             <img class="logo-img" src="https://www.image2url.com/r2/default/images/1779484716038-a6168d99-cdda-4779-8b1d-8af05b3bc507.jpg" alt="El Patio de los Domis Logo">
             <div class="logo-text">
@@ -154,7 +220,7 @@
         </div>
         <div class="status-badge">
             <div id="liveStatusBadge" class="open-status">🟢 Abierto ahora</div>
-            <a href="https://maps.google.com/?q=3343+S+US+Hwy+1+Fort+Pierce+FL+34982" target="_blank" class="address-link">📍 3343 S US Hwy 1, Fort Pierce, FL</a>
+            <a href="https://maps.google.com/?q=3343+S+US+Hwy+1+Fort+Pierce+FL+34982" target="_blank" class="address-link">📍 3343 S US Hwy 1, Fort Pierce, FL 34982</a>
             <div class="hours-note" id="hoursNoteText">📅 Hoy: 11AM - 10PM</div>
         </div>
     </div>
@@ -261,14 +327,72 @@
             ]}
     };
 
-    // BUSINESS HOURS
-    const BUSINESS_HOURS = { sunday: { closed: true }, monday: { open: 11, close: 21 }, tuesday: { open: 11, close: 21 }, wednesday: { open: 11, close: 21 }, thursday: { open: 11, close: 21 }, friday: { open: 11, close: 22 }, saturday: { open: 11, close: 22 } };
-    function getDayKey(d) { return ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][d.getDay()]; }
-    function isOpenNow() { const now=new Date(), h=BUSINESS_HOURS[getDayKey(now)]; if(!h||h.closed) return false; const t=now.getHours()+now.getMinutes()/60; return t>=h.open && t<h.close; }
-    function getTodayHours() { const h=BUSINESS_HOURS[getDayKey(new Date())]; if(!h||h.closed) return "Cerrado"; const f=x=>x===12?"12PM":x===21?"9PM":x===22?"10PM":x>12?`${x-12}PM`:`${x}AM`; return `${f(h.open)} - ${f(h.close)}`; }
-    function updateLiveStatus() { const b=document.getElementById('liveStatusBadge'), n=document.getElementById('hoursNoteText'); if(isOpenNow()){ b.className='open-status'; b.innerText='🟢 Abierto ahora'; n.innerHTML=`📅 Hoy: ${getTodayHours()}`; } else { b.className='closed-status'; b.innerText='🔴 Cerrado ahora'; n.innerHTML=`📅 Hoy: ${getTodayHours()} · Vuelve pronto`; } }
-    updateLiveStatus(); setInterval(updateLiveStatus, 60000);
+    // ============================================================
+    // ⏰ BUSINESS HOURS - CORRECTED (Fort Pierce, FL Eastern Time)
+    // Sunday: 11AM - 8PM, Mon-Thu: 11AM - 9PM, Fri-Sat: 11AM - 10PM
+    // ============================================================
+    const BUSINESS_HOURS = {
+        sunday: { open: 11, close: 20, closed: false },     // Sunday 11AM-8PM
+        monday: { open: 11, close: 21, closed: false },     // Monday 11AM-9PM
+        tuesday: { open: 11, close: 21, closed: false },    // Tuesday 11AM-9PM
+        wednesday: { open: 11, close: 21, closed: false },  // Wednesday 11AM-9PM
+        thursday: { open: 11, close: 21, closed: false },   // Thursday 11AM-9PM
+        friday: { open: 11, close: 22, closed: false },     // Friday 11AM-10PM
+        saturday: { open: 11, close: 22, closed: false }    // Saturday 11AM-10PM
+    };
+    
+    function getDayKey(date) { return ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][date.getDay()]; }
+    function isOpenNow() { 
+        const now = new Date(); 
+        const hours = BUSINESS_HOURS[getDayKey(now)]; 
+        if(!hours || hours.closed) return false; 
+        const t = now.getHours() + now.getMinutes() / 60; 
+        return t >= hours.open && t < hours.close; 
+    }
+    function getTodayHours() { 
+        const h = BUSINESS_HOURS[getDayKey(new Date())]; 
+        if(!h || h.closed) return "Cerrado"; 
+        const f = x => x === 12 ? "12PM" : x === 21 ? "9PM" : x === 22 ? "10PM" : x === 20 ? "8PM" : x > 12 ? `${x-12}PM` : `${x}AM`; 
+        return `${f(h.open)} - ${f(h.close)}`; 
+    }
+    function updateLiveStatus() { 
+        const b = document.getElementById('liveStatusBadge'), n = document.getElementById('hoursNoteText'); 
+        if(isOpenNow()){ 
+            b.className = 'open-status'; 
+            b.innerText = '🟢 Abierto ahora'; 
+            n.innerHTML = `📅 Hoy: ${getTodayHours()}`; 
+        } else { 
+            b.className = 'closed-status'; 
+            b.innerText = '🔴 Cerrado ahora'; 
+            n.innerHTML = `📅 Hoy: ${getTodayHours()} · Vuelve pronto`; 
+        } 
+    }
+    updateLiveStatus(); 
+    setInterval(updateLiveStatus, 60000);
 
+    // ============================================================
+    // 🧭 HEADER HIDE/SHOW ON SCROLL
+    // ============================================================
+    let lastScrollY = window.scrollY;
+    const header = document.getElementById('mainHeader');
+    
+    function handleScroll() {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY && currentScrollY > 80) {
+            // Scrolling down - hide header
+            header.classList.add('hide-header');
+        } else if (currentScrollY < lastScrollY) {
+            // Scrolling up - show header
+            header.classList.remove('hide-header');
+        }
+        lastScrollY = currentScrollY;
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // ============================================================
+    // 🛒 CART FUNCTIONALITY
+    // ============================================================
     let cart = new Map();
     let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
     let tipAmount = 0, selectedTipPreset = '0';

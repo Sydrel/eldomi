@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="El Patio de los Domis - Auténtica comida dominicana. Chimmi, Yaroa, Mofongo, Longaniza y más. Pedidos online con entrega en Fort Pierce, FL.">
+    <meta name="description" content="El Patio de los Domis - Autentica comida dominicana. Chimmi, Yaroa, Mofongo, Longaniza y mas. Pedidos online con entrega en Fort Pierce, FL.">
     <meta name="keywords" content="comida dominicana, chimmi, yaroa, mofongo, longaniza, fort pierce, dominican food">
     <meta name="author" content="El Patio de los Domis">
     <title>El Patio de los Domis · Comida Dominicana · Pedidos Online</title>
@@ -14,7 +14,7 @@
         :root { --dd-red: #e63946; --dd-red-dark: #c1121f; --card-shadow: 0 8px 20px rgba(0,0,0,0.06); --border-light: #e9ecef; --text-secondary: #495057; --header-height: 65px; }
         .app { max-width: 1280px; margin: 0 auto; background: white; min-height: 100vh; display: flex; flex-direction: column; }
         
-        /* ---------- HEADER (HIDE ON SCROLL DOWN, SHOW ON SCROLL UP) ---------- */
+        /* Header */
         .header { 
             background: white; 
             border-bottom: 1px solid var(--border-light); 
@@ -46,16 +46,9 @@
         .logo-text span { font-size: 0.55rem; font-weight: 500; color: var(--text-secondary); display: block; }
         .flag-svg { width: 24px; height: 18px; border-radius: 3px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); vertical-align: middle; }
         
-        /* ---------- HEADER RIGHT SECTION - HORIZONTAL ON MOBILE ---------- */
+        /* Header right section */
         .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        
-        /* Status and schedule in horizontal row on mobile */
-        .header-status {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 8px;
-        }
+        .header-status { display: flex; flex-direction: row; align-items: center; gap: 8px; }
         .header-open-status, .header-closed-status { 
             padding: 4px 12px; 
             border-radius: 30px; 
@@ -75,7 +68,7 @@
             border-radius: 30px;
         }
         
-        /* Address icon only - small circular button */
+        /* Address icon */
         .header-address-icon {
             display: flex;
             align-items: center;
@@ -93,7 +86,7 @@
         .header-address-icon img { width: 18px; height: 18px; object-fit: contain; display: block; }
         .header-address-icon span { display: none; }
         
-        /* ---------- HERO BANNER (COMPACT) ---------- */
+        /* Hero banner */
         .hero-banner { 
             background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%); 
             color: white; 
@@ -115,7 +108,7 @@
             margin-top: 3px; 
         }
         
-        /* ---------- MENU SECTION ---------- */
+        /* Menu section */
         .menu-section { padding: 1rem; flex: 1; }
         .menu-category { margin-bottom: 1.5rem; }
         .category-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--dd-red); flex-wrap: wrap; }
@@ -130,7 +123,7 @@
         .food-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
         .price { font-weight: 800; font-size: 1rem; color: #2b9348; }
         
-        /* ---------- MODAL ---------- */
+        /* Modal */
         .options-modal { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-radius: 28px 28px 0 0; z-index: 1100; transform: translateY(100%); transition: transform 0.3s; padding: 1.2rem; max-height: 85vh; overflow-y: auto; box-shadow: 0 -8px 30px rgba(0,0,0,0.15); }
         .options-modal.open { transform: translateY(0); }
         .options-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1099; visibility: hidden; opacity: 0; transition: 0.2s; backdrop-filter: blur(3px); }
@@ -145,7 +138,7 @@
         .modal-add-btn { background: var(--dd-red); color: white; }
         .modal-cancel-btn { background: #f1f3f5; color: #333; }
         
-        /* ---------- CART PANEL ---------- */
+        /* Cart */
         .cart-bubble { 
             position: fixed; 
             bottom: 20px; 
@@ -212,14 +205,13 @@
         .empty-cart-msg { text-align: center; padding: 1.5rem; color: #adb5bd; font-size: 0.8rem; }
         .info-note { background: #e8f5e9; border-radius: 12px; padding: 8px; font-size: 0.65rem; margin-bottom: 12px; color: #2b9348; text-align: center; }
         
-        /* ---------- RESPONSIVE - HORIZONTAL STATUS ON MOBILE ---------- */
+        /* Responsive */
         @media (min-width: 768px) {
             .cart-bubble { width: 58px; height: 58px; bottom: 25px; right: 25px; }
             .cart-bubble .cart-icon { font-size: 28px; }
             .options-modal { max-width: 520px; left: 50%; transform: translateX(-50%) translateY(100%); width: 90%; border-radius: 28px 28px 0 0; }
             .options-modal.open { transform: translateX(-50%) translateY(0); }
             body { padding-top: 65px; }
-            .header-status { flex-direction: row; }
         }
         
         @media (max-width: 640px) {
@@ -228,11 +220,11 @@
             .logo-area { flex-shrink: 1; min-width: 0; }
             .logo-img { height: 32px; }
             .logo-text h1 { font-size: 0.75rem; }
-            .logo-text span { display: none; } /* Hide secondary text on mobile to save space */
+            .logo-text span { display: none; }
             .header-right { gap: 6px; flex-shrink: 0; }
             .header-status { gap: 6px; }
             .header-open-status, .header-closed-status { padding: 3px 8px; font-size: 0.6rem; }
-            .header-hours-note { font-size: 0.55rem; padding: 3px 6px; white-space: nowrap; background: #f1f3f5; border-radius: 30px; }
+            .header-hours-note { font-size: 0.55rem; padding: 3px 6px; }
             .header-address-icon { width: 28px; height: 28px; padding: 5px; }
             .header-address-icon img { width: 16px; height: 16px; }
             .hero-banner { padding: 0.5rem 0.8rem; }
@@ -245,12 +237,6 @@
             .name-row { flex-direction: column; }
             .payment-buttons { flex-direction: column; }
             .toast-msg { white-space: normal; font-size: 0.7rem; bottom: 70px; }
-        }
-        
-        @media (max-width: 480px) {
-            .logo-text h1 { font-size: 0.7rem; }
-            .header-open-status, .header-closed-status { padding: 2px 6px; font-size: 0.55rem; }
-            .header-hours-note { font-size: 0.5rem; padding: 2px 5px; }
         }
         
         button, .food-card, .option-btn, .qty-btn, .payment-btn { cursor: pointer; user-select: none; }
@@ -266,48 +252,45 @@
                 <h1>El Patio de los Domis 
                     <svg class="flag-svg" viewBox="0 0 36 24"><rect x="0" y="0" width="18" height="12" fill="#002277"/><rect x="18" y="0" width="18" height="12" fill="#ce1126"/><rect x="0" y="12" width="18" height="12" fill="#ce1126"/><rect x="18" y="12" width="18" height="12" fill="#002277"/><rect x="16" y="0" width="4" height="24" fill="white"/><rect x="0" y="10" width="36" height="4" fill="white"/></svg>
                 </h1>
-                <span>Chimmi · Yaroa · Mofongo</span>
+                <span>Chimmi · Yaroa · Mofongo · Longaniza</span>
             </div>
         </div>
         <div class="header-right">
             <div class="header-status">
-                <div id="headerStatusBadge" class="header-open-status">🟢 Abierto ahora</div>
-                <div class="header-hours-note" id="headerHoursNote">📅 Hoy: 11AM - 10PM</div>
+                <div id="headerStatusBadge" class="header-open-status">Abierto ahora</div>
+                <div class="header-hours-note" id="headerHoursNote">Hoy: 11AM - 10PM</div>
             </div>
-            <a href="https://maps.google.com/?q=3343+S+US+Hwy+1+Fort+Pierce+FL+34982" target="_blank" class="header-address-icon" aria-label="Ver ubicación en Google Maps">
-                <img src="https://i.imgur.com/yL7xCrF.png" alt="ubicación" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23e63946%22%3E%3Cpath d=%22M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z%22/%3E%3C/svg%3E';">
+            <a href="https://maps.google.com/?q=3343+S+US+Hwy+1+Fort+Pierce+FL+34982" target="_blank" class="header-address-icon" aria-label="Ver ubicacion en Google Maps">
+                <img src="https://i.imgur.com/yL7xCrF.png" alt="ubicacion" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23e63946%22%3E%3Cpath d=%22M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z%22/%3E%3C/svg%3E';">
                 <span>3343 S US Hwy 1, Fort Pierce, FL</span>
             </a>
         </div>
     </div>
     
-    <!-- COMPACT HERO BANNER -->
     <div class="hero-banner">
         <div class="hero-text">
-            <h2>🔥 ¡Sabor Dominicano!</h2>
-            <p>Toca cualquier platillo para elegir tamaño o variante</p>
+            <h2>Sabor Dominicano</h2>
+            <p>Toca cualquier platillo para elegir tamano o variante</p>
         </div>
     </div>
     
     <div class="menu-section"><div id="menuContainer"></div></div>
-    <footer>© El Patio de los Domis — Comida dominicana 🇩🇴 · Venmo / CashApp</footer>
+    <footer>El Patio de los Domis — Autentica comida dominicana · Venmo / CashApp</footer>
 </div>
 
 <div id="cartBubble" class="cart-bubble"><span class="cart-icon">🛒</span><span class="bubble-count" id="bubbleCount">0</span></div>
-<div id="cartOverlay" class="cart-overlay"><div class="cart-panel"><div class="cart-header"><span>📋 Tu pedido</span><button class="close-cart" id="closeCartBtn">&times;</button></div><div class="cart-scrollable"><div class="info-note">✅ Toca cualquier platillo para elegir tamaño / opción.</div><div class="cart-items-list" id="cartItemsList"><div class="empty-cart-msg">Carrito vacío 🍽️</div></div><div class="customer-info"><h4 style="font-size:0.9rem;">👤 Tus datos</h4><div class="name-row"><input type="text" id="firstNameInput" placeholder="Nombre *" class="name-input"><input type="text" id="lastNameInput" placeholder="Apellido *" class="name-input"></div></div><div class="tip-section"><div style="font-size:0.8rem;">💜 ¿Dejar propina?</div><div class="tip-buttons"><button class="tip-option" data-tip="0">Sin propina</button><button class="tip-option" data-tip="10">10%</button><button class="tip-option" data-tip="15">15%</button><button class="tip-option" data-tip="20">20%</button></div><div class="custom-tip"><span>$</span><input type="number" id="customTipInput" placeholder="Monto" step="0.01" class="custom-tip-input"></div></div><div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div><div class="tip-row" id="tipRow" style="display:none;"><span>💜 Propina</span><span id="tipAmount">$0.00</span></div><div class="total-row"><span>Total a pagar</span><span id="cartTotalPrice">$0.00</span></div><div class="payment-buttons"><button id="venmoPayBtn" class="payment-btn">💚 Venmo</button><button id="cashappPayBtn" class="payment-btn">💰 CashApp</button></div><div class="payment-note">📱 Pagar al <strong>772-307-7637</strong> vía Venmo/CashApp</div><div class="order-track" id="orderTrackSection" style="display:none;"><span id="lastOrderNumber"></span><br><span id="orderStatusMsg"></span></div></div></div></div>
+<div id="cartOverlay" class="cart-overlay"><div class="cart-panel"><div class="cart-header"><span>Tu pedido</span><button class="close-cart" id="closeCartBtn">&times;</button></div><div class="cart-scrollable"><div class="info-note">Toca cualquier platillo para elegir tamano / opcion.</div><div class="cart-items-list" id="cartItemsList"><div class="empty-cart-msg">Carrito vacio</div></div><div class="customer-info"><h4 style="font-size:0.9rem;">Tus datos</h4><div class="name-row"><input type="text" id="firstNameInput" placeholder="Nombre *" class="name-input"><input type="text" id="lastNameInput" placeholder="Apellido *" class="name-input"></div></div><div class="tip-section"><div style="font-size:0.8rem;">Dejar propina</div><div class="tip-buttons"><button class="tip-option" data-tip="0">Sin propina</button><button class="tip-option" data-tip="10">10%</button><button class="tip-option" data-tip="15">15%</button><button class="tip-option" data-tip="20">20%</button></div><div class="custom-tip"><span>$</span><input type="number" id="customTipInput" placeholder="Monto" step="0.01" class="custom-tip-input"></div></div><div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div><div class="tip-row" id="tipRow" style="display:none;"><span>Propina</span><span id="tipAmount">$0.00</span></div><div class="total-row"><span>Total a pagar</span><span id="cartTotalPrice">$0.00</span></div><div class="payment-buttons"><button id="venmoPayBtn" class="payment-btn">Pagar con Venmo</button><button id="cashappPayBtn" class="payment-btn">Pagar con CashApp</button></div><div class="payment-note">Pagar al numero 772-307-7637 via Venmo o CashApp</div><div class="order-track" id="orderTrackSection" style="display:none;"><span id="lastOrderNumber"></span><br><span id="orderStatusMsg"></span></div></div></div></div>
 
 <div id="optionsOverlay" class="options-overlay"></div>
 <div id="optionsModal" class="options-modal">
     <div id="modalItemName" style="font-weight:800; font-size:1.1rem; margin-bottom:10px;"></div>
     <div id="modalOptions"></div>
-    <div class="modal-actions"><button class="modal-cancel-btn" id="modalCancelBtn">Cancelar</button><button class="modal-add-btn" id="modalAddBtn">Añadir</button></div>
+    <div class="modal-actions"><button class="modal-cancel-btn" id="modalCancelBtn">Cancelar</button><button class="modal-add-btn" id="modalAddBtn">Anadir al carrito</button></div>
 </div>
-<div id="toastMsg" class="toast-msg">✨ Agregado</div>
+<div id="toastMsg" class="toast-msg">Agregado</div>
 
 <script>
-    // ============================================================
-    // 🖼️ ALL FOOD IMAGES
-    // ============================================================
+    // All food images
     const IMAGES = {
         yaroa: "https://i.imgur.com/3nPHFzO.jpeg",
         mofongo: "https://i.imgur.com/srqhEOP.jpeg",
@@ -336,9 +319,9 @@
 
     const MOFONGO_PROTEINS = [
         { name: "Carne de Cerdo (Pork)", price: 0, base: true },
-        { name: "Salami & Queso", price: 16.00, base: false },
+        { name: "Salami y Queso", price: 16.00, base: false },
         { name: "Longaniza", price: 0, base: true },
-        { name: "Chicharrón", price: 3.50, base: false },
+        { name: "Chicharron", price: 3.50, base: false },
         { name: "Camarones (Shrimp)", price: 4.00, base: false }
     ];
 
@@ -349,21 +332,21 @@
     ];
 
     const CATEGORIES = {
-        favorites: { name: "⭐ Featured Favorites", icon: "🔥", description: "Platos principales",
+        favorites: { name: "Featured Favorites", icon: "⭐", description: "Platos principales",
             items: [
                 { id: "yaroa", name: "Yaroa (Loaded Fries)", options: ["Small ($11.50)", "Large ($15.50)"], prices: [11.50, 15.50], image: IMAGES.yaroa },
                 { id: "mofongo", name: "Mofongo", hasProteinOptions: true, proteinOptions: MOFONGO_PROTEINS, basePrice: 18.50, image: IMAGES.mofongo },
-                { id: "chicharron", name: "Chicharrón", options: ["Reg ($16.50)", "Large ($20.00)"], prices: [16.50, 20.00], image: IMAGES.chicharron, hasSideOptions: true, sideOptions: SIDE_OPTIONS },
+                { id: "chicharron", name: "Chicharron de Cerdo", options: ["Regular ($16.50)", "Large ($20.00)"], prices: [16.50, 20.00], image: IMAGES.chicharron, hasSideOptions: true, sideOptions: SIDE_OPTIONS },
                 { id: "picapollo", name: "Pica Pollo", price: 15.50, image: IMAGES.picapollo },
                 { id: "pechuga", name: "Pechuga a la Plancha", price: 16.00, image: IMAGES.pechuga },
                 { id: "longaniza", name: "Longaniza", hasSideOptions: true, sideOptions: SIDE_OPTIONS, basePrice: 17.00, image: IMAGES.longaniza }
             ]},
-        burgers: { name: "🍔 Dominican Burgers", icon: "🍔", description: "Chimmi estilo dominicano",
+        burgers: { name: "Dominican Burgers (Chimmi)", icon: "🍔", description: "Chimmi estilo dominicano",
             items: [
                 { id: "chimires", name: "Chimi Res (Beef)", price: 12.00, image: IMAGES.chimires },
                 { id: "chimipollo", name: "Chimi Pollo (Chicken)", price: 12.00, image: IMAGES.chimipollo }
             ]},
-        appetizers: { name: "🥟 Appetizers & Sides", icon: "🥟", description: "Entradas",
+        appetizers: { name: "Appetizers and Sides", icon: "🥟", description: "Entradas",
             items: [
                 { id: "empanadas", name: "Empanadas", options: ["Beef ($5)", "Chicken ($5)", "Cheese ($5.50)"], prices: [5.00, 5.00, 5.50], image: IMAGES.empanadas },
                 { id: "quesofrito", name: "Queso Frito", price: 9.00, image: IMAGES.quesoFrito },
@@ -375,13 +358,13 @@
                 { id: "ricebeans", name: "Rice and Beans", price: 7.00, image: IMAGES.riceBeans },
                 { id: "fries", name: "French Fries", price: 6.00, image: IMAGES.fries }
             ]},
-        drinks: { name: "🍹 Bebidas", icon: "🍹", description: "Jugos naturales",
+        drinks: { name: "Natural Drinks", icon: "🍹", description: "Jugos frescos",
             items: [
                 { id: "chinola", name: "Jugo de Chinola", price: 5.00, image: IMAGES.chinola },
-                { id: "limonada", name: "Limonada", price: 5.00, image: IMAGES.limonada },
-                { id: "morir", name: "Morir Soñando", price: 6.00, image: IMAGES.morir }
+                { id: "limonada", name: "Limonada Natural", price: 5.00, image: IMAGES.limonada },
+                { id: "morir", name: "Morir Sonando", price: 6.00, image: IMAGES.morir }
             ]},
-        sauces: { name: "🌶️ Salsas", icon: "🌶️", description: "Caseras",
+        sauces: { name: "Homemade Sauces", icon: "🌶️", description: "Para acompanar",
             items: [
                 { id: "salsaroja", name: "Salsa Roja", price: 2.00, image: IMAGES.salsaRoja },
                 { id: "salsaverde", name: "Salsa Verde", price: 2.00, image: IMAGES.salsaVerde },
@@ -389,7 +372,7 @@
             ]}
     };
 
-    // BUSINESS HOURS
+    // Business hours
     const BUSINESS_HOURS = {
         sunday: { open: 11, close: 20, closed: false },
         monday: { open: 11, close: 21, closed: false },
@@ -405,18 +388,18 @@
     function getTodayHours() { const h=BUSINESS_HOURS[getDayKey(new Date())]; if(!h||h.closed) return "Cerrado"; const f=x=>x===12?"12PM":x===21?"9PM":x===22?"10PM":x===20?"8PM":x>12?`${x-12}PM`:`${x}AM`; return `${f(h.open)} - ${f(h.close)}`; }
     function updateLiveStatus() { 
         const b=document.getElementById('headerStatusBadge'), n=document.getElementById('headerHoursNote');
-        if(isOpenNow()){ b.className='header-open-status'; b.innerText='🟢 Abierto ahora'; n.innerHTML=`📅 ${getTodayHours()}`; } 
-        else { b.className='header-closed-status'; b.innerText='🔴 Cerrado'; n.innerHTML=`📅 ${getTodayHours()}`; } 
+        if(isOpenNow()){ b.className='header-open-status'; b.innerText='Abierto ahora'; n.innerHTML=`Hoy: ${getTodayHours()}`; } 
+        else { b.className='header-closed-status'; b.innerText='Cerrado'; n.innerHTML=`Hoy: ${getTodayHours()}`; } 
     }
     updateLiveStatus(); setInterval(updateLiveStatus, 60000);
 
-    // HEADER HIDE/SHOW
+    // Header hide/show on scroll
     let lastScrollY = window.scrollY;
     const header = document.getElementById('mainHeader');
     function handleScroll() { const cs = window.scrollY; if (cs > lastScrollY && cs > 60) header.classList.add('hide-header'); else if (cs < lastScrollY) header.classList.remove('hide-header'); lastScrollY = cs; }
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // CART LOGIC
+    // Cart logic
     let cart = new Map();
     let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
     let tipAmount = 0, selectedTipPreset = '0';
@@ -429,24 +412,24 @@
     function getCustomerName() { return { fullName: `${document.getElementById('firstNameInput')?.value.trim()||''} ${document.getElementById('lastNameInput')?.value.trim()||''}`.trim() }; }
     function generateOrderNumber() { return 'DOMI-'+Math.floor(Math.random()*9000+1000)+'-'+Date.now().toString().slice(-4); }
     function buildOrderDescription() { if(cart.size===0) return null; let items=[]; for(let e of cart.values()) items.push(`${e.quantity}x ${e.displayName} ($${(e.price*e.quantity).toFixed(2)})`); const s=getSubtotal(), t=tipAmount, tot=s+t, fn=getCustomerName().fullName; return { summary: items.join(', '), total: tot, fullName: fn }; }
-    function recordOrder(method, total, customerName) { const oNum=generateOrderNumber(); localStorage.setItem('lastDomisOrder',JSON.stringify({orderId:oNum,customerName,total,tip:tipAmount,method})); document.getElementById('orderTrackSection').style.display='block'; document.getElementById('lastOrderNumber').innerHTML=`🎫 Orden: ${oNum}`; document.getElementById('orderStatusMsg').innerHTML=`✅ Pedido #${oNum} para ${customerName}<br>Total: $${total.toFixed(2)}<br>📱 Redirigiendo a ${method}...`; showToast(`🛍️ Orden #${oNum}`,1500); }
-    function openVenmoPayment() { if(cart.size===0||!getCustomerName().fullName){ showToast("❌ Agrega items y nombre",1200); return; } const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; window.location.href=`venmo://pay?phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`; setTimeout(()=>window.location.href=`https://venmo.com/?txn=pay&phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`,2000); recordOrder('Venmo', t, info.fullName); }
-    function openCashAppPayment() { if(cart.size===0||!getCustomerName().fullName){ showToast("❌ Agrega items y nombre",1200); return; } const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; window.location.href=`cashapp://$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`; setTimeout(()=>window.location.href=`https://cash.app/$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`,2000); recordOrder('CashApp', t, info.fullName); }
+    function recordOrder(method, total, customerName) { const oNum=generateOrderNumber(); localStorage.setItem('lastDomisOrder',JSON.stringify({orderId:oNum,customerName,total,tip:tipAmount,method})); document.getElementById('orderTrackSection').style.display='block'; document.getElementById('lastOrderNumber').innerHTML=`Orden: ${oNum}`; document.getElementById('orderStatusMsg').innerHTML=`Pedido ${oNum} para ${customerName}<br>Total: $${total.toFixed(2)}<br>Redirigiendo a ${method}...`; showToast(`Orden ${oNum}`,1500); }
+    function openVenmoPayment() { if(cart.size===0||!getCustomerName().fullName){ showToast("Agrega items y nombre",1200); return; } const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; window.location.href=`venmo://pay?phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`; setTimeout(()=>window.location.href=`https://venmo.com/?txn=pay&phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`,2000); recordOrder('Venmo', t, info.fullName); }
+    function openCashAppPayment() { if(cart.size===0||!getCustomerName().fullName){ showToast("Agrega items y nombre",1200); return; } const t=getTotal(), info=buildOrderDescription(), msg=`${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`; window.location.href=`cashapp://$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`; setTimeout(()=>window.location.href=`https://cash.app/$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`,2000); recordOrder('CashApp', t, info.fullName); }
     function updateAllUI() { updateCartBadge(); renderCartPanel(); calculateTip(); updateTotalsUI(); }
     function updateCartBadge() { let total=0; for(let e of cart.values()) total+=e.quantity; document.getElementById('bubbleCount').innerText=total; }
-    function renderCartPanel() { const cont=document.getElementById('cartItemsList'); if(!cont) return; if(cart.size===0){ cont.innerHTML='<div class="empty-cart-msg">Carrito vacío 🍽️</div>'; return; } let html=''; for(let [k,entry] of cart.entries()){ html+=`<div class="cart-item"><div><h4 style="font-size:0.9rem;">${escapeHtml(entry.displayName)}</h4><div style="font-size:0.8rem;">$${entry.price.toFixed(2)} c/u</div></div><div class="cart-item-actions"><button class="qty-btn decr" data-key="${k}">−</button><span>${entry.quantity}</span><button class="qty-btn incr" data-key="${k}">+</button><button class="qty-btn remove" data-key="${k}" style="background:transparent;">🗑️</button></div></div>`; } cont.innerHTML=html; document.querySelectorAll('.decr').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,-1))); document.querySelectorAll('.incr').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,1))); document.querySelectorAll('.remove').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,-999))); }
+    function renderCartPanel() { const cont=document.getElementById('cartItemsList'); if(!cont) return; if(cart.size===0){ cont.innerHTML='<div class="empty-cart-msg">Carrito vacio</div>'; return; } let html=''; for(let [k,entry] of cart.entries()){ html+=`<div class="cart-item"><div><h4 style="font-size:0.9rem;">${escapeHtml(entry.displayName)}</h4><div style="font-size:0.8rem;">$${entry.price.toFixed(2)} c/u</div></div><div class="cart-item-actions"><button class="qty-btn decr" data-key="${k}">-</button><span>${entry.quantity}</span><button class="qty-btn incr" data-key="${k}">+</button><button class="qty-btn remove" data-key="${k}" style="background:transparent;">X</button></div></div>`; } cont.innerHTML=html; document.querySelectorAll('.decr').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,-1))); document.querySelectorAll('.incr').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,1))); document.querySelectorAll('.remove').forEach(b=>b.addEventListener('click',()=>changeQuantity(b.dataset.key,-999))); }
     function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    function changeQuantity(key, delta) { if(!cart.has(key)) return; const e=cart.get(key); let n=e.quantity+delta; if(n<=0) cart.delete(key); else e.quantity=n; updateAllUI(); if(delta>0) showToast(`➕ ${e.displayName}`,700); }
+    function changeQuantity(key, delta) { if(!cart.has(key)) return; const e=cart.get(key); let n=e.quantity+delta; if(n<=0) cart.delete(key); else e.quantity=n; updateAllUI(); if(delta>0) showToast(`+ ${e.displayName}`,700); }
     function addToCartWithOptions(item, variantName, price, proteinName=null, sideName=null) { let display = item.name; if(proteinName) display+=` con ${proteinName}`; else if(sideName) display+=` con ${sideName}`; else if(variantName) display+=` (${variantName})`; const key=`${item.id}_${proteinName||sideName||variantName||'default'}`; if(cart.has(key)) cart.get(key).quantity++; else cart.set(key,{displayName:display, price, quantity:1}); updateAllUI(); showToast(`${display}`,800); }
-    function showOptions(item) { currentItem=item; currentSelectedOption=currentSelectedProtein=currentSelectedSide=null; document.getElementById('modalItemName').innerText=item.name; const cont=document.getElementById('modalOptions'); let html=''; if(item.options){ html+=`<div class="option-group"><div class="option-label">Elige tamaño:</div><div class="option-buttons">`+item.options.map((opt,i)=>`<button class="option-btn option-size" data-price="${item.prices[i]}" data-name="${opt}">${opt}</button>`).join('')+`</div></div>`; } if(item.hasProteinOptions){ html+=`<div class="option-group"><div class="option-label">🥩 Proteína:</div><div class="option-buttons">`+item.proteinOptions.map(p=>`<button class="option-btn option-protein" data-price="${p.price}" data-name="${p.name}" data-base="${p.base}">${p.name}${p.price>0?` +$${p.price.toFixed(2)}`:p.base?' (Base)':''}</button>`).join('')+`</div></div>`; } if(item.hasSideOptions){ html+=`<div class="option-group"><div class="option-label">🍽️ Acompañante:</div><div class="option-buttons">`+item.sideOptions.map(s=>`<button class="option-btn option-side" data-price="${s.price}" data-name="${s.name}" data-base="${s.base}">${s.name}</button>`).join('')+`</div></div>`; } cont.innerHTML=html; attachOptionEvents(); if(item.options?.length) document.querySelector('.option-size')?.click(); if(item.hasProteinOptions) (document.querySelector('.option-protein[data-base="true"]')||document.querySelector('.option-protein'))?.click(); if(item.hasSideOptions) (document.querySelector('.option-side[data-base="true"]')||document.querySelector('.option-side'))?.click(); document.getElementById('optionsOverlay').classList.add('open'); document.getElementById('optionsModal').classList.add('open'); }
+    function showOptions(item) { currentItem=item; currentSelectedOption=currentSelectedProtein=currentSelectedSide=null; document.getElementById('modalItemName').innerText=item.name; const cont=document.getElementById('modalOptions'); let html=''; if(item.options){ html+=`<div class="option-group"><div class="option-label">Elige tamano:</div><div class="option-buttons">`+item.options.map((opt,i)=>`<button class="option-btn option-size" data-price="${item.prices[i]}" data-name="${opt}">${opt}</button>`).join('')+`</div></div>`; } if(item.hasProteinOptions){ html+=`<div class="option-group"><div class="option-label">Eleccion de Proteina (Obligatorio):</div><div class="option-buttons">`+item.proteinOptions.map(p=>`<button class="option-btn option-protein" data-price="${p.price}" data-name="${p.name}" data-base="${p.base}">${p.name}${p.price>0?` +$${p.price.toFixed(2)}`:p.base?' (Base)':''}</button>`).join('')+`</div></div>`; } if(item.hasSideOptions){ html+=`<div class="option-group"><div class="option-label">Acompanantes (Elige 1 Obligatorio):</div><div class="option-buttons">`+item.sideOptions.map(s=>`<button class="option-btn option-side" data-price="${s.price}" data-name="${s.name}" data-base="${s.base}">${s.name}</button>`).join('')+`</div></div>`; } cont.innerHTML=html; attachOptionEvents(); if(item.options?.length) document.querySelector('.option-size')?.click(); if(item.hasProteinOptions) (document.querySelector('.option-protein[data-base="true"]')||document.querySelector('.option-protein'))?.click(); if(item.hasSideOptions) (document.querySelector('.option-side[data-base="true"]')||document.querySelector('.option-side'))?.click(); document.getElementById('optionsOverlay').classList.add('open'); document.getElementById('optionsModal').classList.add('open'); }
     function attachOptionEvents() { document.querySelectorAll('.option-size').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-size').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedOption={name:b.dataset.name, price:parseFloat(b.dataset.price)}; })); document.querySelectorAll('.option-protein').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-protein').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedProtein={name:b.dataset.name, price:parseFloat(b.dataset.price), isBase:b.dataset.base==='true'}; })); document.querySelectorAll('.option-side').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.option-side').forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); currentSelectedSide={name:b.dataset.name, price:parseFloat(b.dataset.price), isBase:b.dataset.base==='true'}; })); }
     function getFinalPrice(item) { let price=0; if(item.options && currentSelectedOption) price=currentSelectedOption.price; else if(item.price) price=item.price; else if(item.basePrice) price=item.basePrice; if(item.hasProteinOptions && currentSelectedProtein && !currentSelectedProtein.isBase) price+=currentSelectedProtein.price; if(item.hasSideOptions && currentSelectedSide && !currentSelectedSide.isBase) price+=currentSelectedSide.price; return price; }
     function hideOptions() { document.getElementById('optionsOverlay').classList.remove('open'); document.getElementById('optionsModal').classList.remove('open'); currentItem=null; currentSelectedOption=currentSelectedProtein=currentSelectedSide=null; }
     document.getElementById('modalCancelBtn').addEventListener('click', hideOptions);
-    document.getElementById('modalAddBtn').addEventListener('click', ()=>{ if(currentItem){ if(currentItem.hasProteinOptions && !currentSelectedProtein){ showToast("⚠️ Selecciona proteína",1200); return; } if(currentItem.hasSideOptions && !currentSelectedSide){ showToast("⚠️ Selecciona acompañante",1200); return; } if(currentItem.options && !currentSelectedOption && !currentItem.hasProteinOptions && !currentItem.hasSideOptions){ showToast("⚠️ Selecciona opción",1200); return; } const finalPrice=getFinalPrice(currentItem); addToCartWithOptions(currentItem, currentSelectedOption?.name, finalPrice, currentSelectedProtein?.name, currentSelectedSide?.name); } hideOptions(); });
-    function renderMenuByCategories() { const container=document.getElementById('menuContainer'); if(!container) return; let html=''; for(const [key,cat] of Object.entries(CATEGORIES)){ html+=`<div class="menu-category"><div class="category-header"><span class="category-icon">${cat.icon}</span><span class="category-title">${cat.name}</span><span class="category-sub">${cat.description}</span></div><div class="menu-grid" id="grid-${key}"></div></div>`; } container.innerHTML=html; for(const [key,cat] of Object.entries(CATEGORIES)){ const grid=document.getElementById(`grid-${key}`); if(grid){ let gridHtml=''; cat.items.forEach(item=>{ let priceDisplay=''; if(item.options) priceDisplay=`Desde $${Math.min(...item.prices).toFixed(2)}`; else if(item.hasProteinOptions) priceDisplay=`$${item.basePrice.toFixed(2)} + proteína`; else if(item.hasSideOptions) priceDisplay=`$${item.basePrice.toFixed(2)} + acompañante`; else priceDisplay=`$${item.price.toFixed(2)}`; const imgUrl = item.image || ''; gridHtml+=`<div class="food-card" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'><div class="card-img" style="background-image: url('${imgUrl}'); background-size: cover; background-position: center;"></div><div class="card-content"><div class="food-title">${item.name}</div><div class="price-row"><span class="price">${priceDisplay}</span></div></div></div>`; }); grid.innerHTML=gridHtml; } } document.querySelectorAll('.food-card').forEach(card=>{ card.addEventListener('click',()=>{ const itemData=JSON.parse(card.dataset.item); showOptions(itemData); }); }); }
+    document.getElementById('modalAddBtn').addEventListener('click', ()=>{ if(currentItem){ if(currentItem.hasProteinOptions && !currentSelectedProtein){ showToast("Selecciona una proteina",1200); return; } if(currentItem.hasSideOptions && !currentSelectedSide){ showToast("Selecciona un acompanante",1200); return; } if(currentItem.options && !currentSelectedOption && !currentItem.hasProteinOptions && !currentItem.hasSideOptions){ showToast("Selecciona una opcion",1200); return; } const finalPrice=getFinalPrice(currentItem); addToCartWithOptions(currentItem, currentSelectedOption?.name, finalPrice, currentSelectedProtein?.name, currentSelectedSide?.name); } hideOptions(); });
+    function renderMenuByCategories() { const container=document.getElementById('menuContainer'); if(!container) return; let html=''; for(const [key,cat] of Object.entries(CATEGORIES)){ html+=`<div class="menu-category"><div class="category-header"><span class="category-icon">${cat.icon}</span><span class="category-title">${cat.name}</span><span class="category-sub">${cat.description}</span></div><div class="menu-grid" id="grid-${key}"></div></div>`; } container.innerHTML=html; for(const [key,cat] of Object.entries(CATEGORIES)){ const grid=document.getElementById(`grid-${key}`); if(grid){ let gridHtml=''; cat.items.forEach(item=>{ let priceDisplay=''; if(item.options) priceDisplay=`Desde $${Math.min(...item.prices).toFixed(2)}`; else if(item.hasProteinOptions) priceDisplay=`$${item.basePrice.toFixed(2)} + proteina`; else if(item.hasSideOptions) priceDisplay=`$${item.basePrice.toFixed(2)} + acompanante`; else priceDisplay=`$${item.price.toFixed(2)}`; const imgUrl = item.image || ''; gridHtml+=`<div class="food-card" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'><div class="card-img" style="background-image: url('${imgUrl}'); background-size: cover; background-position: center;"></div><div class="card-content"><div class="food-title">${item.name}</div><div class="price-row"><span class="price">${priceDisplay}</span></div></div></div>`; }); grid.innerHTML=gridHtml; } } document.querySelectorAll('.food-card').forEach(card=>{ card.addEventListener('click',()=>{ const itemData=JSON.parse(card.dataset.item); showOptions(itemData); }); }); }
     function setupTip() { const btns=document.querySelectorAll('.tip-option'), ci=document.getElementById('customTipInput'); btns.forEach(b=>b.addEventListener('click',()=>{ btns.forEach(bb=>bb.classList.remove('selected')); b.classList.add('selected'); selectedTipPreset=b.dataset.tip; if(ci) ci.value=''; calculateTip(); updateTotalsUI(); })); if(ci) ci.addEventListener('input',()=>{ btns.forEach(bb=>bb.classList.remove('selected')); selectedTipPreset='custom'; calculateTip(); updateTotalsUI(); }); document.querySelector('.tip-option[data-tip="0"]')?.classList.add('selected'); calculateTip(); updateTotalsUI(); }
-    function loadLastOrder() { const saved=localStorage.getItem('lastDomisOrder'); if(saved){ try{ const ord=JSON.parse(saved); const td=document.getElementById('orderTrackSection'), ln=document.getElementById('lastOrderNumber'), st=document.getElementById('orderStatusMsg'); if(td&&ln&&st){ td.style.display='block'; ln.innerHTML=`🎫 Pedido #${ord.orderId}`; st.innerHTML=`👤 ${ord.customerName}<br>Total: $${ord.total.toFixed(2)}`; } } catch(e){} } }
+    function loadLastOrder() { const saved=localStorage.getItem('lastDomisOrder'); if(saved){ try{ const ord=JSON.parse(saved); const td=document.getElementById('orderTrackSection'), ln=document.getElementById('lastOrderNumber'), st=document.getElementById('orderStatusMsg'); if(td&&ln&&st){ td.style.display='block'; ln.innerHTML=`Pedido ${ord.orderId}`; st.innerHTML=`${ord.customerName}<br>Total: $${ord.total.toFixed(2)}`; } } catch(e){} } }
     let toastTimeout; function showToast(msg,dur=1200){ const toast=document.getElementById('toastMsg'); toast.innerText=msg; toast.classList.add('show'); if(toastTimeout) clearTimeout(toastTimeout); toastTimeout=setTimeout(()=>toast.classList.remove('show'),dur); }
     function openCart() { document.getElementById('cartOverlay').classList.add('open'); }
     function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); }

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <meta name="description" content="El Patio de los Domis - Authentic Dominican food. Chimmi, Yaroa, Mofongo, Longaniza and more. Online ordering in Fort Pierce, FL.">
+  <meta name="description" content="El Patio de los Domis - Authentic Dominican food. Online ordering in Fort Pierce, FL.">
   <meta name="theme-color" content="#e63946">
   
-  <!-- iOS / Android PWA settings -->
+  <!-- ========== PWA / HOME SCREEN SETTINGS ========== -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="El Patio Domis">
@@ -22,6 +22,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
+    /* ============================================================
+       GLOBAL STYLES & VARIABLES
+    ============================================================ */
     * {
       margin: 0;
       padding: 0;
@@ -73,7 +76,9 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Header */
+    /* ============================================================
+       HEADER SECTION
+    ============================================================ */
     .header {
       background: white;
       border-bottom: 1px solid var(--border-light);
@@ -105,7 +110,7 @@
 
     .header-right { display: flex; align-items: center; gap: 8px; }
 
-    /* Combined status badge - Open/Closed with dot and hours */
+    /* Status Badge (Open/Closed with dot) */
     .status-badge {
       display: flex;
       align-items: center;
@@ -123,11 +128,7 @@
     }
     .status-dot.open { background: #2b9348; box-shadow: 0 0 4px #2b9348; }
     .status-dot.closed { background: #9e2e2e; animation: none; }
-    .status-text {
-      font-weight: 700;
-      font-size: 0.7rem;
-      color: #1a1a2e;
-    }
+    .status-text { font-weight: 700; font-size: 0.7rem; color: #1a1a2e; }
     .status-hours {
       font-size: 0.65rem;
       color: var(--text-secondary);
@@ -135,7 +136,9 @@
       border-left: 1px solid #dee2e6;
     }
 
-    /* Hero banner */
+    /* ============================================================
+       HERO BANNER SECTION
+    ============================================================ */
     .hero-banner {
       background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%);
       color: white;
@@ -156,7 +159,7 @@
       margin-bottom: 16px;
     }
 
-    /* Social Icons + Location Icon Container */
+    /* Social Icons + Location Icon */
     .social-icons {
       display: flex;
       justify-content: center;
@@ -184,12 +187,15 @@
     .location-icon { background: rgba(255,255,255,0.2); }
     .social-icon svg, .location-icon svg { width: 24px; height: 24px; fill: white; }
 
-    /* Menu */
+    /* ============================================================
+       MENU SECTION
+    ============================================================ */
     .menu-section { padding: 16px 12px; flex: 1; }
     .menu-category {
       margin-bottom: 24px;
       animation: fadeInUp 0.4s ease-out backwards;
     }
+    /* Staggered animation delays */
     .menu-category:nth-child(1) { animation-delay: 0.15s; }
     .menu-category:nth-child(2) { animation-delay: 0.2s; }
     .menu-category:nth-child(3) { animation-delay: 0.25s; }
@@ -236,7 +242,9 @@
     .food-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
     .price { font-weight: 800; font-size: 1rem; color: #2b9348; }
 
-    /* Modal */
+    /* ============================================================
+       MODAL (BOTTOM SHEET)
+    ============================================================ */
     .options-modal {
       position: fixed;
       bottom: 0;
@@ -300,7 +308,9 @@
     .modal-add-btn { background: var(--dd-red); color: white; }
     .modal-cancel-btn { background: #f1f3f5; color: #333; }
 
-    /* Cart */
+    /* ============================================================
+       FLOATING CART BUTTON
+    ============================================================ */
     .cart-bubble {
       position: fixed;
       bottom: 20px;
@@ -339,6 +349,9 @@
     }
     .cart-bubble:active .bubble-count { transform: scale(1.15); }
 
+    /* ============================================================
+       CART PANEL (SLIDE-IN)
+    ============================================================ */
     .cart-overlay {
       position: fixed;
       top: 0;
@@ -422,10 +435,6 @@
       border: 1px solid #e9ecef;
       animation: slideInRight 0.3s ease-out backwards;
     }
-    @keyframes slideInRight {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
     .cart-item-name { font-weight: 800; font-size: 0.9rem; color: #2d241c; margin-bottom: 6px; }
     .cart-item-details {
       font-size: 0.7rem;
@@ -472,7 +481,7 @@
     }
     .remove-item-btn:active { transform: scale(0.92); }
 
-    /* Customer Info & Tip */
+    /* Customer Info & Tip Section */
     .customer-info, .tip-section {
       background: #f8f9fa;
       border-radius: 14px;
@@ -517,7 +526,7 @@
     .subtotal-row, .tip-row, .total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
     .total-row { font-weight: 800; font-size: 1.1rem; margin-top: 10px; padding-top: 10px; border-top: 2px dashed #e9ecef; }
 
-    /* Payment */
+    /* Payment Buttons */
     .payment-buttons { display: flex; gap: 15px; margin: 15px 0 10px; justify-content: center; }
     .payment-btn {
       width: 55px;
@@ -552,7 +561,7 @@
       transition: all 0.2s ease;
     }
 
-    /* Toast */
+    /* Toast Messages */
     .toast-msg {
       position: fixed;
       bottom: 80px;
@@ -574,6 +583,8 @@
     .toast-msg.show { opacity: 1; transform: translateX(-50%) scale(1); }
 
     footer { text-align: center; padding: 12px; font-size: 0.65rem; color: #adb5bd; border-top: 1px solid #e9ecef; }
+
+    /* Install Banner */
     .install-banner {
       position: fixed;
       bottom: 80px;
@@ -604,7 +615,9 @@
     }
     .install-banner button:active { transform: scale(0.95); }
 
-    /* Responsive */
+    /* ============================================================
+       RESPONSIVE ADJUSTMENTS
+    ============================================================ */
     @media (max-width: 640px) {
       .hero-banner { padding: 16px 12px; }
       .hero-text h2 { font-size: 1.2rem; }
@@ -647,7 +660,6 @@
       </div>
     </div>
     <div class="header-right">
-      <!-- Combined Status Badge - Open/Closed with dot and hours together -->
       <div class="status-badge" id="statusBadge">
         <div class="status-dot" id="statusDot"></div>
         <span class="status-text" id="statusText">Open now</span>
@@ -656,50 +668,44 @@
     </div>
   </div>
 
-  <!-- ==================== HERO BANNER WITH SOCIAL ICONS + MAP ICON ==================== -->
+  <!-- ==================== HERO BANNER WITH SOCIAL ICONS ==================== -->
   <div class="hero-banner">
     <div class="hero-text">
       <h2>Dominican Flavor</h2>
       <p>Tap any dish to choose size or variation</p>
     </div>
     <div class="social-icons">
-      <!-- Instagram -->
       <a href="https://www.instagram.com/elpatiodelosdomis/" target="_blank" class="social-icon instagram" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       </a>
-      <!-- Facebook -->
       <a href="https://www.facebook.com/people/El-Patio-De-Los-Domis/100078238761813/" target="_blank" class="social-icon facebook" aria-label="Facebook">
         <svg viewBox="0 0 24 24" fill="white"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
       </a>
-      <!-- WhatsApp Channel -->
       <a href="https://www.whatsapp.com/channel/0029VaCKPf6GpLHSxtTTlE0K" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp Channel">
         <svg viewBox="0 0 24 24" fill="white"><path d="M12.031 2.016c-5.49 0-9.984 4.5-9.984 9.984 0 1.781.469 3.469 1.313 4.969l-1.313 4.969 5.109-1.266c1.406.703 3.047 1.125 4.875 1.125 5.484 0 9.984-4.5 9.984-9.984s-4.5-9.797-9.984-9.797zm0 18.703c-1.641 0-3.188-.422-4.547-1.219l-.328-.188-3.047.75.797-3.047-.219-.328c-.891-1.406-1.406-3.047-1.406-4.734 0-4.828 3.938-8.766 8.766-8.766 4.828 0 8.766 3.938 8.766 8.766s-3.938 8.766-8.766 8.766zm4.828-6.328c-.203-.094-1.219-.594-1.406-.656-.188-.094-.328-.094-.469.094-.141.188-.547.656-.672.797-.125.125-.25.141-.453.047-.203-.094-.844-.313-1.609-.984-.594-.531-.984-1.172-1.094-1.375-.125-.188-.016-.281.094-.375.094-.094.203-.25.297-.375.094-.125.125-.219.188-.375.063-.156.031-.281-.016-.406-.047-.125-.422-1.016-.578-1.391-.156-.375-.313-.313-.422-.313-.109 0-.234-.016-.359-.016-.125 0-.328.047-.5.234-.172.188-.656.641-.656 1.563 0 .922.672 1.813.766 1.938.094.125 1.313 2.016 3.188 2.828.445.188.797.313 1.078.406.453.156.875.125 1.203.063.375-.063 1.188-.484 1.359-.953.156-.469.156-.875.109-.953-.047-.078-.172-.125-.375-.219z"/></svg>
       </a>
-      <!-- Location / Map Icon (moved from header) -->
       <a href="https://maps.google.com/?q=3343+S+US+Hwy+1+Fort+Pierce+FL+34982" target="_blank" class="location-icon" aria-label="View location on Google Maps">
-        <svg viewBox="0 0 24 24" fill="white">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
       </a>
     </div>
   </div>
 
-  <!-- ==================== DYNAMIC MENU ==================== -->
+  <!-- ==================== DYNAMIC MENU SECTION ==================== -->
   <div class="menu-section"><div id="menuContainer"></div></div>
   <footer>El Patio de los Domis — Authentic Dominican Food · Venmo / CashApp / Zelle</footer>
 </div>
 
-<!-- Install banner -->
+<!-- ==================== INSTALL BANNER ==================== -->
 <div id="installBanner" class="install-banner">
   <span>📱 Add to Home Screen</span>
   <button id="installBtn">Add</button>
   <button id="closeInstallBanner">✕</button>
 </div>
 
-<!-- Floating cart button -->
+<!-- ==================== FLOATING CART BUTTON ==================== -->
 <div id="cartBubble" class="cart-bubble"><span class="cart-icon">🛒</span><span class="bubble-count" id="bubbleCount">0</span></div>
 
-<!-- Cart slide‑in panel -->
+<!-- ==================== CART SLIDE-IN PANEL ==================== -->
 <div id="cartOverlay" class="cart-overlay">
   <div class="cart-panel">
     <div class="cart-header">
@@ -743,7 +749,7 @@
   </div>
 </div>
 
-<!-- Bottom modal -->
+<!-- ==================== MODAL FOR CUSTOMIZATION ==================== -->
 <div id="optionsOverlay" class="options-overlay"></div>
 <div id="optionsModal" class="options-modal">
   <div id="modalItemName" style="font-weight:800; font-size:1rem; margin-bottom:8px;"></div>
@@ -756,422 +762,480 @@
 <div id="toastMsg" class="toast-msg">Added</div>
 
 <script>
-  (function() {
-    // ------------------------------
-    // MENU DATA
-    // ------------------------------
-    const IMAGES = {
-      yaroa: "https://i.imgur.com/3nPHFzO.jpeg", mofongo: "https://i.imgur.com/srqhEOP.jpeg",
-      chicharron: "https://i.imgur.com/BRpYZ9a.jpeg", picapollo: "https://i.imgur.com/EhPwwDn.jpeg",
-      pechuga: "https://i.imgur.com/XM1TLoD.jpeg", longaniza: "https://i.imgur.com/EKxarug.jpeg",
-      chimires: "https://i.imgur.com/r40XEdz.jpeg", chimipollo: "https://i.imgur.com/Wl4op3d.jpeg",
-      empanadas: "https://i.imgur.com/wQbMOds.jpg", quesoFrito: "https://i.imgur.com/2oEU7qX.png",
-      salchipapas: "https://i.imgur.com/gHJrmdJ.png", alitas: "https://i.imgur.com/UYdIbiP.png",
-      tostones: "https://i.imgur.com/j1BlfcS.jpeg", maduros: "https://i.imgur.com/vMsdBS8.png",
-      arrozGandules: "https://i.imgur.com/KoBiTky.jpeg", riceBeans: "https://i.imgur.com/BjmJjg7.png",
-      fries: "https://i.imgur.com/xQbv16p.png", chinola: "https://i.imgur.com/VwTmGAE.jpeg",
-      limonada: "https://i.imgur.com/torAUAd.jpeg", morir: "https://i.imgur.com/Op6tCvN.jpeg",
-      salsaRoja: "https://i.imgur.com/jlAecYF.jpeg", salsaVerde: "https://i.imgur.com/0zYqZdY.jpeg",
-      salsaAjo: "https://i.imgur.com/d5gdmLv.jpeg"
-    };
+  // ============================================================
+  // 📸 GOOGLE DRIVE IMAGE SETUP
+  // ============================================================
+  // To use Google Drive images:
+  // 1. Upload image to Google Drive
+  // 2. Share → "Anyone with the link can view"
+  // 3. Get FILE ID from URL (between /d/ and /view)
+  // 4. Use format: https://drive.google.com/uc?export=view&id=YOUR_FILE_ID
+  // ============================================================
+  
+  const IMAGES = {
+    // === FEATURED FAVORITES & MEATS ===
+    yaroa: "https://i.imgur.com/3nPHFzO.jpeg",
+    mofongo: "https://i.imgur.com/srqhEOP.jpeg",
+    chicharron: "https://i.imgur.com/BRpYZ9a.jpeg",
+    picapollo: "https://i.imgur.com/EhPwwDn.jpeg",
+    pechuga: "https://i.imgur.com/XM1TLoD.jpeg",
+    longaniza: "https://i.imgur.com/EKxarug.jpeg",
+    // === DOMINICAN BURGERS ===
+    chimires: "https://i.imgur.com/r40XEdz.jpeg",
+    chimipollo: "https://i.imgur.com/Wl4op3d.jpeg",
+    // === APPETIZERS & SIDES ===
+    empanadas: "https://i.imgur.com/wQbMOds.jpg",
+    quesoFrito: "https://i.imgur.com/2oEU7qX.png",
+    salchipapas: "https://i.imgur.com/gHJrmdJ.png",
+    alitas: "https://i.imgur.com/UYdIbiP.png",
+    tostones: "https://i.imgur.com/j1BlfcS.jpeg",
+    maduros: "https://i.imgur.com/vMsdBS8.png",
+    arrozGandules: "https://i.imgur.com/KoBiTky.jpeg",
+    riceBeans: "https://i.imgur.com/BjmJjg7.png",
+    fries: "https://i.imgur.com/xQbv16p.png",
+    // === DRINKS ===
+    chinola: "https://i.imgur.com/VwTmGAE.jpeg",
+    limonada: "https://i.imgur.com/torAUAd.jpeg",
+    morir: "https://i.imgur.com/Op6tCvN.jpeg",
+    // === SAUCES ===
+    salsaRoja: "https://i.imgur.com/jlAecYF.jpeg",
+    salsaVerde: "https://i.imgur.com/0zYqZdY.jpeg",
+    salsaAjo: "https://i.imgur.com/d5gdmLv.jpeg"
+  };
 
-    const PROTEIN_OPTIONS = [
-      { name: "Fried Pork", price: 0, base: true },
-      { name: "Salami & Cheese", price: 16.00, base: false },
-      { name: "Longaniza", price: 0, base: true },
-      { name: "Crispy Pork Rinds", price: 3.50, base: false },
-      { name: "Shrimp", price: 4.00, base: false }
-    ];
+  // ============================================================
+  // 🥩 PROTEIN OPTIONS FOR MOFONGO
+  // ============================================================
+  const PROTEIN_OPTIONS = [
+    { name: "Fried Pork", price: 0, base: true },
+    { name: "Salami & Cheese", price: 16.00, base: false },
+    { name: "Longaniza", price: 0, base: true },
+    { name: "Crispy Pork Rinds", price: 3.50, base: false },
+    { name: "Shrimp", price: 4.00, base: false }
+  ];
 
-    const SIDE_OPTIONS = [
-      { name: "Rice and Beans", price: 0, base: true }, { name: "Yellow Rice", price: 0, base: true },
-      { name: "Tostones", price: 0, base: true }, { name: "French Fries", price: 0, base: true },
-      { name: "Fried Yuca", price: 0, base: true }, { name: "Sweet Plantains", price: 0, base: true }
-    ];
+  // ============================================================
+  // 🍽️ SIDE OPTIONS FOR CHICHARRON AND LONGANIZA
+  // ============================================================
+  const SIDE_OPTIONS = [
+    { name: "Rice and Beans", price: 0, base: true },
+    { name: "Yellow Rice", price: 0, base: true },
+    { name: "Tostones", price: 0, base: true },
+    { name: "French Fries", price: 0, base: true },
+    { name: "Fried Yuca", price: 0, base: true },
+    { name: "Sweet Plantains", price: 0, base: true }
+  ];
 
-    const CATEGORIES = {
-      favorites: {
-        name: "Featured Favorites", icon: "⭐", description: "Main dishes",
-        items: [
-          { id: "yaroa", name: "Yaroa", options: ["Small ($11.50)", "Large ($15.50)"], prices: [11.50, 15.50], image: IMAGES.yaroa },
-          { id: "mofongo", name: "Mofongo", hasProteinOptions: true, proteinOptions: PROTEIN_OPTIONS, basePrice: 18.50, image: IMAGES.mofongo },
-          { id: "chicharron", name: "Chicharron", options: ["Regular ($16.50)", "Large ($20.00)"], prices: [16.50, 20.00], image: IMAGES.chicharron, hasSideOptions: true, sideOptions: SIDE_OPTIONS },
-          { id: "picapollo", name: "Pica Pollo", price: 15.50, image: IMAGES.picapollo },
-          { id: "pechuga", name: "Grilled Chicken", price: 16.00, image: IMAGES.pechuga },
-          { id: "longaniza", name: "Longaniza", hasSideOptions: true, sideOptions: SIDE_OPTIONS, basePrice: 17.00, image: IMAGES.longaniza }
-        ]
-      },
-      burgers: {
-        name: "Dominican Burgers", icon: "🍔", description: "Chimmi style",
-        items: [
-          { id: "chimires", name: "Chimi Res (Beef)", price: 12.00, image: IMAGES.chimires },
-          { id: "chimipollo", name: "Chimi Pollo (Chicken)", price: 12.00, image: IMAGES.chimipollo }
-        ]
-      },
-      appetizers: {
-        name: "Appetizers & Sides", icon: "🥟", description: "Starters",
-        items: [
-          { id: "empanadas", name: "Empanadas", options: ["Beef ($5)", "Chicken ($5)", "Cheese ($5.50)"], prices: [5.00, 5.00, 5.50], image: IMAGES.empanadas },
-          { id: "quesofrito", name: "Fried Cheese", price: 9.00, image: IMAGES.quesoFrito },
-          { id: "salchipapas", name: "Salchipapas", price: 11.00, image: IMAGES.salchipapas },
-          { id: "alitas", name: "Wings", price: 12.00, image: IMAGES.alitas },
-          { id: "tostones", name: "Tostones", price: 5.00, image: IMAGES.tostones },
-          { id: "maduros", name: "Sweet Plantains", price: 6.00, image: IMAGES.maduros },
-          { id: "arrozgandules", name: "Rice w/ Peas", price: 7.00, image: IMAGES.arrozGandules },
-          { id: "ricebeans", name: "Rice & Beans", price: 7.00, image: IMAGES.riceBeans },
-          { id: "fries", name: "French Fries", price: 6.00, image: IMAGES.fries }
-        ]
-      },
-      drinks: {
-        name: "Natural Drinks", icon: "🍹", description: "Fresh juices",
-        items: [
-          { id: "chinola", name: "Passion Fruit", price: 5.00, image: IMAGES.chinola },
-          { id: "limonada", name: "Lemonade", price: 5.00, image: IMAGES.limonada },
-          { id: "morir", name: "Morir Sonando", price: 6.00, image: IMAGES.morir }
-        ]
-      },
-      sauces: {
-        name: "Homemade Sauces", icon: "🌶️", description: "To accompany",
-        items: [
-          { id: "salsaroja", name: "Red Sauce", price: 2.00, image: IMAGES.salsaRoja },
-          { id: "salsaverde", name: "Green Sauce", price: 2.00, image: IMAGES.salsaVerde },
-          { id: "salsaajo", name: "Garlic Sauce", price: 2.50, image: IMAGES.salsaAjo }
-        ]
-      }
-    };
+  // ============================================================
+  // 📋 FULL MENU STRUCTURE
+  // ============================================================
+  const CATEGORIES = {
+    favorites: {
+      name: "Featured Favorites", icon: "⭐", description: "Main dishes",
+      items: [
+        { id: "yaroa", name: "Yaroa", options: ["Small ($11.50)", "Large ($15.50)"], prices: [11.50, 15.50], image: IMAGES.yaroa },
+        { id: "mofongo", name: "Mofongo", hasProteinOptions: true, proteinOptions: PROTEIN_OPTIONS, basePrice: 18.50, image: IMAGES.mofongo },
+        { id: "chicharron", name: "Chicharron", options: ["Regular ($16.50)", "Large ($20.00)"], prices: [16.50, 20.00], image: IMAGES.chicharron, hasSideOptions: true, sideOptions: SIDE_OPTIONS },
+        { id: "picapollo", name: "Pica Pollo", price: 15.50, image: IMAGES.picapollo },
+        { id: "pechuga", name: "Grilled Chicken", price: 16.00, image: IMAGES.pechuga },
+        { id: "longaniza", name: "Longaniza", hasSideOptions: true, sideOptions: SIDE_OPTIONS, basePrice: 17.00, image: IMAGES.longaniza }
+      ]
+    },
+    burgers: {
+      name: "Dominican Burgers", icon: "🍔", description: "Chimmi style",
+      items: [
+        { id: "chimires", name: "Chimi Res (Beef)", price: 12.00, image: IMAGES.chimires },
+        { id: "chimipollo", name: "Chimi Pollo (Chicken)", price: 12.00, image: IMAGES.chimipollo }
+      ]
+    },
+    appetizers: {
+      name: "Appetizers & Sides", icon: "🥟", description: "Starters",
+      items: [
+        { id: "empanadas", name: "Empanadas", options: ["Beef ($5)", "Chicken ($5)", "Cheese ($5.50)"], prices: [5.00, 5.00, 5.50], image: IMAGES.empanadas },
+        { id: "quesofrito", name: "Fried Cheese", price: 9.00, image: IMAGES.quesoFrito },
+        { id: "salchipapas", name: "Salchipapas", price: 11.00, image: IMAGES.salchipapas },
+        { id: "alitas", name: "Wings", price: 12.00, image: IMAGES.alitas },
+        { id: "tostones", name: "Tostones", price: 5.00, image: IMAGES.tostones },
+        { id: "maduros", name: "Sweet Plantains", price: 6.00, image: IMAGES.maduros },
+        { id: "arrozgandules", name: "Rice w/ Peas", price: 7.00, image: IMAGES.arrozGandules },
+        { id: "ricebeans", name: "Rice & Beans", price: 7.00, image: IMAGES.riceBeans },
+        { id: "fries", name: "French Fries", price: 6.00, image: IMAGES.fries }
+      ]
+    },
+    drinks: {
+      name: "Natural Drinks", icon: "🍹", description: "Fresh juices",
+      items: [
+        { id: "chinola", name: "Passion Fruit", price: 5.00, image: IMAGES.chinola },
+        { id: "limonada", name: "Lemonade", price: 5.00, image: IMAGES.limonada },
+        { id: "morir", name: "Morir Sonando", price: 6.00, image: IMAGES.morir }
+      ]
+    },
+    sauces: {
+      name: "Homemade Sauces", icon: "🌶️", description: "To accompany",
+      items: [
+        { id: "salsaroja", name: "Red Sauce", price: 2.00, image: IMAGES.salsaRoja },
+        { id: "salsaverde", name: "Green Sauce", price: 2.00, image: IMAGES.salsaVerde },
+        { id: "salsaajo", name: "Garlic Sauce", price: 2.50, image: IMAGES.salsaAjo }
+      ]
+    }
+  };
 
-    // Business hours
-    const BUSINESS_HOURS = {
-      sunday: { open: 11, close: 20 }, monday: { open: 11, close: 21 },
-      tuesday: { open: 11, close: 21 }, wednesday: { open: 11, close: 21 },
-      thursday: { open: 11, close: 21 }, friday: { open: 11, close: 22 },
-      saturday: { open: 11, close: 22 }
-    };
+  // ============================================================
+  // ⏰ BUSINESS HOURS
+  // ============================================================
+  const BUSINESS_HOURS = {
+    sunday: { open: 11, close: 20 },
+    monday: { open: 11, close: 21 },
+    tuesday: { open: 11, close: 21 },
+    wednesday: { open: 11, close: 21 },
+    thursday: { open: 11, close: 21 },
+    friday: { open: 11, close: 22 },
+    saturday: { open: 11, close: 22 }
+  };
 
-    const PAYMENT_PHONE = "7723077637";
-    const ZELLE_EMAIL = "elpatiodelosdomis@gmail.com";
+  // ============================================================
+  // 📞 PAYMENT INFO
+  // ============================================================
+  const PAYMENT_PHONE = "7723077637";
+  const ZELLE_EMAIL = "elpatiodelosdomis@gmail.com";
 
-    // ------------------------------
-    // GLOBALS
-    // ------------------------------
-    let cart = new Map();
-    let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
-    let tipAmount = 0, selectedTipPreset = '0';
-    let deferredPrompt;
+  // ============================================================
+  // 🛒 CART & UI LOGIC (DO NOT EDIT UNLESS NECESSARY)
+  // ============================================================
+  let cart = new Map();
+  let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
+  let tipAmount = 0, selectedTipPreset = '0';
+  let deferredPrompt;
 
-    // DOM elements
-    const installBanner = document.getElementById('installBanner');
-    const installBtn = document.getElementById('installBtn');
-    const closeInstallBanner = document.getElementById('closeInstallBanner');
-    const statusDot = document.getElementById('statusDot');
-    const statusText = document.getElementById('statusText');
-    const statusHours = document.getElementById('statusHours');
+  // DOM Elements
+  const installBanner = document.getElementById('installBanner');
+  const installBtn = document.getElementById('installBtn');
+  const closeInstallBanner = document.getElementById('closeInstallBanner');
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+  const statusHours = document.getElementById('statusHours');
 
-    // PWA install
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      setTimeout(() => {
-        if (installBanner && !localStorage.getItem('installBannerClosed')) installBanner.classList.add('show');
-      }, 3000);
-    });
-    installBtn?.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        installBanner.classList.remove('show');
-        localStorage.setItem('installBannerClosed', 'true');
-      } else alert('To add to home screen:\n\nOn iPhone: Tap Share → "Add to Home Screen"\n\nOn Android: Tap Menu → "Add to Home Screen"');
-    });
-    closeInstallBanner?.addEventListener('click', () => {
+  // ============================================================
+  // 📱 PWA INSTALL PROMPT
+  // ============================================================
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(() => {
+      if (installBanner && !localStorage.getItem('installBannerClosed')) installBanner.classList.add('show');
+    }, 3000);
+  });
+  installBtn?.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
       installBanner.classList.remove('show');
       localStorage.setItem('installBannerClosed', 'true');
-    });
+    } else {
+      alert('To add to home screen:\n\nOn iPhone: Tap Share → "Add to Home Screen"\n\nOn Android: Tap Menu → "Add to Home Screen"');
+    }
+  });
+  closeInstallBanner?.addEventListener('click', () => {
+    installBanner.classList.remove('show');
+    localStorage.setItem('installBannerClosed', 'true');
+  });
 
-    // Business hours display with combined badge
-    function getDayKey(d) { return ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][d.getDay()]; }
-    function isOpenNow() {
-      const now = new Date();
-      const hours = BUSINESS_HOURS[getDayKey(now)];
-      if (!hours) return false;
-      const t = now.getHours() + now.getMinutes() / 60;
-      return t >= hours.open && t < hours.close;
+  // ============================================================
+  // 🕒 BUSINESS HOURS DISPLAY
+  // ============================================================
+  function getDayKey(d) { return ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][d.getDay()]; }
+  function isOpenNow() {
+    const now = new Date();
+    const hours = BUSINESS_HOURS[getDayKey(now)];
+    if (!hours) return false;
+    const t = now.getHours() + now.getMinutes() / 60;
+    return t >= hours.open && t < hours.close;
+  }
+  function getTodayHours() {
+    const h = BUSINESS_HOURS[getDayKey(new Date())];
+    if (!h) return "Closed";
+    const f = x => x === 12 ? "12PM" : x === 21 ? "9PM" : x === 22 ? "10PM" : x === 20 ? "8PM" : (x > 12 ? `${x-12}PM` : `${x}AM`);
+    return `${f(h.open)}-${f(h.close)}`;
+  }
+  function updateLiveStatus() {
+    const open = isOpenNow();
+    if (open) {
+      statusDot.className = 'status-dot open';
+      statusText.innerText = 'Open now';
+      statusHours.innerText = `Today: ${getTodayHours()}`;
+    } else {
+      statusDot.className = 'status-dot closed';
+      statusText.innerText = 'Closed';
+      statusHours.innerText = `Today: ${getTodayHours()}`;
     }
-    function getTodayHours() {
-      const h = BUSINESS_HOURS[getDayKey(new Date())];
-      if (!h) return "Closed";
-      const f = x => x === 12 ? "12PM" : x === 21 ? "9PM" : x === 22 ? "10PM" : x === 20 ? "8PM" : (x > 12 ? `${x-12}PM` : `${x}AM`);
-      return `${f(h.open)}-${f(h.close)}`;
-    }
-    function updateLiveStatus() {
-      const open = isOpenNow();
-      if (open) {
-        statusDot.className = 'status-dot open';
-        statusText.innerText = 'Open now';
-        statusHours.innerText = `Today: ${getTodayHours()}`;
-      } else {
-        statusDot.className = 'status-dot closed';
-        statusText.innerText = 'Closed';
-        statusHours.innerText = `Today: ${getTodayHours()}`;
-      }
-    }
-    updateLiveStatus();
-    setInterval(updateLiveStatus, 60000);
+  }
+  updateLiveStatus();
+  setInterval(updateLiveStatus, 60000);
 
-    // Cart functions
-    function getSubtotal() { let s = 0; for (let e of cart.values()) s += e.price * e.quantity; return s; }
-    function calculateTip() {
-      const sub = getSubtotal();
-      const customVal = parseFloat(document.getElementById('customTipInput')?.value);
-      if (!isNaN(customVal) && customVal > 0) { tipAmount = customVal; return tipAmount; }
-      const percent = parseFloat(selectedTipPreset);
-      tipAmount = (percent === 0 || isNaN(percent)) ? 0 : (sub * percent) / 100;
-      return tipAmount;
+  // ============================================================
+  // 🧮 CART CALCULATIONS
+  // ============================================================
+  function getSubtotal() { let s = 0; for (let e of cart.values()) s += e.price * e.quantity; return s; }
+  function calculateTip() {
+    const sub = getSubtotal();
+    const customVal = parseFloat(document.getElementById('customTipInput')?.value);
+    if (!isNaN(customVal) && customVal > 0) { tipAmount = customVal; return tipAmount; }
+    const percent = parseFloat(selectedTipPreset);
+    tipAmount = (percent === 0 || isNaN(percent)) ? 0 : (sub * percent) / 100;
+    return tipAmount;
+  }
+  function getTotal() { return getSubtotal() + tipAmount; }
+  function updateTotalsUI() {
+    const s = getSubtotal(), t = tipAmount, tot = s + t;
+    document.getElementById('cartSubtotal').innerText = `$${s.toFixed(2)}`;
+    document.getElementById('tipAmount').innerText = `$${t.toFixed(2)}`;
+    document.getElementById('cartTotalPrice').innerText = `$${tot.toFixed(2)}`;
+    document.getElementById('tipRow').style.display = t > 0 ? 'flex' : 'none';
+  }
+  function getCustomerName() { return { fullName: `${document.getElementById('firstNameInput')?.value.trim() || ''} ${document.getElementById('lastNameInput')?.value.trim() || ''}`.trim() }; }
+  function showToast(msg, dur = 1200) {
+    const toast = document.getElementById('toastMsg');
+    toast.innerText = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), dur);
+  }
+  function updateCartBadge() {
+    let total = 0;
+    for (let e of cart.values()) total += e.quantity;
+    document.getElementById('bubbleCount').innerText = total;
+  }
+  function renderCartPanel() {
+    const container = document.getElementById('cartItemsList');
+    if (!container) return;
+    if (cart.size === 0) {
+      container.innerHTML = '<div class="empty-cart-msg">Your cart is empty</div>';
+      return;
     }
-    function getTotal() { return getSubtotal() + tipAmount; }
-    function updateTotalsUI() {
-      const s = getSubtotal(), t = tipAmount, tot = s + t;
-      document.getElementById('cartSubtotal').innerText = `$${s.toFixed(2)}`;
-      document.getElementById('tipAmount').innerText = `$${t.toFixed(2)}`;
-      document.getElementById('cartTotalPrice').innerText = `$${tot.toFixed(2)}`;
-      document.getElementById('tipRow').style.display = t > 0 ? 'flex' : 'none';
-    }
-    function getCustomerName() { return { fullName: `${document.getElementById('firstNameInput')?.value.trim() || ''} ${document.getElementById('lastNameInput')?.value.trim() || ''}`.trim() }; }
-    function showToast(msg, dur = 1200) {
-      const toast = document.getElementById('toastMsg');
-      toast.innerText = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), dur);
-    }
-    function updateCartBadge() {
-      let total = 0;
-      for (let e of cart.values()) total += e.quantity;
-      document.getElementById('bubbleCount').innerText = total;
-    }
-    function renderCartPanel() {
-      const container = document.getElementById('cartItemsList');
-      if (!container) return;
-      if (cart.size === 0) {
-        container.innerHTML = '<div class="empty-cart-msg">Your cart is empty</div>';
-        return;
-      }
-      let html = '';
-      for (let [key, entry] of cart.entries()) {
-        html += `
-          <div class="cart-item">
-            <div class="cart-item-name">${escapeHtml(entry.displayName)}</div>
-            <div class="cart-item-details">
-              <div class="cart-item-detail-row"><span class="cart-item-detail-label">Item:</span><span class="cart-item-detail-value">${escapeHtml(entry.itemName || entry.displayName.split(' w/')[0])}</span></div>
-              <div class="cart-item-detail-row"><span class="cart-item-detail-label">Quantity:</span><span class="cart-item-detail-value">${entry.quantity}</span></div>
-              <div class="cart-item-detail-row"><span class="cart-item-detail-label">Unit price:</span><span class="cart-item-detail-value">$${entry.price.toFixed(2)}</span></div>
+    let html = '';
+    for (let [key, entry] of cart.entries()) {
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-name">${escapeHtml(entry.displayName)}</div>
+          <div class="cart-item-details">
+            <div class="cart-item-detail-row"><span class="cart-item-detail-label">Item:</span><span class="cart-item-detail-value">${escapeHtml(entry.itemName || entry.displayName.split(' w/')[0])}</span></div>
+            <div class="cart-item-detail-row"><span class="cart-item-detail-label">Quantity:</span><span class="cart-item-detail-value">${entry.quantity}</span></div>
+            <div class="cart-item-detail-row"><span class="cart-item-detail-label">Unit price:</span><span class="cart-item-detail-value">$${entry.price.toFixed(2)}</span></div>
+          </div>
+          <div class="cart-item-price-row">
+            <span class="cart-item-price">Total: $${(entry.price * entry.quantity).toFixed(2)}</span>
+            <div class="cart-item-actions">
+              <button class="qty-btn decr" data-key="${key}">-</button><span>${entry.quantity}</span>
+              <button class="qty-btn incr" data-key="${key}">+</button>
+              <button class="remove-item-btn" data-key="${key}">🗑️</button>
             </div>
-            <div class="cart-item-price-row">
-              <span class="cart-item-price">Total: $${(entry.price * entry.quantity).toFixed(2)}</span>
-              <div class="cart-item-actions">
-                <button class="qty-btn decr" data-key="${key}">-</button><span>${entry.quantity}</span>
-                <button class="qty-btn incr" data-key="${key}">+</button>
-                <button class="remove-item-btn" data-key="${key}">🗑️</button>
-              </div>
-            </div>
-          </div>`;
-      }
-      container.innerHTML = html;
-      document.querySelectorAll('.decr').forEach(b => b.addEventListener('click', () => changeQuantity(b.dataset.key, -1)));
-      document.querySelectorAll('.incr').forEach(b => b.addEventListener('click', () => changeQuantity(b.dataset.key, 1)));
-      document.querySelectorAll('.remove-item-btn').forEach(b => b.addEventListener('click', () => changeQuantity(b.dataset.key, -999)));
+          </div>
+        </div>`;
     }
-    function changeQuantity(key, delta) {
-      if (!cart.has(key)) return;
-      const entry = cart.get(key);
-      let newQty = entry.quantity + delta;
-      if (newQty <= 0) cart.delete(key);
-      else entry.quantity = newQty;
-      updateAllUI();
-      if (delta > 0) showToast(`+ ${entry.displayName}`, 700);
-    }
-    function addToCartWithOptions(item, variantName, price, proteinName = null, sideName = null) {
-      let display = item.name;
-      let itemName = item.name;
-      if (proteinName) { display += ` with ${proteinName}`; itemName = `${item.name} (${proteinName})`; }
-      else if (sideName) { display += ` with ${sideName}`; itemName = `${item.name} (${sideName})`; }
-      else if (variantName) { display += ` (${variantName})`; itemName = `${item.name} (${variantName})`; }
-      const key = `${item.id}_${proteinName || sideName || variantName || 'default'}`;
-      if (cart.has(key)) cart.get(key).quantity++;
-      else cart.set(key, { displayName: display, itemName, price, quantity: 1 });
-      updateAllUI();
-      showToast(`${display}`, 800);
-    }
-    function updateAllUI() { updateCartBadge(); renderCartPanel(); calculateTip(); updateTotalsUI(); }
-
-    // Modal & menu
-    function getFinalPrice(item) {
-      let price = 0;
-      if (item.options && currentSelectedOption) price = currentSelectedOption.price;
-      else if (item.price) price = item.price;
-      else if (item.basePrice) price = item.basePrice;
-      if (item.hasProteinOptions && currentSelectedProtein && !currentSelectedProtein.isBase) price += currentSelectedProtein.price;
-      if (item.hasSideOptions && currentSelectedSide && !currentSelectedSide.isBase) price += currentSelectedSide.price;
-      return price;
-    }
-    function attachOptionEvents() {
-      document.querySelectorAll('.option-size').forEach(b => b.addEventListener('click', () => {
-        document.querySelectorAll('.option-size').forEach(bb => bb.classList.remove('selected'));
-        b.classList.add('selected');
-        currentSelectedOption = { name: b.dataset.name, price: parseFloat(b.dataset.price) };
-      }));
-      document.querySelectorAll('.option-protein').forEach(b => b.addEventListener('click', () => {
-        document.querySelectorAll('.option-protein').forEach(bb => bb.classList.remove('selected'));
-        b.classList.add('selected');
-        currentSelectedProtein = { name: b.dataset.name, price: parseFloat(b.dataset.price), isBase: b.dataset.base === 'true' };
-      }));
-      document.querySelectorAll('.option-side').forEach(b => b.addEventListener('click', () => {
-        document.querySelectorAll('.option-side').forEach(bb => bb.classList.remove('selected'));
-        b.classList.add('selected');
-        currentSelectedSide = { name: b.dataset.name, price: parseFloat(b.dataset.price), isBase: b.dataset.base === 'true' };
-      }));
-    }
-    function showOptions(item) {
-      currentItem = item;
-      currentSelectedOption = currentSelectedProtein = currentSelectedSide = null;
-      document.getElementById('modalItemName').innerText = item.name;
-      const container = document.getElementById('modalOptions');
-      let html = '';
-      if (item.options) html += `<div class="option-group"><div class="option-label">Choose size:</div><div class="option-buttons">${item.options.map((opt, i) => `<button class="option-btn option-size" data-price="${item.prices[i]}" data-name="${opt}">${opt}</button>`).join('')}</div></div>`;
-      if (item.hasProteinOptions) html += `<div class="option-group"><div class="option-label">Protein:</div><div class="option-buttons">${item.proteinOptions.map(p => `<button class="option-btn option-protein" data-price="${p.price}" data-name="${p.name}" data-base="${p.base}">${p.name}${p.price > 0 ? ` +$${p.price.toFixed(2)}` : (p.base ? ' (Base)' : '')}</button>`).join('')}</div></div>`;
-      if (item.hasSideOptions) html += `<div class="option-group"><div class="option-label">Side:</div><div class="option-buttons">${item.sideOptions.map(s => `<button class="option-btn option-side" data-price="${s.price}" data-name="${s.name}" data-base="${s.base}">${s.name}</button>`).join('')}</div></div>`;
-      container.innerHTML = html;
-      attachOptionEvents();
-      if (item.options?.length) document.querySelector('.option-size')?.click();
-      if (item.hasProteinOptions) (document.querySelector('.option-protein[data-base="true"]') || document.querySelector('.option-protein'))?.click();
-      if (item.hasSideOptions) (document.querySelector('.option-side[data-base="true"]') || document.querySelector('.option-side'))?.click();
-      document.getElementById('optionsOverlay').classList.add('open');
-      document.getElementById('optionsModal').classList.add('open');
-    }
-    function hideOptions() {
-      document.getElementById('optionsOverlay').classList.remove('open');
-      document.getElementById('optionsModal').classList.remove('open');
-      currentItem = null;
-    }
-    function renderMenu() {
-      const container = document.getElementById('menuContainer');
-      if (!container) return;
-      let html = '';
-      for (const [key, cat] of Object.entries(CATEGORIES)) {
-        html += `<div class="menu-category"><div class="category-header"><span class="category-icon">${cat.icon}</span><span class="category-title">${cat.name}</span><span class="category-sub">${cat.description}</span></div><div class="menu-grid" id="grid-${key}"></div></div>`;
-      }
-      container.innerHTML = html;
-      for (const [key, cat] of Object.entries(CATEGORIES)) {
-        const grid = document.getElementById(`grid-${key}`);
-        if (!grid) continue;
-        let gridHtml = '';
-        for (const item of cat.items) {
-          let priceDisplay = '';
-          if (item.options) priceDisplay = `$${Math.min(...item.prices).toFixed(2)}`;
-          else if (item.hasProteinOptions) priceDisplay = `$${item.basePrice.toFixed(2)} + protein`;
-          else if (item.hasSideOptions) priceDisplay = `$${item.basePrice.toFixed(2)} + side`;
-          else priceDisplay = `$${item.price.toFixed(2)}`;
-          const imgUrl = item.image || '';
-          gridHtml += `<div class="food-card" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'><div class="card-img" style="background-image: url('${imgUrl}'); background-size: cover; background-position: center;"></div><div class="card-content"><div class="food-title">${item.name}</div><div class="price-row"><span class="price">${priceDisplay}</span></div></div></div>`;
-        }
-        grid.innerHTML = gridHtml;
-      }
-      document.querySelectorAll('.food-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const itemData = JSON.parse(card.dataset.item);
-          showOptions(itemData);
-        });
-      });
-    }
-    function setupTip() {
-      const btns = document.querySelectorAll('.tip-option'), ci = document.getElementById('customTipInput');
-      btns.forEach(b => b.addEventListener('click', () => {
-        btns.forEach(bb => bb.classList.remove('selected'));
-        b.classList.add('selected');
-        selectedTipPreset = b.dataset.tip;
-        if (ci) ci.value = '';
-        calculateTip(); updateTotalsUI();
-      }));
-      if (ci) ci.addEventListener('input', () => {
-        btns.forEach(bb => bb.classList.remove('selected'));
-        selectedTipPreset = 'custom';
-        calculateTip(); updateTotalsUI();
-      });
-      document.querySelector('.tip-option[data-tip="0"]')?.classList.add('selected');
-      calculateTip(); updateTotalsUI();
-    }
-
-    // Payment
-    function buildOrderDescription() {
-      if (cart.size === 0) return null;
-      let items = [];
-      for (let e of cart.values()) items.push(`${e.quantity}x ${e.displayName} ($${(e.price * e.quantity).toFixed(2)})`);
-      const tot = getTotal();
-      return { summary: items.join(', '), total: tot, fullName: getCustomerName().fullName };
-    }
-    function openVenmoPayment() {
-      if (cart.size === 0) { showToast("Add items to cart", 1200); return; }
-      if (!getCustomerName().fullName) { showToast("Enter your name", 1200); return; }
-      const t = getTotal(), info = buildOrderDescription();
-      const msg = `${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`;
-      window.location.href = `venmo://pay?phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`;
-      setTimeout(() => window.location.href = `https://venmo.com/?txn=pay&phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`, 2000);
-      showToast(`Venmo - $${t.toFixed(2)}`, 1500);
-    }
-    function openCashAppPayment() {
-      if (cart.size === 0) { showToast("Add items to cart", 1200); return; }
-      if (!getCustomerName().fullName) { showToast("Enter your name", 1200); return; }
-      const t = getTotal(), info = buildOrderDescription();
-      const msg = `${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`;
-      window.location.href = `cashapp://$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`;
-      setTimeout(() => window.location.href = `https://cash.app/$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`, 2000);
-      showToast(`CashApp - $${t.toFixed(2)}`, 1500);
-    }
-    function openZellePayment() {
-      if (cart.size === 0) { showToast("Add items to cart", 1200); return; }
-      if (!getCustomerName().fullName) { showToast("Enter your name", 1200); return; }
-      const t = getTotal(), info = buildOrderDescription();
-      const msg = `${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`;
-      navigator.clipboard.writeText(msg);
-      showToast(`Note copied! Send $${t.toFixed(2)} to ${ZELLE_EMAIL}`, 3000);
-      setTimeout(() => alert(`Send $${t.toFixed(2)} via Zelle to:\n${ZELLE_EMAIL}\n\nNote copied.`), 500);
-    }
-
-    // Event listeners
-    document.getElementById('modalCancelBtn').addEventListener('click', hideOptions);
-    document.getElementById('modalAddBtn').addEventListener('click', () => {
-      if (!currentItem) return;
-      if (currentItem.hasProteinOptions && !currentSelectedProtein) { showToast("Select protein", 1200); return; }
-      if (currentItem.hasSideOptions && !currentSelectedSide) { showToast("Select side", 1200); return; }
-      if (currentItem.options && !currentSelectedOption && !currentItem.hasProteinOptions && !currentItem.hasSideOptions) { showToast("Select an option", 1200); return; }
-      const finalPrice = getFinalPrice(currentItem);
-      addToCartWithOptions(currentItem, currentSelectedOption?.name, finalPrice, currentSelectedProtein?.name, currentSelectedSide?.name);
-      hideOptions();
-    });
-
-    document.getElementById('cartBubble').addEventListener('click', () => document.getElementById('cartOverlay').classList.add('open'));
-    document.getElementById('closeCartBtn').addEventListener('click', () => document.getElementById('cartOverlay').classList.remove('open'));
-    document.getElementById('cartOverlay').addEventListener('click', (e) => { if (e.target === document.getElementById('cartOverlay')) document.getElementById('cartOverlay').classList.remove('open'); });
-
-    const swipeArea = document.getElementById('cartSwipeArea');
-    let touchStart = 0;
-    swipeArea?.addEventListener('touchstart', (e) => { touchStart = e.touches[0].clientY; });
-    swipeArea?.addEventListener('touchmove', (e) => {
-      const diff = e.touches[0].clientY - touchStart;
-      if (diff > 40) { document.getElementById('cartOverlay').classList.remove('open'); e.preventDefault(); }
-    });
-    swipeArea?.addEventListener('click', () => document.getElementById('cartOverlay').classList.remove('open'));
-
-    document.getElementById('venmoPayBtn').addEventListener('click', openVenmoPayment);
-    document.getElementById('cashappPayBtn').addEventListener('click', openCashAppPayment);
-    document.getElementById('zellePayBtn').addEventListener('click', openZellePayment);
-
-    function escapeHtml(str) { return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
-
-    renderMenu();
-    setupTip();
+    container.innerHTML = html;
+    document.querySelectorAll('.decr').forEach(b => b.addEventListener('click', () => changeQuantity(b.dataset.key, -1)));
+    document.querySelectorAll('.incr').forEach(b => b.addEventListener('click', () => changeQuantity(b.dataset.key, 1)));
+    document.querySelectorAll('.remove-item-btn').forEach(b => b.addEventListener('click', () => changeQuantity(b.dataset.key, -999)));
+  }
+  function changeQuantity(key, delta) {
+    if (!cart.has(key)) return;
+    const entry = cart.get(key);
+    let newQty = entry.quantity + delta;
+    if (newQty <= 0) cart.delete(key);
+    else entry.quantity = newQty;
     updateAllUI();
-  })();
+    if (delta > 0) showToast(`+ ${entry.displayName}`, 700);
+  }
+  function addToCartWithOptions(item, variantName, price, proteinName = null, sideName = null) {
+    let display = item.name;
+    let itemName = item.name;
+    if (proteinName) { display += ` with ${proteinName}`; itemName = `${item.name} (${proteinName})`; }
+    else if (sideName) { display += ` with ${sideName}`; itemName = `${item.name} (${sideName})`; }
+    else if (variantName) { display += ` (${variantName})`; itemName = `${item.name} (${variantName})`; }
+    const key = `${item.id}_${proteinName || sideName || variantName || 'default'}`;
+    if (cart.has(key)) cart.get(key).quantity++;
+    else cart.set(key, { displayName: display, itemName, price, quantity: 1 });
+    updateAllUI();
+    showToast(`${display}`, 800);
+  }
+  function updateAllUI() { updateCartBadge(); renderCartPanel(); calculateTip(); updateTotalsUI(); }
+
+  // ============================================================
+  // 🎨 MODAL & MENU RENDERING
+  // ============================================================
+  function getFinalPrice(item) {
+    let price = 0;
+    if (item.options && currentSelectedOption) price = currentSelectedOption.price;
+    else if (item.price) price = item.price;
+    else if (item.basePrice) price = item.basePrice;
+    if (item.hasProteinOptions && currentSelectedProtein && !currentSelectedProtein.isBase) price += currentSelectedProtein.price;
+    if (item.hasSideOptions && currentSelectedSide && !currentSelectedSide.isBase) price += currentSelectedSide.price;
+    return price;
+  }
+  function attachOptionEvents() {
+    document.querySelectorAll('.option-size').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.option-size').forEach(bb => bb.classList.remove('selected'));
+      b.classList.add('selected');
+      currentSelectedOption = { name: b.dataset.name, price: parseFloat(b.dataset.price) };
+    }));
+    document.querySelectorAll('.option-protein').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.option-protein').forEach(bb => bb.classList.remove('selected'));
+      b.classList.add('selected');
+      currentSelectedProtein = { name: b.dataset.name, price: parseFloat(b.dataset.price), isBase: b.dataset.base === 'true' };
+    }));
+    document.querySelectorAll('.option-side').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.option-side').forEach(bb => bb.classList.remove('selected'));
+      b.classList.add('selected');
+      currentSelectedSide = { name: b.dataset.name, price: parseFloat(b.dataset.price), isBase: b.dataset.base === 'true' };
+    }));
+  }
+  function showOptions(item) {
+    currentItem = item;
+    currentSelectedOption = currentSelectedProtein = currentSelectedSide = null;
+    document.getElementById('modalItemName').innerText = item.name;
+    const container = document.getElementById('modalOptions');
+    let html = '';
+    if (item.options) html += `<div class="option-group"><div class="option-label">Choose size:</div><div class="option-buttons">${item.options.map((opt, i) => `<button class="option-btn option-size" data-price="${item.prices[i]}" data-name="${opt}">${opt}</button>`).join('')}</div></div>`;
+    if (item.hasProteinOptions) html += `<div class="option-group"><div class="option-label">Protein:</div><div class="option-buttons">${item.proteinOptions.map(p => `<button class="option-btn option-protein" data-price="${p.price}" data-name="${p.name}" data-base="${p.base}">${p.name}${p.price > 0 ? ` +$${p.price.toFixed(2)}` : (p.base ? ' (Base)' : '')}</button>`).join('')}</div></div>`;
+    if (item.hasSideOptions) html += `<div class="option-group"><div class="option-label">Side:</div><div class="option-buttons">${item.sideOptions.map(s => `<button class="option-btn option-side" data-price="${s.price}" data-name="${s.name}" data-base="${s.base}">${s.name}</button>`).join('')}</div></div>`;
+    container.innerHTML = html;
+    attachOptionEvents();
+    if (item.options?.length) document.querySelector('.option-size')?.click();
+    if (item.hasProteinOptions) (document.querySelector('.option-protein[data-base="true"]') || document.querySelector('.option-protein'))?.click();
+    if (item.hasSideOptions) (document.querySelector('.option-side[data-base="true"]') || document.querySelector('.option-side'))?.click();
+    document.getElementById('optionsOverlay').classList.add('open');
+    document.getElementById('optionsModal').classList.add('open');
+  }
+  function hideOptions() {
+    document.getElementById('optionsOverlay').classList.remove('open');
+    document.getElementById('optionsModal').classList.remove('open');
+    currentItem = null;
+  }
+  function renderMenu() {
+    const container = document.getElementById('menuContainer');
+    if (!container) return;
+    let html = '';
+    for (const [key, cat] of Object.entries(CATEGORIES)) {
+      html += `<div class="menu-category"><div class="category-header"><span class="category-icon">${cat.icon}</span><span class="category-title">${cat.name}</span><span class="category-sub">${cat.description}</span></div><div class="menu-grid" id="grid-${key}"></div></div>`;
+    }
+    container.innerHTML = html;
+    for (const [key, cat] of Object.entries(CATEGORIES)) {
+      const grid = document.getElementById(`grid-${key}`);
+      if (!grid) continue;
+      let gridHtml = '';
+      for (const item of cat.items) {
+        let priceDisplay = '';
+        if (item.options) priceDisplay = `$${Math.min(...item.prices).toFixed(2)}`;
+        else if (item.hasProteinOptions) priceDisplay = `$${item.basePrice.toFixed(2)} + protein`;
+        else if (item.hasSideOptions) priceDisplay = `$${item.basePrice.toFixed(2)} + side`;
+        else priceDisplay = `$${item.price.toFixed(2)}`;
+        const imgUrl = item.image || '';
+        gridHtml += `<div class="food-card" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'><div class="card-img" style="background-image: url('${imgUrl}'); background-size: cover; background-position: center;"></div><div class="card-content"><div class="food-title">${item.name}</div><div class="price-row"><span class="price">${priceDisplay}</span></div></div></div>`;
+      }
+      grid.innerHTML = gridHtml;
+    }
+    document.querySelectorAll('.food-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const itemData = JSON.parse(card.dataset.item);
+        showOptions(itemData);
+      });
+    });
+  }
+  function setupTip() {
+    const btns = document.querySelectorAll('.tip-option'), ci = document.getElementById('customTipInput');
+    btns.forEach(b => b.addEventListener('click', () => {
+      btns.forEach(bb => bb.classList.remove('selected'));
+      b.classList.add('selected');
+      selectedTipPreset = b.dataset.tip;
+      if (ci) ci.value = '';
+      calculateTip(); updateTotalsUI();
+    }));
+    if (ci) ci.addEventListener('input', () => {
+      btns.forEach(bb => bb.classList.remove('selected'));
+      selectedTipPreset = 'custom';
+      calculateTip(); updateTotalsUI();
+    });
+    document.querySelector('.tip-option[data-tip="0"]')?.classList.add('selected');
+    calculateTip(); updateTotalsUI();
+  }
+
+  // ============================================================
+  // 💳 PAYMENT FUNCTIONS
+  // ============================================================
+  function buildOrderDescription() {
+    if (cart.size === 0) return null;
+    let items = [];
+    for (let e of cart.values()) items.push(`${e.quantity}x ${e.displayName} ($${(e.price * e.quantity).toFixed(2)})`);
+    const tot = getTotal();
+    return { summary: items.join(', '), total: tot, fullName: getCustomerName().fullName };
+  }
+  function openVenmoPayment() {
+    if (cart.size === 0) { showToast("Add items to cart", 1200); return; }
+    if (!getCustomerName().fullName) { showToast("Enter your name", 1200); return; }
+    const t = getTotal(), info = buildOrderDescription();
+    const msg = `${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`;
+    window.location.href = `venmo://pay?phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`;
+    setTimeout(() => window.location.href = `https://venmo.com/?txn=pay&phone=${PAYMENT_PHONE}&amount=${t.toFixed(2)}&note=${encodeURIComponent(msg)}`, 2000);
+    showToast(`Venmo - $${t.toFixed(2)}`, 1500);
+  }
+  function openCashAppPayment() {
+    if (cart.size === 0) { showToast("Add items to cart", 1200); return; }
+    if (!getCustomerName().fullName) { showToast("Enter your name", 1200); return; }
+    const t = getTotal(), info = buildOrderDescription();
+    const msg = `${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`;
+    window.location.href = `cashapp://$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`;
+    setTimeout(() => window.location.href = `https://cash.app/$$ElPatioTruck/${t.toFixed(2)}?memo=${encodeURIComponent(msg)}`, 2000);
+    showToast(`CashApp - $${t.toFixed(2)}`, 1500);
+  }
+  function openZellePayment() {
+    if (cart.size === 0) { showToast("Add items to cart", 1200); return; }
+    if (!getCustomerName().fullName) { showToast("Enter your name", 1200); return; }
+    const t = getTotal(), info = buildOrderDescription();
+    const msg = `${info.fullName} - El Patio: ${info.summary} | Total $${t.toFixed(2)}`;
+    navigator.clipboard.writeText(msg);
+    showToast(`Note copied! Send $${t.toFixed(2)} to ${ZELLE_EMAIL}`, 3000);
+    setTimeout(() => alert(`Send $${t.toFixed(2)} via Zelle to:\n${ZELLE_EMAIL}\n\nNote copied.`), 500);
+  }
+
+  // ============================================================
+  // 🎯 EVENT LISTENERS
+  // ============================================================
+  document.getElementById('modalCancelBtn').addEventListener('click', hideOptions);
+  document.getElementById('modalAddBtn').addEventListener('click', () => {
+    if (!currentItem) return;
+    if (currentItem.hasProteinOptions && !currentSelectedProtein) { showToast("Select protein", 1200); return; }
+    if (currentItem.hasSideOptions && !currentSelectedSide) { showToast("Select side", 1200); return; }
+    if (currentItem.options && !currentSelectedOption && !currentItem.hasProteinOptions && !currentItem.hasSideOptions) { showToast("Select an option", 1200); return; }
+    const finalPrice = getFinalPrice(currentItem);
+    addToCartWithOptions(currentItem, currentSelectedOption?.name, finalPrice, currentSelectedProtein?.name, currentSelectedSide?.name);
+    hideOptions();
+  });
+
+  document.getElementById('cartBubble').addEventListener('click', () => document.getElementById('cartOverlay').classList.add('open'));
+  document.getElementById('closeCartBtn').addEventListener('click', () => document.getElementById('cartOverlay').classList.remove('open'));
+  document.getElementById('cartOverlay').addEventListener('click', (e) => { if (e.target === document.getElementById('cartOverlay')) document.getElementById('cartOverlay').classList.remove('open'); });
+
+  const swipeArea = document.getElementById('cartSwipeArea');
+  let touchStart = 0;
+  swipeArea?.addEventListener('touchstart', (e) => { touchStart = e.touches[0].clientY; });
+  swipeArea?.addEventListener('touchmove', (e) => {
+    const diff = e.touches[0].clientY - touchStart;
+    if (diff > 40) { document.getElementById('cartOverlay').classList.remove('open'); e.preventDefault(); }
+  });
+  swipeArea?.addEventListener('click', () => document.getElementById('cartOverlay').classList.remove('open'));
+
+  document.getElementById('venmoPayBtn').addEventListener('click', openVenmoPayment);
+  document.getElementById('cashappPayBtn').addEventListener('click', openCashAppPayment);
+  document.getElementById('zellePayBtn').addEventListener('click', openZellePayment);
+
+  function escapeHtml(str) { return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
+
+  // ============================================================
+  // 🚀 INITIALIZE
+  // ============================================================
+  renderMenu();
+  setupTip();
+  updateAllUI();
 </script>
 </body>
 </html>

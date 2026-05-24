@@ -30,7 +30,7 @@
             --card-shadow: 0 8px 20px rgba(0,0,0,0.06);
             --border-light: #e9ecef;
             --text-secondary: #495057;
-            --header-height: 60px;
+            --header-height: 65px;
         }
         
         body { 
@@ -41,11 +41,9 @@
             overflow-x: hidden;
         }
         
-        /* IMPORTANT: No body padding-top - we'll let the first element handle spacing */
-        
         .app { max-width: 1280px; margin: 0 auto; background: white; min-height: 100vh; display: flex; flex-direction: column; }
         
-        /* Header */
+        /* Header - FIXED from the start for smooth scrolling */
         .header { 
             background: white; 
             border-bottom: 1px solid var(--border-light); 
@@ -55,38 +53,28 @@
             justify-content: space-between; 
             align-items: center; 
             gap: 8px; 
-            position: relative;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
             z-index: 100; 
             backdrop-filter: blur(10px); 
             background: rgba(255,255,255,0.96); 
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 8px rgba(0,0,0,0.05);
-            width: 100%;
-        }
-        
-        /* Add a spacer div to push content below header */
-        .header-spacer {
-            height: var(--header-height);
-            width: 100%;
-        }
-        
-        /* Hide header on scroll - update for better visibility */
-        .header.fixed-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             max-width: 1280px;
             margin: 0 auto;
-            animation: slideDown 0.3s ease;
         }
         .header.hide-header { 
             transform: translateY(-100%);
-            transition: transform 0.3s ease;
         }
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
+        
+        /* Spacer to push content below fixed header */
+        .header-spacer {
+            height: var(--header-height);
+            width: 100%;
+            background: transparent;
         }
         
         .logo-area { display: flex; align-items: center; gap: 8px; }
@@ -131,31 +119,41 @@
         .header-address-icon:active { transform: scale(0.92); background: #e9ecef; }
         .header-address-icon img { width: 16px; height: 16px; }
         
-        /* Hero banner - FULLY VISIBLE with NO overlap */
+        /* Hero banner - beautifully visible with smooth appearance */
         .hero-banner { 
             background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%); 
             color: white; 
-            padding: 20px 16px;
+            padding: 24px 20px;
             text-align: center;
             width: 100%;
-            margin-top: 0;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
         .hero-text h2 { 
-            font-size: 1.5rem; 
+            font-size: 1.6rem; 
             font-weight: 800; 
             letter-spacing: -0.5px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .hero-text p { 
-            font-size: 0.8rem; 
-            opacity: 0.9; 
+            font-size: 0.85rem; 
+            opacity: 0.92; 
             margin-top: 4px;
         }
         
         /* Menu section */
-        .menu-section { padding: 12px; flex: 1; }
+        .menu-section { padding: 16px 12px; flex: 1; }
         .menu-category { 
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             animation: fadeInUp 0.4s ease-out backwards;
         }
         .menu-category:nth-child(1) { animation-delay: 0.05s; }
@@ -163,11 +161,6 @@
         .menu-category:nth-child(3) { animation-delay: 0.15s; }
         .menu-category:nth-child(4) { animation-delay: 0.2s; }
         .menu-category:nth-child(5) { animation-delay: 0.25s; }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         
         .category-header { 
             display: flex; 
@@ -183,7 +176,7 @@
         .category-title { font-size: 1rem; font-weight: 700; color: #2d241c; }
         .category-sub { font-size: 0.6rem; color: #868e96; margin-left: auto; }
         
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
         .food-card { 
             background: white; 
             border-radius: 16px; 
@@ -191,26 +184,26 @@
             box-shadow: var(--card-shadow); 
             border: 1px solid var(--border-light); 
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            animation: cardFadeIn 0.3s ease-out backwards;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            animation: cardFadeIn 0.4s ease-out backwards;
         }
         @keyframes cardFadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .food-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
-        .food-card:active { transform: scale(0.97); transition: transform 0.05s; }
+        .food-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 16px 28px rgba(0,0,0,0.1); }
+        .food-card:active { transform: scale(0.98); transition: transform 0.05s; }
         .card-img { 
             height: 140px; 
             background-size: cover; 
             background-position: center; 
             background-color: #f8f3ed;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
-        .food-card:hover .card-img { transform: scale(1.02); }
-        .card-content { padding: 10px 12px 12px; }
-        .food-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
-        .price { font-weight: 800; font-size: 0.95rem; color: #2b9348; }
+        .food-card:hover .card-img { transform: scale(1.05); }
+        .card-content { padding: 12px; }
+        .food-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+        .price { font-weight: 800; font-size: 1rem; color: #2b9348; }
         
         /* Modal animations */
         .options-modal { 
@@ -219,13 +212,14 @@
             left: 0; 
             width: 100%; 
             background: white; 
-            border-radius: 24px 24px 0 0; 
+            border-radius: 28px 28px 0 0; 
             z-index: 1100; 
             transform: translateY(100%); 
-            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
-            padding: 1rem; 
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+            padding: 20px; 
             max-height: 85vh; 
             overflow-y: auto; 
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.15);
         }
         .options-modal.open { transform: translateY(0); }
         .options-overlay { 
@@ -237,39 +231,39 @@
             background: rgba(0,0,0,0); 
             z-index: 1099; 
             visibility: hidden; 
-            transition: background 0.25s ease, visibility 0.25s; 
+            transition: background 0.3s ease, visibility 0.3s; 
         }
         .options-overlay.open { 
             visibility: visible; 
             background: rgba(0,0,0,0.6); 
         }
         
-        .option-group { margin-bottom: 1rem; }
-        .option-label { font-weight: 700; margin-bottom: 6px; font-size: 0.8rem; }
-        .option-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+        .option-group { margin-bottom: 20px; }
+        .option-label { font-weight: 700; margin-bottom: 8px; font-size: 0.85rem; color: #2d241c; }
+        .option-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
         .option-btn { 
             background: #f1f3f5; 
             border: 1px solid #dee2e6; 
-            padding: 6px 12px; 
+            padding: 8px 16px; 
             border-radius: 40px; 
-            font-size: 0.7rem; 
+            font-size: 0.8rem; 
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        .option-btn:active { transform: scale(0.94); }
+        .option-btn:active { transform: scale(0.95); }
         .option-btn.selected { 
             background: var(--dd-red); 
             border-color: var(--dd-red); 
             color: white;
             transform: scale(1.02);
         }
-        .modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+        .modal-actions { display: flex; gap: 12px; margin-top: 20px; }
         .modal-add-btn, .modal-cancel-btn { 
             flex: 1; 
-            padding: 10px; 
+            padding: 12px; 
             border-radius: 40px; 
             font-weight: 700; 
-            font-size: 0.8rem; 
+            font-size: 0.9rem; 
             border: none;
             transition: all 0.2s ease;
         }
@@ -282,8 +276,8 @@
             position: fixed; 
             bottom: 20px; 
             right: 16px; 
-            width: 54px; 
-            height: 54px; 
+            width: 56px; 
+            height: 56px; 
             background: var(--dd-red); 
             border-radius: 50%; 
             display: flex; 
@@ -291,21 +285,21 @@
             justify-content: center; 
             cursor: pointer; 
             z-index: 1000; 
-            box-shadow: 0 6px 16px rgba(230,57,70,0.4);
+            box-shadow: 0 6px 20px rgba(230,57,70,0.4);
             margin-bottom: var(--safe-area-bottom);
             transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-        .cart-bubble:active { transform: scale(0.9); }
+        .cart-bubble:active { transform: scale(0.92); }
         .cart-bubble .cart-icon { font-size: 24px; color: white; }
         .bubble-count { 
             position: absolute; 
-            top: -5px; 
-            right: -5px; 
+            top: -6px; 
+            right: -6px; 
             background: #ffd166; 
             color: #1a1a2e; 
             border-radius: 50%; 
-            width: 22px; 
-            height: 22px; 
+            width: 24px; 
+            height: 24px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -313,7 +307,6 @@
             font-weight: 800;
             transition: transform 0.2s ease;
         }
-        .cart-bubble:active .bubble-count { transform: scale(1.1); }
         
         /* Cart panel animations */
         .cart-overlay { 
@@ -325,7 +318,7 @@
             background: rgba(0,0,0,0); 
             z-index: 1001; 
             visibility: hidden; 
-            transition: background 0.25s ease, visibility 0.25s; 
+            transition: background 0.3s ease, visibility 0.3s; 
             display: flex; 
             justify-content: flex-end; 
         }
@@ -358,7 +351,7 @@
             padding-top: max(16px, var(--safe-area-top));
         }
         .close-cart { 
-            font-size: 2rem; 
+            font-size: 1.8rem; 
             cursor: pointer; 
             background: none; 
             border: none; 
@@ -374,20 +367,18 @@
             justify-content: center;
             transition: all 0.15s ease;
         }
-        .close-cart:active { color: #333; transform: scale(0.92); }
+        .close-cart:active { color: #333; transform: scale(0.94); }
         
         /* Swipe area */
         .cart-swipe-area {
             text-align: center;
             padding: 10px 0 8px;
-            margin-top: -5px;
             border-bottom: 1px solid #f0f0f0;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            touch-action: pan-y;
         }
         .cart-swipe-indicator {
             display: flex;
@@ -412,44 +403,51 @@
             width: 40px;
         }
         
-        .cart-scrollable { flex: 1; overflow-y: auto; padding: 12px; -webkit-overflow-scrolling: touch; }
+        .cart-scrollable { flex: 1; overflow-y: auto; padding: 16px; -webkit-overflow-scrolling: touch; }
         
         /* Animated cart items */
         .cart-item { 
             background: #f8f9fa;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 12px;
             border: 1px solid #e9ecef;
-            animation: slideInRight 0.3s ease-out backwards;
+            animation: slideInRight 0.35s ease-out backwards;
             transition: all 0.2s ease;
         }
         @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(30px); }
+            from { opacity: 0; transform: translateX(40px); }
             to { opacity: 1; transform: translateX(0); }
         }
-        .cart-item:active { transform: scale(0.99); }
         
-        .cart-item-name { font-weight: 800; font-size: 0.9rem; color: #2d241c; margin-bottom: 6px; }
-        .cart-item-details { font-size: 0.7rem; color: #6c757d; margin-bottom: 8px; padding-left: 4px; border-left: 2px solid var(--dd-red); padding: 6px 8px; background: white; border-radius: 8px; }
-        .cart-item-detail-row { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.7rem; }
+        .cart-item-name { font-weight: 800; font-size: 0.95rem; color: #2d241c; margin-bottom: 8px; }
+        .cart-item-details { 
+            font-size: 0.7rem; 
+            color: #6c757d; 
+            margin-bottom: 10px; 
+            border-left: 3px solid var(--dd-red); 
+            padding: 8px 10px; 
+            background: white; 
+            border-radius: 10px; 
+        }
+        .cart-item-detail-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.7rem; }
         .cart-item-detail-label { font-weight: 600; color: #495057; }
         .cart-item-detail-value { color: #2b9348; font-weight: 500; }
-        .cart-item-price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #dee2e6; }
-        .cart-item-price { font-weight: 800; font-size: 0.85rem; color: #2b9348; }
+        .cart-item-price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px dashed #dee2e6; }
+        .cart-item-price { font-weight: 800; font-size: 0.9rem; color: #2b9348; }
         .cart-item-actions { display: flex; gap: 12px; align-items: center; }
         .qty-btn { 
             background: #f1f3f5; 
             border: none; 
-            width: 32px; 
-            height: 32px; 
+            width: 34px; 
+            height: 34px; 
             border-radius: 30px; 
             font-weight: 700; 
-            font-size: 1rem; 
+            font-size: 1.1rem; 
             cursor: pointer;
             transition: all 0.15s ease;
         }
-        .qty-btn:active { transform: scale(0.9); background: #e9ecef; }
+        .qty-btn:active { transform: scale(0.92); background: #e9ecef; }
         .remove-item-btn {
             background: none;
             border: none;
@@ -459,31 +457,31 @@
             padding: 4px 8px;
             transition: transform 0.15s ease;
         }
-        .remove-item-btn:active { transform: scale(0.9); }
+        .remove-item-btn:active { transform: scale(0.92); }
         
         .customer-info, .tip-section { 
             background: #f8f9fa; 
             border-radius: 14px; 
-            padding: 12px; 
-            margin: 12px 0;
+            padding: 14px; 
+            margin: 14px 0;
             transition: all 0.2s ease;
         }
-        .name-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .name-row { display: flex; gap: 12px; flex-wrap: wrap; }
         .name-input { 
             flex: 1; 
             padding: 10px 14px; 
             border: 1px solid #dee2e6; 
             border-radius: 30px; 
             font-size: 0.8rem; 
-            min-width: 110px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            min-width: 120px;
+            transition: all 0.2s ease;
         }
         .name-input:focus { 
             outline: none; 
             border-color: var(--dd-red); 
-            box-shadow: 0 0 0 2px rgba(230,57,70,0.2);
+            box-shadow: 0 0 0 3px rgba(230,57,70,0.1);
         }
-        .tip-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+        .tip-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
         .tip-option { 
             background: white; 
             border: 1px solid #dee2e6; 
@@ -494,23 +492,23 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        .tip-option:active { transform: scale(0.94); }
+        .tip-option:active { transform: scale(0.95); }
         .tip-option.selected { background: var(--dd-red); color: white; border-color: var(--dd-red); }
-        .custom-tip { display: flex; gap: 8px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+        .custom-tip { display: flex; gap: 10px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
         .custom-tip-input { 
             flex: 1; 
             padding: 8px 12px; 
             border: 1px solid #dee2e6; 
             border-radius: 30px; 
             font-size: 0.75rem;
-            transition: border-color 0.2s ease;
+            transition: all 0.2s ease;
         }
         .custom-tip-input:focus { outline: none; border-color: var(--dd-red); }
         
         .subtotal-row, .tip-row, .total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
-        .total-row { font-weight: 800; font-size: 1.1rem; margin-top: 10px; padding-top: 10px; border-top: 2px dashed #e9ecef; }
+        .total-row { font-weight: 800; font-size: 1.1rem; margin-top: 12px; padding-top: 12px; border-top: 2px dashed #e9ecef; }
         
-        .payment-buttons { display: flex; gap: 15px; margin: 15px 0 10px; justify-content: center; }
+        .payment-buttons { display: flex; gap: 16px; margin: 16px 0 12px; justify-content: center; }
         .payment-btn { 
             width: 55px; 
             height: 55px; 
@@ -521,10 +519,10 @@
             align-items: center; 
             justify-content: center; 
             background: white; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: all 0.2s ease;
         }
-        .payment-btn:active { transform: scale(0.9); }
+        .payment-btn:active { transform: scale(0.92); }
         .payment-btn img { width: 32px; height: 32px; object-fit: contain; }
         .payment-btn.venmo-btn { background: #3D95CE; }
         .payment-btn.venmo-btn img { filter: brightness(0) invert(1); }
@@ -532,13 +530,13 @@
         .payment-btn.zelle-btn { background: #6D1ED4; }
         .payment-btn.zelle-btn img { filter: brightness(0) invert(1); }
         .payment-note { font-size: 0.65rem; text-align: center; margin-top: 8px; color: #6c757d; }
-        .empty-cart-msg { text-align: center; padding: 1.5rem; color: #adb5bd; font-size: 0.8rem; }
+        .empty-cart-msg { text-align: center; padding: 2rem; color: #adb5bd; font-size: 0.85rem; }
         .info-note { 
             background: #e8f5e9; 
-            border-radius: 10px; 
-            padding: 8px; 
+            border-radius: 12px; 
+            padding: 10px; 
             font-size: 0.65rem; 
-            margin-bottom: 12px; 
+            margin-bottom: 14px; 
             text-align: center; 
             color: #2b9348;
             transition: all 0.2s ease;
@@ -547,14 +545,14 @@
         /* Toast animation */
         .toast-msg { 
             position: fixed; 
-            bottom: 80px; 
+            bottom: 90px; 
             left: 50%; 
             transform: translateX(-50%) scale(0.9); 
             background: #1a1a2e; 
             color: white; 
-            padding: 8px 16px; 
+            padding: 8px 18px; 
             border-radius: 40px; 
-            font-size: 0.75rem; 
+            font-size: 0.8rem; 
             z-index: 1200; 
             opacity: 0; 
             transition: all 0.2s ease; 
@@ -568,7 +566,7 @@
             transform: translateX(-50%) scale(1);
         }
         
-        footer { text-align: center; padding: 12px; font-size: 0.65rem; color: #adb5bd; border-top: 1px solid #e9ecef; }
+        footer { text-align: center; padding: 16px; font-size: 0.65rem; color: #adb5bd; border-top: 1px solid #e9ecef; }
         .install-banner { 
             position: fixed; 
             bottom: 80px; 
@@ -601,13 +599,13 @@
             cursor: pointer;
             transition: transform 0.15s ease;
         }
-        .install-banner button:active { transform: scale(0.94); }
+        .install-banner button:active { transform: scale(0.95); }
         
         @media (max-width: 640px) {
-            .hero-banner { padding: 16px 12px; }
-            .hero-text h2 { font-size: 1.2rem; }
+            .hero-banner { padding: 20px 16px; }
+            .hero-text h2 { font-size: 1.3rem; }
             .hero-text p { font-size: 0.7rem; }
-            .menu-grid { gap: 10px; }
+            .menu-grid { gap: 12px; }
             .card-img { height: 120px; }
             .payment-btn { width: 48px; height: 48px; }
             .payment-btn img { width: 28px; height: 28px; }
@@ -616,7 +614,7 @@
         }
         
         @media (max-width: 480px) {
-            .hero-text h2 { font-size: 1.1rem; }
+            .hero-text h2 { font-size: 1.2rem; }
             .category-title { font-size: 0.9rem; }
         }
         
@@ -626,7 +624,7 @@
 </head>
 <body>
 <div class="app">
-    <!-- Header is NOT fixed by default - it scrolls naturally -->
+    <!-- Header is fixed from the start -->
     <div class="header" id="mainHeader">
         <div class="logo-area">
             <img class="logo-img" src="https://www.image2url.com/r2/default/images/1779484716038-a6168d99-cdda-4779-8b1d-8af05b3bc507.jpg" alt="El Patio de los Domis Logo">
@@ -646,7 +644,10 @@
         </div>
     </div>
     
-    <!-- Hero banner - directly below header, fully visible -->
+    <!-- Spacer to prevent content from hiding under fixed header -->
+    <div class="header-spacer"></div>
+    
+    <!-- Hero banner - beautifully visible -->
     <div class="hero-banner">
         <div class="hero-text">
             <h2>Dominican Flavor</h2>
@@ -724,7 +725,7 @@
 
 <div id="optionsOverlay" class="options-overlay"></div>
 <div id="optionsModal" class="options-modal">
-    <div id="modalItemName" style="font-weight:800; font-size:1rem; margin-bottom:8px;"></div>
+    <div id="modalItemName" style="font-weight:800; font-size:1rem; margin-bottom:10px;"></div>
     <div id="modalOptions"></div>
     <div class="modal-actions">
         <button class="modal-cancel-btn" id="modalCancelBtn">Cancel</button>
@@ -854,35 +855,28 @@
     }
     updateLiveStatus(); setInterval(updateLiveStatus, 60000);
 
-    // Hide header on scroll down, show on scroll up
+    // Smooth header hide/show on scroll
     let lastScrollY = window.scrollY;
     const header = document.getElementById('mainHeader');
+    let ticking = false;
     
     window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        if (currentScrollY > 80) {
-            // Make header fixed when scrolled past hero
-            header.style.position = 'fixed';
-            header.style.top = '0';
-            header.style.left = '0';
-            header.style.right = '0';
-            header.style.maxWidth = '1280px';
-            header.style.margin = '0 auto';
-            
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                header.style.transform = 'translateY(-100%)';
-            } else if (currentScrollY < lastScrollY) {
-                header.style.transform = 'translateY(0)';
-            }
-        } else {
-            // When at top, header is normal (not fixed)
-            header.style.position = 'relative';
-            header.style.transform = 'translateY(0)';
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    header.classList.add('hide-header');
+                } else if (currentScrollY < lastScrollY) {
+                    header.classList.remove('hide-header');
+                }
+                lastScrollY = currentScrollY;
+                ticking = false;
+            });
+            ticking = true;
         }
-        lastScrollY = currentScrollY;
     });
 
-    // Cart logic (same as before)
+    // Cart logic
     let cart = new Map();
     let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
     let tipAmount = 0, selectedTipPreset = '0';
@@ -959,7 +953,7 @@
                         <span class="cart-item-price">Total: $${(entry.price * entry.quantity).toFixed(2)}</span>
                         <div class="cart-item-actions">
                             <button class="qty-btn decr" data-key="${key}">-</button>
-                            <span style="font-weight:600; min-width:24px; text-align:center;">${entry.quantity}</span>
+                            <span style="font-weight:600; min-width:28px; text-align:center;">${entry.quantity}</span>
                             <button class="qty-btn incr" data-key="${key}">+</button>
                             <button class="remove-item-btn" data-key="${key}" title="Remove item">🗑️</button>
                         </div>

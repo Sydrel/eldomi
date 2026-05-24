@@ -39,13 +39,13 @@
             color: #1a1a2e; 
             line-height: 1.5; 
             overflow-x: hidden;
-            padding-top: var(--header-height);
-            padding-bottom: var(--safe-area-bottom);
         }
+        
+        /* IMPORTANT: No body padding-top - we'll let the first element handle spacing */
         
         .app { max-width: 1280px; margin: 0 auto; background: white; min-height: 100vh; display: flex; flex-direction: column; }
         
-        /* Header with smooth transition */
+        /* Header */
         .header { 
             background: white; 
             border-bottom: 1px solid var(--border-light); 
@@ -55,20 +55,39 @@
             justify-content: space-between; 
             align-items: center; 
             gap: 8px; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
+            position: relative;
             z-index: 100; 
             backdrop-filter: blur(10px); 
             background: rgba(255,255,255,0.96); 
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            transform: translateY(0);
+            transition: all 0.3s ease;
             box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+        
+        /* Add a spacer div to push content below header */
+        .header-spacer {
+            height: var(--header-height);
+            width: 100%;
+        }
+        
+        /* Hide header on scroll - update for better visibility */
+        .header.fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             max-width: 1280px;
             margin: 0 auto;
+            animation: slideDown 0.3s ease;
         }
-        .header.hide-header { transform: translateY(-100%); }
+        .header.hide-header { 
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
         
         .logo-area { display: flex; align-items: center; gap: 8px; }
         .logo-img { height: 36px; width: auto; object-fit: contain; border-radius: 8px; transition: transform 0.2s ease; }
@@ -112,39 +131,31 @@
         .header-address-icon:active { transform: scale(0.92); background: #e9ecef; }
         .header-address-icon img { width: 16px; height: 16px; }
         
-        /* Hero banner - FULLY VISIBLE with proper spacing */
+        /* Hero banner - FULLY VISIBLE with NO overlap */
         .hero-banner { 
             background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%); 
             color: white; 
-            padding: 1rem 0.8rem;
-            margin-top: 0;
+            padding: 20px 16px;
             text-align: center;
-            animation: fadeInUp 0.5s ease-out;
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            width: 100%;
+            margin-top: 0;
         }
         .hero-text h2 { 
-            font-size: clamp(1.1rem, 5vw, 1.4rem); 
+            font-size: 1.5rem; 
             font-weight: 800; 
             letter-spacing: -0.5px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .hero-text p { 
-            font-size: 0.7rem; 
+            font-size: 0.8rem; 
             opacity: 0.9; 
             margin-top: 4px;
         }
         
         /* Menu section */
-        .menu-section { padding: 0.7rem; flex: 1; }
+        .menu-section { padding: 12px; flex: 1; }
         .menu-category { 
-            margin-bottom: 1.2rem;
+            margin-bottom: 20px;
             animation: fadeInUp 0.4s ease-out backwards;
         }
         .menu-category:nth-child(1) { animation-delay: 0.05s; }
@@ -153,24 +164,29 @@
         .menu-category:nth-child(4) { animation-delay: 0.2s; }
         .menu-category:nth-child(5) { animation-delay: 0.25s; }
         
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .category-header { 
             display: flex; 
             align-items: baseline; 
-            gap: 6px; 
-            margin-bottom: 0.6rem; 
-            padding-bottom: 0.3rem; 
+            gap: 8px; 
+            margin-bottom: 12px; 
+            padding-bottom: 6px; 
             border-bottom: 2px solid var(--dd-red);
             transition: border-color 0.2s ease;
         }
-        .category-icon { font-size: 1.1rem; transition: transform 0.2s ease; }
+        .category-icon { font-size: 1.2rem; transition: transform 0.2s ease; }
         .category-header:hover .category-icon { transform: scale(1.1); }
-        .category-title { font-size: clamp(0.85rem, 3vw, 1rem); font-weight: 700; color: #2d241c; }
-        .category-sub { font-size: 0.5rem; color: #868e96; margin-left: auto; }
+        .category-title { font-size: 1rem; font-weight: 700; color: #2d241c; }
+        .category-sub { font-size: 0.6rem; color: #868e96; margin-left: auto; }
         
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
         .food-card { 
             background: white; 
-            border-radius: 14px; 
+            border-radius: 16px; 
             overflow: hidden; 
             box-shadow: var(--card-shadow); 
             border: 1px solid var(--border-light); 
@@ -185,16 +201,16 @@
         .food-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
         .food-card:active { transform: scale(0.97); transition: transform 0.05s; }
         .card-img { 
-            height: 130px; 
+            height: 140px; 
             background-size: cover; 
             background-position: center; 
             background-color: #f8f3ed;
             transition: transform 0.3s ease;
         }
         .food-card:hover .card-img { transform: scale(1.02); }
-        .card-content { padding: 0.6rem 0.7rem 0.7rem; }
-        .food-title { font-weight: 700; font-size: 0.85rem; }
-        .price { font-weight: 800; font-size: 0.9rem; color: #2b9348; }
+        .card-content { padding: 10px 12px 12px; }
+        .food-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+        .price { font-weight: 800; font-size: 0.95rem; color: #2b9348; }
         
         /* Modal animations */
         .options-modal { 
@@ -266,8 +282,8 @@
             position: fixed; 
             bottom: 20px; 
             right: 16px; 
-            width: 52px; 
-            height: 52px; 
+            width: 54px; 
+            height: 54px; 
             background: var(--dd-red); 
             border-radius: 50%; 
             display: flex; 
@@ -332,14 +348,14 @@
         .cart-overlay.open .cart-panel { transform: translateX(0); }
         
         .cart-header { 
-            padding: 1rem; 
+            padding: 16px; 
             border-bottom: 1px solid #eee; 
             display: flex; 
             justify-content: space-between; 
             align-items: center;
             font-weight: 800; 
             font-size: 1.1rem;
-            padding-top: max(1rem, var(--safe-area-top));
+            padding-top: max(16px, var(--safe-area-top));
         }
         .close-cart { 
             font-size: 2rem; 
@@ -396,7 +412,7 @@
             width: 40px;
         }
         
-        .cart-scrollable { flex: 1; overflow-y: auto; padding: 0.8rem; -webkit-overflow-scrolling: touch; }
+        .cart-scrollable { flex: 1; overflow-y: auto; padding: 12px; -webkit-overflow-scrolling: touch; }
         
         /* Animated cart items */
         .cart-item { 
@@ -448,17 +464,18 @@
         .customer-info, .tip-section { 
             background: #f8f9fa; 
             border-radius: 14px; 
-            padding: 0.7rem; 
-            margin: 0.7rem 0;
+            padding: 12px; 
+            margin: 12px 0;
             transition: all 0.2s ease;
         }
+        .name-row { display: flex; gap: 10px; flex-wrap: wrap; }
         .name-input { 
             flex: 1; 
-            padding: 8px 12px; 
+            padding: 10px 14px; 
             border: 1px solid #dee2e6; 
             border-radius: 30px; 
-            font-size: 0.75rem; 
-            min-width: 100px;
+            font-size: 0.8rem; 
+            min-width: 110px;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
         .name-input:focus { 
@@ -466,21 +483,23 @@
             border-color: var(--dd-red); 
             box-shadow: 0 0 0 2px rgba(230,57,70,0.2);
         }
+        .tip-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
         .tip-option { 
             background: white; 
             border: 1px solid #dee2e6; 
             border-radius: 40px; 
-            padding: 5px 12px; 
-            font-size: 0.7rem; 
+            padding: 6px 14px; 
+            font-size: 0.75rem; 
             font-weight: 600; 
             cursor: pointer;
             transition: all 0.2s ease;
         }
         .tip-option:active { transform: scale(0.94); }
         .tip-option.selected { background: var(--dd-red); color: white; border-color: var(--dd-red); }
+        .custom-tip { display: flex; gap: 8px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
         .custom-tip-input { 
             flex: 1; 
-            padding: 6px 10px; 
+            padding: 8px 12px; 
             border: 1px solid #dee2e6; 
             border-radius: 30px; 
             font-size: 0.75rem;
@@ -488,13 +507,13 @@
         }
         .custom-tip-input:focus { outline: none; border-color: var(--dd-red); }
         
-        .subtotal-row, .tip-row, .total-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.8rem; }
-        .total-row { font-weight: 800; font-size: 1rem; margin-top: 8px; padding-top: 8px; border-top: 2px dashed #e9ecef; }
+        .subtotal-row, .tip-row, .total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
+        .total-row { font-weight: 800; font-size: 1.1rem; margin-top: 10px; padding-top: 10px; border-top: 2px dashed #e9ecef; }
         
-        .payment-buttons { display: flex; gap: 12px; margin: 12px 0 8px; justify-content: center; }
+        .payment-buttons { display: flex; gap: 15px; margin: 15px 0 10px; justify-content: center; }
         .payment-btn { 
-            width: 52px; 
-            height: 52px; 
+            width: 55px; 
+            height: 55px; 
             border-radius: 50%; 
             cursor: pointer; 
             border: none; 
@@ -506,20 +525,20 @@
             transition: all 0.2s ease;
         }
         .payment-btn:active { transform: scale(0.9); }
-        .payment-btn img { width: 30px; height: 30px; object-fit: contain; }
+        .payment-btn img { width: 32px; height: 32px; object-fit: contain; }
         .payment-btn.venmo-btn { background: #3D95CE; }
         .payment-btn.venmo-btn img { filter: brightness(0) invert(1); }
         .payment-btn.cashapp-btn { background: #00D632; }
         .payment-btn.zelle-btn { background: #6D1ED4; }
         .payment-btn.zelle-btn img { filter: brightness(0) invert(1); }
-        .payment-note { font-size: 0.6rem; text-align: center; margin-top: 6px; color: #6c757d; }
-        .empty-cart-msg { text-align: center; padding: 1.5rem; color: #adb5bd; font-size: 0.75rem; }
+        .payment-note { font-size: 0.65rem; text-align: center; margin-top: 8px; color: #6c757d; }
+        .empty-cart-msg { text-align: center; padding: 1.5rem; color: #adb5bd; font-size: 0.8rem; }
         .info-note { 
             background: #e8f5e9; 
             border-radius: 10px; 
-            padding: 6px; 
-            font-size: 0.6rem; 
-            margin-bottom: 10px; 
+            padding: 8px; 
+            font-size: 0.65rem; 
+            margin-bottom: 12px; 
             text-align: center; 
             color: #2b9348;
             transition: all 0.2s ease;
@@ -533,9 +552,9 @@
             transform: translateX(-50%) scale(0.9); 
             background: #1a1a2e; 
             color: white; 
-            padding: 6px 14px; 
+            padding: 8px 16px; 
             border-radius: 40px; 
-            font-size: 0.7rem; 
+            font-size: 0.75rem; 
             z-index: 1200; 
             opacity: 0; 
             transition: all 0.2s ease; 
@@ -549,7 +568,7 @@
             transform: translateX(-50%) scale(1);
         }
         
-        footer { text-align: center; padding: 0.6rem; font-size: 0.55rem; color: #adb5bd; border-top: 1px solid #e9ecef; }
+        footer { text-align: center; padding: 12px; font-size: 0.65rem; color: #adb5bd; border-top: 1px solid #e9ecef; }
         .install-banner { 
             position: fixed; 
             bottom: 80px; 
@@ -557,13 +576,13 @@
             transform: translateX(-50%) translateY(20px); 
             background: white; 
             border-radius: 50px; 
-            padding: 6px 14px; 
+            padding: 8px 16px; 
             box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
             display: none; 
             align-items: center; 
-            gap: 8px; 
+            gap: 10px; 
             z-index: 1002; 
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             opacity: 0;
             transition: all 0.3s ease;
         }
@@ -576,39 +595,29 @@
             background: var(--dd-red); 
             color: white; 
             border: none; 
-            padding: 4px 10px; 
+            padding: 5px 12px; 
             border-radius: 40px; 
-            font-size: 0.65rem; 
+            font-size: 0.7rem; 
             cursor: pointer;
             transition: transform 0.15s ease;
         }
         .install-banner button:active { transform: scale(0.94); }
         
         @media (max-width: 640px) {
-            .header { padding: 0.3rem 0.6rem; padding-top: max(0.3rem, var(--safe-area-top)); }
-            .logo-img { height: 30px; }
-            .logo-text h1 { font-size: 0.7rem; }
-            .logo-text span { display: none; }
-            .header-open-status, .header-closed-status { padding: 2px 6px; font-size: 0.5rem; }
-            .header-hours-note { font-size: 0.45rem; padding: 2px 4px; }
-            .header-address-icon { width: 26px; height: 26px; }
-            .hero-banner { padding: 0.8rem 0.6rem; min-height: 80px; }
-            .hero-text h2 { font-size: 1rem; }
-            .hero-text p { font-size: 0.6rem; }
-            .menu-section { padding: 0.5rem; }
-            .card-img { height: 110px; }
-            .close-cart { font-size: 1.8rem; padding: 6px 10px; min-width: 44px; min-height: 44px; }
+            .hero-banner { padding: 16px 12px; }
+            .hero-text h2 { font-size: 1.2rem; }
+            .hero-text p { font-size: 0.7rem; }
+            .menu-grid { gap: 10px; }
+            .card-img { height: 120px; }
             .payment-btn { width: 48px; height: 48px; }
-            .payment-btn img { width: 26px; height: 26px; }
+            .payment-btn img { width: 28px; height: 28px; }
             .cart-item-name { font-size: 0.85rem; }
             .cart-item-details { font-size: 0.65rem; }
-            .cart-swipe-area { padding: 8px 0 6px; }
-            .cart-swipe-indicator span { width: 30px; height: 3px; }
         }
         
         @media (max-width: 480px) {
-            .hero-banner { padding: 0.7rem 0.5rem; min-height: 75px; }
-            .hero-text h2 { font-size: 0.9rem; }
+            .hero-text h2 { font-size: 1.1rem; }
+            .category-title { font-size: 0.9rem; }
         }
         
         button, .food-card, .option-btn, .qty-btn, .payment-btn, .close-cart { cursor: pointer; user-select: none; touch-action: manipulation; }
@@ -617,6 +626,7 @@
 </head>
 <body>
 <div class="app">
+    <!-- Header is NOT fixed by default - it scrolls naturally -->
     <div class="header" id="mainHeader">
         <div class="logo-area">
             <img class="logo-img" src="https://www.image2url.com/r2/default/images/1779484716038-a6168d99-cdda-4779-8b1d-8af05b3bc507.jpg" alt="El Patio de los Domis Logo">
@@ -636,6 +646,7 @@
         </div>
     </div>
     
+    <!-- Hero banner - directly below header, fully visible -->
     <div class="hero-banner">
         <div class="hero-text">
             <h2>Dominican Flavor</h2>
@@ -673,14 +684,14 @@
             <div class="info-note">Review your order before checkout</div>
             <div class="cart-items-list" id="cartItemsList"><div class="empty-cart-msg">Your cart is empty</div></div>
             <div class="customer-info">
-                <h4 style="font-size:0.8rem;">Your Information</h4>
+                <h4 style="font-size:0.85rem;">Your Information</h4>
                 <div class="name-row">
                     <input type="text" id="firstNameInput" placeholder="First name *" class="name-input">
                     <input type="text" id="lastNameInput" placeholder="Last name *" class="name-input">
                 </div>
             </div>
             <div class="tip-section">
-                <div style="font-size:0.7rem;">Add a tip</div>
+                <div style="font-size:0.75rem;">Add a tip</div>
                 <div class="tip-buttons">
                     <button class="tip-option" data-tip="0">No tip</button>
                     <button class="tip-option" data-tip="10">10%</button>
@@ -756,7 +767,7 @@
         localStorage.setItem('installBannerClosed', 'true');
     });
 
-    // IMAGES (all your original images)
+    // IMAGES
     const IMAGES = {
         yaroa: "https://i.imgur.com/3nPHFzO.jpeg", mofongo: "https://i.imgur.com/srqhEOP.jpeg",
         chicharron: "https://i.imgur.com/BRpYZ9a.jpeg", picapollo: "https://i.imgur.com/EhPwwDn.jpeg",
@@ -843,13 +854,35 @@
     }
     updateLiveStatus(); setInterval(updateLiveStatus, 60000);
 
-    // Scroll header
+    // Hide header on scroll down, show on scroll up
     let lastScrollY = window.scrollY;
     const header = document.getElementById('mainHeader');
-    function handleScroll() { const cs = window.scrollY; if (cs > lastScrollY && cs > 60) header.classList.add('hide-header'); else if (cs < lastScrollY) header.classList.remove('hide-header'); lastScrollY = cs; }
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > 80) {
+            // Make header fixed when scrolled past hero
+            header.style.position = 'fixed';
+            header.style.top = '0';
+            header.style.left = '0';
+            header.style.right = '0';
+            header.style.maxWidth = '1280px';
+            header.style.margin = '0 auto';
+            
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else if (currentScrollY < lastScrollY) {
+                header.style.transform = 'translateY(0)';
+            }
+        } else {
+            // When at top, header is normal (not fixed)
+            header.style.position = 'relative';
+            header.style.transform = 'translateY(0)';
+        }
+        lastScrollY = currentScrollY;
+    });
 
-    // Cart logic
+    // Cart logic (same as before)
     let cart = new Map();
     let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
     let tipAmount = 0, selectedTipPreset = '0';
@@ -1127,7 +1160,7 @@
     document.getElementById('closeCartBtn').addEventListener('click', closeCart);
     document.getElementById('cartOverlay').addEventListener('click', (e) => { if(e.target === document.getElementById('cartOverlay')) closeCart(); });
     
-    // Improved swipe down to close - ONLY from the swipe area
+    // Swipe down to close
     let swipeStartY = 0;
     let isSwiping = false;
     const swipeArea = document.getElementById('cartSwipeArea');

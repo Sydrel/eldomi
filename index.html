@@ -13,7 +13,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="El Patio Domis">
   
-  <!-- App Icon (same image used for all platforms) -->
+  <!-- App Icon -->
   <link rel="apple-touch-icon" sizes="180x180" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb9T3Hl7v0reHQ4xkWyABL5_fyWyfpntuNhQ&s">
   <link rel="icon" type="image/png" sizes="32x32" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb9T3Hl7v0reHQ4xkWyABL5_fyWyfpntuNhQ&s">
   <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb9T3Hl7v0reHQ4xkWyABL5_fyWyfpntuNhQ&s">
@@ -22,9 +22,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* ----------------------------------------------
-       GLOBAL RESET & VARIABLES
-    ------------------------------------------------ */
     * {
       margin: 0;
       padding: 0;
@@ -59,9 +56,75 @@
       flex-direction: column;
     }
 
-    /* ----------------------------------------------
-       HEADER (normal flow, no overlap)
-    ------------------------------------------------ */
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      50% { opacity: 1; transform: scale(1.05); }
+      70% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    /* Animated elements */
+    .header, .hero-banner, .menu-category, .food-card, .cart-bubble {
+      animation: fadeInUp 0.5s ease-out backwards;
+    }
+
+    .header { animation-delay: 0.05s; }
+    .hero-banner { animation-delay: 0.1s; }
+    .menu-category:nth-child(1) { animation-delay: 0.15s; }
+    .menu-category:nth-child(2) { animation-delay: 0.2s; }
+    .menu-category:nth-child(3) { animation-delay: 0.25s; }
+    .menu-category:nth-child(4) { animation-delay: 0.3s; }
+    .menu-category:nth-child(5) { animation-delay: 0.35s; }
+
+    /* Hover/active animations */
+    .food-card {
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .food-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+    .food-card:active { transform: scale(0.97); transition: transform 0.05s; }
+
+    .cart-bubble {
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .cart-bubble:active { transform: scale(0.9); }
+    .cart-bubble .bubble-count {
+      transition: transform 0.2s ease;
+    }
+    .cart-bubble:active .bubble-count { transform: scale(1.15); }
+
+    .social-icon {
+      transition: all 0.2s ease;
+    }
+    .social-icon:active { transform: scale(0.92); }
+
+    /* Header */
     .header {
       background: white;
       border-bottom: 1px solid var(--border-light);
@@ -77,19 +140,9 @@
       box-shadow: 0 1px 8px rgba(0,0,0,0.05);
     }
 
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .logo-img {
-      height: 38px;
-      width: auto;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
+    .logo-area { display: flex; align-items: center; gap: 8px; }
+    .logo-img { height: 38px; width: auto; object-fit: contain; border-radius: 8px; transition: transform 0.2s ease; }
+    .logo-img:active { transform: scale(0.95); }
     .logo-text h1 {
       font-size: clamp(0.85rem, 4vw, 1.15rem);
       font-weight: 800;
@@ -98,46 +151,28 @@
       -webkit-background-clip: text;
       color: transparent;
     }
+    .logo-text span { font-size: 0.55rem; font-weight: 500; color: var(--text-secondary); display: block; }
 
-    .logo-text span {
-      font-size: 0.55rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      display: block;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .header-status {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 6px;
-    }
-
+    .header-right { display: flex; align-items: center; gap: 8px; }
+    .header-status { display: flex; flex-direction: row; align-items: center; gap: 6px; }
     .header-open-status, .header-closed-status {
       padding: 4px 10px;
       border-radius: 30px;
       font-weight: 700;
       font-size: 0.65rem;
       white-space: nowrap;
+      transition: all 0.2s ease;
     }
-
     .header-open-status { background: #2b9348; color: white; }
     .header-closed-status { background: #9e2e2e; color: white; }
-
     .header-hours-note {
       font-size: 0.6rem;
       color: var(--text-secondary);
       background: #f1f3f5;
       padding: 4px 8px;
       border-radius: 30px;
+      transition: background 0.2s ease;
     }
-
     .header-address-icon {
       display: flex;
       align-items: center;
@@ -148,14 +183,12 @@
       text-decoration: none;
       width: 32px;
       height: 32px;
+      transition: all 0.2s ease;
     }
-
     .header-address-icon:active { transform: scale(0.95); background: #e9ecef; }
     .header-address-icon img { width: 18px; height: 18px; }
 
-    /* ----------------------------------------------
-       HERO BANNER (fully visible with social icons)
-    ------------------------------------------------ */
+    /* Hero banner */
     .hero-banner {
       background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%);
       color: white;
@@ -163,28 +196,25 @@
       text-align: center;
       width: 100%;
     }
-
     .hero-text h2 {
       font-size: 1.5rem;
       font-weight: 800;
       letter-spacing: -0.5px;
       margin-bottom: 6px;
     }
-
     .hero-text p {
       font-size: 0.8rem;
       opacity: 0.9;
       margin-bottom: 16px;
     }
 
-    /* Social Icons Container */
+    /* Social Icons */
     .social-icons {
       display: flex;
       justify-content: center;
       gap: 20px;
       margin-top: 8px;
     }
-
     .social-icon {
       display: inline-flex;
       align-items: center;
@@ -194,40 +224,16 @@
       background: rgba(255,255,255,0.15);
       backdrop-filter: blur(4px);
       border-radius: 50%;
-      transition: all 0.2s ease;
       text-decoration: none;
     }
+    .social-icon.instagram { background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+    .social-icon.facebook { background: #1877f2; }
+    .social-icon.whatsapp { background: #25D366; }
+    .social-icon svg { width: 24px; height: 24px; fill: white; }
 
-    .social-icon:active {
-      transform: scale(0.92);
-      background: rgba(255,255,255,0.25);
-    }
-
-    .social-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
-
-    /* Instagram specific gradient background */
-    .social-icon.instagram {
-      background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    }
-
-    .social-icon.facebook {
-      background: #1877f2;
-    }
-
-    .social-icon.whatsapp {
-      background: #25D366;
-    }
-
-    /* ----------------------------------------------
-       MENU & CATEGORIES
-    ------------------------------------------------ */
+    /* Menu */
     .menu-section { padding: 16px 12px; flex: 1; }
     .menu-category { margin-bottom: 24px; }
-
     .category-header {
       display: flex;
       align-items: baseline;
@@ -235,18 +241,17 @@
       margin-bottom: 12px;
       padding-bottom: 6px;
       border-bottom: 2px solid var(--dd-red);
+      transition: border-color 0.2s ease;
     }
-
-    .category-icon { font-size: 1.3rem; }
+    .category-icon { font-size: 1.3rem; transition: transform 0.2s ease; }
+    .category-header:hover .category-icon { transform: scale(1.1); }
     .category-title { font-size: 1.1rem; font-weight: 700; color: #2d241c; }
     .category-sub { font-size: 0.65rem; color: #868e96; margin-left: auto; }
-
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
       gap: 16px;
     }
-
     .food-card {
       background: white;
       border-radius: 16px;
@@ -254,25 +259,20 @@
       box-shadow: var(--card-shadow);
       border: 1px solid var(--border-light);
       cursor: pointer;
-      transition: all 0.2s ease;
     }
-
-    .food-card:active { transform: scale(0.98); }
-
     .card-img {
       height: 150px;
       background-size: cover;
       background-position: center;
       background-color: #f8f3ed;
+      transition: transform 0.3s ease;
     }
-
+    .food-card:hover .card-img { transform: scale(1.02); }
     .card-content { padding: 10px 12px 12px; }
     .food-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
     .price { font-weight: 800; font-size: 1rem; color: #2b9348; }
 
-    /* ----------------------------------------------
-       MODAL (BOTTOM SHEET)
-    ------------------------------------------------ */
+    /* Modal */
     .options-modal {
       position: fixed;
       bottom: 0;
@@ -282,14 +282,12 @@
       border-radius: 24px 24px 0 0;
       z-index: 1100;
       transform: translateY(100%);
-      transition: transform 0.3s;
+      transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       padding: 1rem;
       max-height: 85vh;
       overflow-y: auto;
     }
-
     .options-modal.open { transform: translateY(0); }
-
     .options-overlay {
       position: fixed;
       top: 0;
@@ -299,23 +297,15 @@
       background: rgba(0,0,0,0);
       z-index: 1099;
       visibility: hidden;
-      transition: background 0.25s ease;
+      transition: background 0.25s ease, visibility 0.25s;
     }
-
     .options-overlay.open {
       visibility: visible;
       background: rgba(0,0,0,0.6);
     }
-
     .option-group { margin-bottom: 1rem; }
     .option-label { font-weight: 700; margin-bottom: 8px; font-size: 0.85rem; }
-
-    .option-buttons {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
+    .option-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
     .option-btn {
       background: #f1f3f5;
       border: 1px solid #dee2e6;
@@ -325,21 +315,14 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-
     .option-btn:active { transform: scale(0.95); }
-
     .option-btn.selected {
       background: var(--dd-red);
       border-color: var(--dd-red);
       color: white;
+      transform: scale(1.02);
     }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
     .modal-add-btn, .modal-cancel-btn {
       flex: 1;
       padding: 12px;
@@ -347,15 +330,13 @@
       font-weight: 700;
       font-size: 0.85rem;
       border: none;
+      transition: all 0.2s ease;
     }
-
     .modal-add-btn:active, .modal-cancel-btn:active { transform: scale(0.97); }
     .modal-add-btn { background: var(--dd-red); color: white; }
     .modal-cancel-btn { background: #f1f3f5; color: #333; }
 
-    /* ----------------------------------------------
-       FLOATING CART BUTTON
-    ------------------------------------------------ */
+    /* Cart */
     .cart-bubble {
       position: fixed;
       bottom: 20px;
@@ -372,10 +353,7 @@
       box-shadow: 0 6px 16px rgba(230,57,70,0.4);
       margin-bottom: var(--safe-area-bottom);
     }
-
-    .cart-bubble:active { transform: scale(0.92); }
     .cart-bubble .cart-icon { font-size: 26px; color: white; }
-
     .bubble-count {
       position: absolute;
       top: -5px;
@@ -391,10 +369,6 @@
       font-size: 11px;
       font-weight: 800;
     }
-
-    /* ----------------------------------------------
-       CART PANEL (SLIDE‑IN)
-    ------------------------------------------------ */
     .cart-overlay {
       position: fixed;
       top: 0;
@@ -404,16 +378,14 @@
       background: rgba(0,0,0,0);
       z-index: 1001;
       visibility: hidden;
-      transition: background 0.25s ease;
+      transition: background 0.25s ease, visibility 0.25s;
       display: flex;
       justify-content: flex-end;
     }
-
     .cart-overlay.open {
       visibility: visible;
       background: rgba(0,0,0,0.5);
     }
-
     .cart-panel {
       background: white;
       width: 100%;
@@ -422,11 +394,9 @@
       display: flex;
       flex-direction: column;
       transform: translateX(100%);
-      transition: transform 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
-
     .cart-overlay.open .cart-panel { transform: translateX(0); }
-
     .cart-header {
       padding: 16px;
       border-bottom: 1px solid #eee;
@@ -437,7 +407,6 @@
       font-size: 1.1rem;
       padding-top: max(16px, var(--safe-area-top));
     }
-
     .close-cart {
       font-size: 2rem;
       cursor: pointer;
@@ -448,11 +417,9 @@
       margin: -8px -12px -8px 0;
       min-width: 48px;
       min-height: 48px;
+      transition: all 0.15s ease;
     }
-
     .close-cart:active { color: #333; transform: scale(0.95); }
-
-    /* swipe area (only this triggers close) */
     .cart-swipe-area {
       text-align: center;
       padding: 10px 0 8px;
@@ -463,49 +430,33 @@
       gap: 6px;
       cursor: pointer;
     }
-
-    .cart-swipe-indicator {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
-
+    .cart-swipe-indicator { display: flex; justify-content: center; gap: 8px; }
     .cart-swipe-indicator span {
       background: #c0c0c0;
       width: 35px;
       height: 4px;
       border-radius: 2px;
       display: inline-block;
+      transition: all 0.2s ease;
     }
+    .cart-swipe-area:active .cart-swipe-indicator span { background: var(--dd-red); width: 40px; }
+    .cart-swipe-text { font-size: 0.55rem; color: #999; }
+    .cart-scrollable { flex: 1; overflow-y: auto; padding: 12px; -webkit-overflow-scrolling: touch; }
 
-    .cart-swipe-text {
-      font-size: 0.55rem;
-      color: #999;
-    }
-
-    .cart-scrollable {
-      flex: 1;
-      overflow-y: auto;
-      padding: 12px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* cart items (clearly separated) */
+    /* Cart Items */
     .cart-item {
       background: #f8f9fa;
       border-radius: 12px;
       padding: 12px;
       margin-bottom: 10px;
       border: 1px solid #e9ecef;
+      animation: slideInRight 0.3s ease-out backwards;
     }
-
-    .cart-item-name {
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: #2d241c;
-      margin-bottom: 6px;
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
     }
-
+    .cart-item-name { font-weight: 800; font-size: 0.9rem; color: #2d241c; margin-bottom: 6px; }
     .cart-item-details {
       font-size: 0.7rem;
       color: #6c757d;
@@ -515,17 +466,9 @@
       background: white;
       border-radius: 8px;
     }
-
-    .cart-item-detail-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-      font-size: 0.7rem;
-    }
-
+    .cart-item-detail-row { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.7rem; }
     .cart-item-detail-label { font-weight: 600; color: #495057; }
     .cart-item-detail-value { color: #2b9348; font-weight: 500; }
-
     .cart-item-price-row {
       display: flex;
       justify-content: space-between;
@@ -534,10 +477,8 @@
       padding-top: 6px;
       border-top: 1px dashed #dee2e6;
     }
-
     .cart-item-price { font-weight: 800; font-size: 0.85rem; color: #2b9348; }
     .cart-item-actions { display: flex; gap: 12px; align-items: center; }
-
     .qty-btn {
       background: #f1f3f5;
       border: none;
@@ -547,10 +488,9 @@
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
+      transition: all 0.15s ease;
     }
-
-    .qty-btn:active { transform: scale(0.92); }
-
+    .qty-btn:active { transform: scale(0.92); background: #e9ecef; }
     .remove-item-btn {
       background: none;
       border: none;
@@ -558,20 +498,19 @@
       cursor: pointer;
       color: #dc3545;
       padding: 4px 8px;
+      transition: transform 0.15s ease;
     }
-
     .remove-item-btn:active { transform: scale(0.92); }
 
-    /* customer info & tip */
+    /* Customer Info & Tip */
     .customer-info, .tip-section {
       background: #f8f9fa;
       border-radius: 14px;
       padding: 12px;
       margin: 12px 0;
+      transition: all 0.2s ease;
     }
-
     .name-row { display: flex; gap: 10px; flex-wrap: wrap; }
-
     .name-input {
       flex: 1;
       padding: 10px 14px;
@@ -579,17 +518,10 @@
       border-radius: 30px;
       font-size: 0.8rem;
       min-width: 110px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-
-    .name-input:focus { outline: none; border-color: var(--dd-red); }
-
-    .tip-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0;
-    }
-
+    .name-input:focus { outline: none; border-color: var(--dd-red); box-shadow: 0 0 0 2px rgba(230,57,70,0.2); }
+    .tip-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
     .tip-option {
       background: white;
       border: 1px solid #dee2e6;
@@ -598,52 +530,25 @@
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
-
     .tip-option:active { transform: scale(0.95); }
     .tip-option.selected { background: var(--dd-red); color: white; border-color: var(--dd-red); }
-
-    .custom-tip {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
+    .custom-tip { display: flex; gap: 8px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
     .custom-tip-input {
       flex: 1;
       padding: 8px 12px;
       border: 1px solid #dee2e6;
       border-radius: 30px;
       font-size: 0.75rem;
+      transition: border-color 0.2s ease;
     }
-
     .custom-tip-input:focus { outline: none; border-color: var(--dd-red); }
+    .subtotal-row, .tip-row, .total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
+    .total-row { font-weight: 800; font-size: 1.1rem; margin-top: 10px; padding-top: 10px; border-top: 2px dashed #e9ecef; }
 
-    .subtotal-row, .tip-row, .total-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 0.85rem;
-    }
-
-    .total-row {
-      font-weight: 800;
-      font-size: 1.1rem;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 2px dashed #e9ecef;
-    }
-
-    /* payment buttons */
-    .payment-buttons {
-      display: flex;
-      gap: 15px;
-      margin: 15px 0 10px;
-      justify-content: center;
-    }
-
+    /* Payment */
+    .payment-buttons { display: flex; gap: 15px; margin: 15px 0 10px; justify-content: center; }
     .payment-btn {
       width: 55px;
       height: 55px;
@@ -655,31 +560,17 @@
       justify-content: center;
       background: white;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
     }
-
     .payment-btn:active { transform: scale(0.92); }
     .payment-btn img { width: 32px; height: 32px; object-fit: contain; }
-
     .payment-btn.venmo-btn { background: #3D95CE; }
     .payment-btn.venmo-btn img { filter: brightness(0) invert(1); }
     .payment-btn.cashapp-btn { background: #00D632; }
     .payment-btn.zelle-btn { background: #6D1ED4; }
     .payment-btn.zelle-btn img { filter: brightness(0) invert(1); }
-
-    .payment-note {
-      font-size: 0.65rem;
-      text-align: center;
-      margin-top: 8px;
-      color: #6c757d;
-    }
-
-    .empty-cart-msg {
-      text-align: center;
-      padding: 1.5rem;
-      color: #adb5bd;
-      font-size: 0.8rem;
-    }
-
+    .payment-note { font-size: 0.65rem; text-align: center; margin-top: 8px; color: #6c757d; }
+    .empty-cart-msg { text-align: center; padding: 1.5rem; color: #adb5bd; font-size: 0.8rem; }
     .info-note {
       background: #e8f5e9;
       border-radius: 10px;
@@ -688,9 +579,10 @@
       margin-bottom: 12px;
       text-align: center;
       color: #2b9348;
+      transition: all 0.2s ease;
     }
 
-    /* toast messages */
+    /* Toast */
     .toast-msg {
       position: fixed;
       bottom: 80px;
@@ -709,20 +601,9 @@
       max-width: 90vw;
       text-align: center;
     }
+    .toast-msg.show { opacity: 1; transform: translateX(-50%) scale(1); }
 
-    .toast-msg.show {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
-
-    footer {
-      text-align: center;
-      padding: 12px;
-      font-size: 0.65rem;
-      color: #adb5bd;
-      border-top: 1px solid #e9ecef;
-    }
-
+    footer { text-align: center; padding: 12px; font-size: 0.65rem; color: #adb5bd; border-top: 1px solid #e9ecef; }
     .install-banner {
       position: fixed;
       bottom: 80px;
@@ -740,13 +621,7 @@
       opacity: 0;
       transition: all 0.3s ease;
     }
-
-    .install-banner.show {
-      display: flex;
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
+    .install-banner.show { display: flex; transform: translateX(-50%) translateY(0); opacity: 1; }
     .install-banner button {
       background: var(--dd-red);
       color: white;
@@ -755,11 +630,11 @@
       border-radius: 40px;
       font-size: 0.7rem;
       cursor: pointer;
+      transition: transform 0.15s ease;
     }
-
     .install-banner button:active { transform: scale(0.95); }
 
-    /* responsive adjustments */
+    /* Responsive */
     @media (max-width: 640px) {
       .hero-banner { padding: 16px 12px; }
       .hero-text h2 { font-size: 1.2rem; }
@@ -775,7 +650,6 @@
       .header-hours-note { font-size: 0.55rem; padding: 3px 6px; }
       .logo-img { height: 34px; }
     }
-
     @media (max-width: 480px) {
       .hero-text h2 { font-size: 1rem; }
       .hero-banner { padding: 12px 10px; }
@@ -816,23 +690,14 @@
       <p>Tap any dish to choose size or variation</p>
     </div>
     <div class="social-icons">
-      <!-- Instagram -->
       <a href="https://www.instagram.com/elpatiodelosdomis/" target="_blank" class="social-icon instagram" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="white">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       </a>
-      <!-- Facebook -->
       <a href="https://www.facebook.com/people/El-Patio-De-Los-Domis/100078238761813/" target="_blank" class="social-icon facebook" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="white">
-          <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="white"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
       </a>
-      <!-- WhatsApp Channel -->
       <a href="https://www.whatsapp.com/channel/0029VaCKPf6GpLHSxtTTlE0K" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp Channel">
-        <svg viewBox="0 0 24 24" fill="white">
-          <path d="M12.031 2.016c-5.49 0-9.984 4.5-9.984 9.984 0 1.781.469 3.469 1.313 4.969l-1.313 4.969 5.109-1.266c1.406.703 3.047 1.125 4.875 1.125 5.484 0 9.984-4.5 9.984-9.984s-4.5-9.797-9.984-9.797zm0 18.703c-1.641 0-3.188-.422-4.547-1.219l-.328-.188-3.047.75.797-3.047-.219-.328c-.891-1.406-1.406-3.047-1.406-4.734 0-4.828 3.938-8.766 8.766-8.766 4.828 0 8.766 3.938 8.766 8.766s-3.938 8.766-8.766 8.766zm4.828-6.328c-.203-.094-1.219-.594-1.406-.656-.188-.094-.328-.094-.469.094-.141.188-.547.656-.672.797-.125.125-.25.141-.453.047-.203-.094-.844-.313-1.609-.984-.594-.531-.984-1.172-1.094-1.375-.125-.188-.016-.281.094-.375.094-.094.203-.25.297-.375.094-.125.125-.219.188-.375.063-.156.031-.281-.016-.406-.047-.125-.422-1.016-.578-1.391-.156-.375-.313-.313-.422-.313-.109 0-.234-.016-.359-.016-.125 0-.328.047-.5.234-.172.188-.656.641-.656 1.563 0 .922.672 1.813.766 1.938.094.125 1.313 2.016 3.188 2.828.445.188.797.313 1.078.406.453.156.875.125 1.203.063.375-.063 1.188-.484 1.359-.953.156-.469.156-.875.109-.953-.047-.078-.172-.125-.375-.219z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12.031 2.016c-5.49 0-9.984 4.5-9.984 9.984 0 1.781.469 3.469 1.313 4.969l-1.313 4.969 5.109-1.266c1.406.703 3.047 1.125 4.875 1.125 5.484 0 9.984-4.5 9.984-9.984s-4.5-9.797-9.984-9.797zm0 18.703c-1.641 0-3.188-.422-4.547-1.219l-.328-.188-3.047.75.797-3.047-.219-.328c-.891-1.406-1.406-3.047-1.406-4.734 0-4.828 3.938-8.766 8.766-8.766 4.828 0 8.766 3.938 8.766 8.766s-3.938 8.766-8.766 8.766zm4.828-6.328c-.203-.094-1.219-.594-1.406-.656-.188-.094-.328-.094-.469.094-.141.188-.547.656-.672.797-.125.125-.25.141-.453.047-.203-.094-.844-.313-1.609-.984-.594-.531-.984-1.172-1.094-1.375-.125-.188-.016-.281.094-.375.094-.094.203-.25.297-.375.094-.125.125-.219.188-.375.063-.156.031-.281-.016-.406-.047-.125-.422-1.016-.578-1.391-.156-.375-.313-.313-.422-.313-.109 0-.234-.016-.359-.016-.125 0-.328.047-.5.234-.172.188-.656.641-.656 1.563 0 .922.672 1.813.766 1.938.094.125 1.313 2.016 3.188 2.828.445.188.797.313 1.078.406.453.156.875.125 1.203.063.375-.063 1.188-.484 1.359-.953.156-.469.156-.875.109-.953-.047-.078-.172-.125-.375-.219z"/></svg>
       </a>
     </div>
   </div>
@@ -842,7 +707,7 @@
   <footer>El Patio de los Domis — Authentic Dominican Food · Venmo / CashApp / Zelle</footer>
 </div>
 
-<!-- Install banner (shown when PWA can be installed) -->
+<!-- Install banner -->
 <div id="installBanner" class="install-banner">
   <span>📱 Add to Home Screen</span>
   <button id="installBtn">Add</button>
@@ -896,7 +761,7 @@
   </div>
 </div>
 
-<!-- Bottom modal for customisation (size, protein, side) -->
+<!-- Bottom modal -->
 <div id="optionsOverlay" class="options-overlay"></div>
 <div id="optionsModal" class="options-modal">
   <div id="modalItemName" style="font-weight:800; font-size:1rem; margin-bottom:8px;"></div>
@@ -911,7 +776,7 @@
 <script>
   (function() {
     // ------------------------------
-    // 1. MENU DATA (easy to edit)
+    // MENU DATA
     // ------------------------------
     const IMAGES = {
       yaroa: "https://i.imgur.com/3nPHFzO.jpeg", mofongo: "https://i.imgur.com/srqhEOP.jpeg",
@@ -993,7 +858,7 @@
       }
     };
 
-    // business hours (Fort Pierce, FL)
+    // Business hours
     const BUSINESS_HOURS = {
       sunday: { open: 11, close: 20 }, monday: { open: 11, close: 21 },
       tuesday: { open: 11, close: 21 }, wednesday: { open: 11, close: 21 },
@@ -1005,13 +870,14 @@
     const ZELLE_EMAIL = "elpatiodelosdomis@gmail.com";
 
     // ------------------------------
-    // 2. GLOBALS & HELPER FUNCTIONS
+    // GLOBALS
     // ------------------------------
     let cart = new Map();
     let currentItem = null, currentSelectedOption = null, currentSelectedProtein = null, currentSelectedSide = null;
     let tipAmount = 0, selectedTipPreset = '0';
     let deferredPrompt;
 
+    // DOM elements
     const installBanner = document.getElementById('installBanner');
     const installBtn = document.getElementById('installBtn');
     const closeInstallBanner = document.getElementById('closeInstallBanner');
@@ -1038,7 +904,7 @@
       localStorage.setItem('installBannerClosed', 'true');
     });
 
-    // business hours display
+    // Business hours display
     function getDayKey(d) { return ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][d.getDay()]; }
     function isOpenNow() {
       const now = new Date();
@@ -1067,7 +933,7 @@
     updateLiveStatus();
     setInterval(updateLiveStatus, 60000);
 
-    // cart core
+    // Cart functions
     function getSubtotal() { let s = 0; for (let e of cart.values()) s += e.price * e.quantity; return s; }
     function calculateTip() {
       const sub = getSubtotal();
@@ -1152,7 +1018,7 @@
     }
     function updateAllUI() { updateCartBadge(); renderCartPanel(); calculateTip(); updateTotalsUI(); }
 
-    // modal & menu
+    // Modal & menu
     function getFinalPrice(item) {
       let price = 0;
       if (item.options && currentSelectedOption) price = currentSelectedOption.price;
@@ -1249,7 +1115,7 @@
       calculateTip(); updateTotalsUI();
     }
 
-    // payment redirects
+    // Payment
     function buildOrderDescription() {
       if (cart.size === 0) return null;
       let items = [];
@@ -1285,9 +1151,7 @@
       setTimeout(() => alert(`Send $${t.toFixed(2)} via Zelle to:\n${ZELLE_EMAIL}\n\nNote copied.`), 500);
     }
 
-    // ------------------------------
-    // 3. EVENT LISTENERS & START
-    // ------------------------------
+    // Event listeners
     document.getElementById('modalCancelBtn').addEventListener('click', hideOptions);
     document.getElementById('modalAddBtn').addEventListener('click', () => {
       if (!currentItem) return;

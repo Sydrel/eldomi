@@ -112,22 +112,36 @@
         .header-address-icon:active { transform: scale(0.92); background: #e9ecef; }
         .header-address-icon img { width: 16px; height: 16px; }
         
-        /* Hero banner with fade in */
+        /* Hero banner - FULLY VISIBLE with proper spacing */
         .hero-banner { 
             background: linear-gradient(135deg, #2d241c 0%, #5c3d2e 100%); 
             color: white; 
-            padding: 0.5rem 0.8rem; 
+            padding: 1rem 0.8rem;
+            margin-top: 0;
             text-align: center;
             animation: fadeInUp 0.5s ease-out;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .hero-text h2 { font-size: clamp(0.9rem, 4vw, 1.2rem); font-weight: 700; }
-        .hero-text p { font-size: 0.6rem; opacity: 0.85; margin-top: 2px; }
+        .hero-text h2 { 
+            font-size: clamp(1.1rem, 5vw, 1.4rem); 
+            font-weight: 800; 
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+        .hero-text p { 
+            font-size: 0.7rem; 
+            opacity: 0.9; 
+            margin-top: 4px;
+        }
         
-        /* Menu items with staggered animation */
+        /* Menu section */
         .menu-section { padding: 0.7rem; flex: 1; }
         .menu-category { 
             margin-bottom: 1.2rem;
@@ -346,7 +360,7 @@
         }
         .close-cart:active { color: #333; transform: scale(0.92); }
         
-        /* Swipe area - only this area triggers the swipe-to-close */
+        /* Swipe area */
         .cart-swipe-area {
             text-align: center;
             padding: 10px 0 8px;
@@ -578,7 +592,9 @@
             .header-open-status, .header-closed-status { padding: 2px 6px; font-size: 0.5rem; }
             .header-hours-note { font-size: 0.45rem; padding: 2px 4px; }
             .header-address-icon { width: 26px; height: 26px; }
-            .hero-banner { padding: 0.4rem 0.6rem; }
+            .hero-banner { padding: 0.8rem 0.6rem; min-height: 80px; }
+            .hero-text h2 { font-size: 1rem; }
+            .hero-text p { font-size: 0.6rem; }
             .menu-section { padding: 0.5rem; }
             .card-img { height: 110px; }
             .close-cart { font-size: 1.8rem; padding: 6px 10px; min-width: 44px; min-height: 44px; }
@@ -588,6 +604,11 @@
             .cart-item-details { font-size: 0.65rem; }
             .cart-swipe-area { padding: 8px 0 6px; }
             .cart-swipe-indicator span { width: 30px; height: 3px; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-banner { padding: 0.7rem 0.5rem; min-height: 75px; }
+            .hero-text h2 { font-size: 0.9rem; }
         }
         
         button, .food-card, .option-btn, .qty-btn, .payment-btn, .close-cart { cursor: pointer; user-select: none; touch-action: manipulation; }
@@ -640,7 +661,6 @@
             <span>Your Order</span>
             <button class="close-cart" id="closeCartBtn">✕</button>
         </div>
-        <!-- Only this swipe area triggers the close gesture -->
         <div class="cart-swipe-area" id="cartSwipeArea">
             <div class="cart-swipe-indicator">
                 <span></span>
@@ -1107,11 +1127,10 @@
     document.getElementById('closeCartBtn').addEventListener('click', closeCart);
     document.getElementById('cartOverlay').addEventListener('click', (e) => { if(e.target === document.getElementById('cartOverlay')) closeCart(); });
     
-    // Improved swipe down to close - ONLY from the swipe area, NOT from scrolling content
+    // Improved swipe down to close - ONLY from the swipe area
     let swipeStartY = 0;
     let isSwiping = false;
     const swipeArea = document.getElementById('cartSwipeArea');
-    const cartScrollable = document.getElementById('cartScrollable');
     
     if(swipeArea) {
         swipeArea.addEventListener('touchstart', (e) => {
@@ -1123,7 +1142,6 @@
             if(!isSwiping) return;
             const currentY = e.touches[0].clientY;
             const diff = currentY - swipeStartY;
-            // Only close if swipe down is more than 40px
             if(diff > 40) {
                 closeCart();
                 isSwiping = false;
@@ -1135,7 +1153,6 @@
             isSwiping = false;
         });
         
-        // Also allow click/tap on swipe area to close (alternative)
         swipeArea.addEventListener('click', () => {
             closeCart();
         });
